@@ -45,6 +45,7 @@ const customModules = [
 }
 inherits(BpmnSpaceModeler, BpmnModeler);
 
+// Metodi della classe BpmnSpaceModeler
 BpmnSpaceModeler.prototype.handleOlcListChanged = function (places, dryRun=false) {
     this._places = places;
 }
@@ -59,12 +60,25 @@ BpmnSpaceModeler.prototype.handleCanvaChanged = function (canvas1, dryRun=false)
 
 BpmnSpaceModeler.prototype.getDataObjectReferencesInState = function (olcState) {
     return this.get('elementRegistry').filter((element, gfx) =>
-        is(element, 'bpmn:Task') &&
+        is(element, 'bpmn:Task') && is(element,'bpmn:Participant') &&
         element.type !== 'label' &&
         element.businessObject.places
     );
 }
 
+// Metodo per aggiornare la posizione corrente di un partecipante nel modello BPMN
+BpmnSpaceModeler.prototype.updateParticipantPosition = function (participantElement, newPosition) {
+    this.modeling.updateProperties(participantElement, {
+        root: newPosition
+    });
+}
+
+// Metodo per definire l'output di un task nel modello BPMN
+BpmnSpaceModeler.prototype.defineTaskOutput = function (taskElement, newDestination) {
+    this.modeling.updateProperties(taskElement, {
+        destination: newDestination
+    });
+}
 
 BpmnSpaceModeler.prototype.handleStateDeleted = function (olcPlaces) {
     this.getDataObjectReferencesInState(olcPlaces).forEach((element, gfx) => {
@@ -74,7 +88,5 @@ BpmnSpaceModeler.prototype.handleStateDeleted = function (olcPlaces) {
         });
     });
 }
-
-
 
 
