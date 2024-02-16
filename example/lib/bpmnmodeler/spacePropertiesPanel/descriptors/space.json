@@ -1,0 +1,45 @@
+{
+  "name": "Space",
+  "prefix": "space",
+  "uri": "http://space",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "associations": [],
+  "types": [
+    {
+      "name": "SpaceTask",
+      "extends": [
+        "bpmn:Task",
+        "bpmn:Participant"
+      ],
+      "properties": [
+        {
+          "name": "guard",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "root",
+          "isAttr": true,
+          "type": "space:Place"
+        },
+        {
+          "name": "destination",
+          "isAttr": true,
+          "type": "space:Place"
+        },
+        {
+          "name": "velocity",
+          "isAttr": true,
+          "type": "Integer"
+        },
+        {
+          "name": "duration",
+          "isAttr": true,
+          "type": "Integer"
+        }
+      ]
+    }
+  ]
+}

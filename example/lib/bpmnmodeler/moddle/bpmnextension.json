@@ -1,0 +1,39 @@
+{
+    "name": "placesBPMN",
+    "prefix": "JP",
+    "uri": "http://bptlab/schema/JPspace",
+    "xml": {
+        "tagAlias": "lowerCase"
+    },
+    "associations": [],
+    "types": [
+        {
+            "name": "DataConfiguration",
+            "extends": ["bpmn:Task"],
+            "properties": [
+                {
+                    "name": "places",
+                    "isAttr": true,
+                    "isReference": true,
+                    "type": "space:Place",
+                    "isMany": true
+                },
+                {
+                    "name": "shapes",
+                    "isAttr": true,
+                    "isReference": true,
+                    "type": "space:Place",
+                    "isMany": true
+                },
+                {
+                    "name": "canvaspace",
+                    "isAttr": true,
+                    "isReference": true,
+                    "type": "space:Place",
+                    "isMany": true
+                }
+            ]
+
+        }
+    ]
+}

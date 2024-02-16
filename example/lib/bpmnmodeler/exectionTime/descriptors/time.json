@@ -1,0 +1,24 @@
+{
+    "name": "ExecutionTime",
+    "prefix": "executionTime",
+    "uri": "http://executionTime",
+    "xml": {
+      "tagAlias": "lowerCase"
+    },
+    "associations": [],
+    "types": [
+      {
+        "name": "ExecutionTime",
+        "extends": [
+          "bpmn:Process"
+        ],
+        "properties": [
+          {
+            "name": "executionTime",
+            "isAttr": true,
+            "type": "Float"
+          }
+        ]
+      }
+    ]
+  }
