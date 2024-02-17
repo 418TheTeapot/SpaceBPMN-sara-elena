@@ -213,9 +213,6 @@ function Destination(props) {
             setValue={setValue}
             debounce={debounce}
         />
-        <div>
-          <p>Root: {rootValue}</p>
-        </div>
       </div>
   );
 }
