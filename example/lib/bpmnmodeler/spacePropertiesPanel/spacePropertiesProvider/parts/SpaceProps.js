@@ -23,14 +23,18 @@ export default function(element, modeler) {
     });
   }
 
+  if (is(element, 'bpmn:Task')) {
+    entries.push(
+        {
+          id: 'destination',
+          element,
+          modeler,
+          component: Destination,
+          isEdited: isSelectEntryEdited
+        });
+  }
+
   entries.push(
-      {
-        id: 'destination',
-        element,
-        modeler,
-        component: Destination,
-        isEdited: isSelectEntryEdited
-      },
       {
         id: 'velocity',
         element,
