@@ -20,6 +20,11 @@
           "type": "String"
         },
         {
+          "name": "assignment",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
           "name": "root",
           "isAttr": true,
           "type": "space:Place"

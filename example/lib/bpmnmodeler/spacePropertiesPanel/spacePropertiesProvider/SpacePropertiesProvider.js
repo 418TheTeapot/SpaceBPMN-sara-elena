@@ -15,6 +15,8 @@ const LOW_PRIORITY = 500;
  *
  * @param {PropertiesPanel} propertiesPanel
  * @param {Function} translate
+ * @param eventBus
+ * @param spaceModeler
  */
 export default function SpacePropertiesProvider(propertiesPanel, translate, eventBus, spaceModeler) {
 
@@ -35,11 +37,10 @@ export default function SpacePropertiesProvider(propertiesPanel, translate, even
       if(is(element, 'bpmn:Task')) {
         groups.push(createSpaceGroup(element, translate));
       }
-      //add the "magic CURRENT POSITION" to PARTICIPANT
-      if(is(element,'bpmn:Participant')){
+      if (is(element,'bpmn:Participant')) {
         groups.push(createSpaceGroup(element,translate));
       }
-    if(is(element,'bpmn:Process')){
+      if(is(element,'bpmn:Process')){
         groups.push(createTimeGroup(element,translate))
       }
       return groups;
@@ -54,31 +55,30 @@ export default function SpacePropertiesProvider(propertiesPanel, translate, even
   propertiesPanel.registerProvider(LOW_PRIORITY, this);
 
 
-
   // Create the custom magic group
   function createSpaceGroup(element, translate) {
-   // var modeler= this._spaceModeler;
-  // create a group called "Magic properties".
-  const spaceGroup ={
-    id: 'space',
-    label: translate('SpaceBPMN properties'),
-    entries: spaceProps(element,modeler)
-  };
-  //destinationProps(spaceGroup, element, translate, bpmnFactory);
-  return spaceGroup
-}
+    // var modeler= this._spaceModeler;
+    // create a group called "Magic properties".
+    const spaceGroup ={
+      id: 'space',
+      label: translate('SpaceBPMN properties'),
+      entries: spaceProps(element,modeler)
+    };
+    //destinationProps(spaceGroup, element, translate, bpmnFactory);
+    return spaceGroup
+  }
 
-function createTimeGroup(element, translate) {
-  // var modeler= this._spaceModeler;
- // create a group called "Magic properties".
- const timeGroup ={
-   id: 'executionTime',
-   label: translate('Process Execution time'),
-   entries: timeProp(element,modeler)
- };
- //destinationProps(spaceGroup, element, translate, bpmnFactory);
- return timeGroup
-}
+  function createTimeGroup(element, translate) {
+    // var modeler= this._spaceModeler;
+    // create a group called "Magic properties".
+    const timeGroup ={
+      id: 'executionTime',
+      label: translate('Process Execution time'),
+      entries: timeProp(element,modeler)
+    };
+    //destinationProps(spaceGroup, element, translate, bpmnFactory);
+    return timeGroup
+  }
 
 }
 SpacePropertiesProvider.$inject = [ 'propertiesPanel', 'translate', 'eventBus', 'spaceModeler' ];

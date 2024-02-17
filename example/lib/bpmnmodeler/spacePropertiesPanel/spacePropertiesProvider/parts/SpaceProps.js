@@ -1,59 +1,62 @@
 import { TextFieldEntry, NumberFieldEntry, isTextFieldEntryEdited, isNumberFieldEntryEdited, SelectEntry, isSelectEntryEdited } from '@bpmn-io/properties-panel';
 import { useService } from 'bpmn-js-properties-panel';
 import { is } from "../../../../util/Util";
-export default function(element, modeler) {
+import {  useState } from "@bpmn-io/properties-panel/preact/hooks";
 
-  const entries = [
-    {
-      id: 'guard',
-      element,
-      component: Guard,
-      isEdited: isTextFieldEntryEdited
-    }
-  ];
 
-  // Aggiungi la voce 'root' solo se l'elemento è di tipo 'Participant'
+export default function SpaceProps(element, modeler) {
+  const properties = [];
+
   if (is(element, 'bpmn:Participant')) {
-    entries.push({
+    properties.push({
       id: 'root',
       element,
       modeler,
       component: Root,
       isEdited: isSelectEntryEdited
     });
-  }
-
-  if (is(element, 'bpmn:Task')) {
-    entries.push(
+  } else if (is(element, 'bpmn:Task')) {
+    properties.push(
+        {
+          id: 'guard',
+          element,
+          component: Guard,
+          isEdited: isTextFieldEntryEdited
+        },
         {
           id: 'destination',
           element,
           modeler,
           component: Destination,
           isEdited: isSelectEntryEdited
-        });
+        },
+        {
+          id: 'velocity',
+          element,
+          component: Velocity,
+          isEdited: isNumberFieldEntryEdited
+        },
+        {
+          id: 'duration',
+          element,
+          component: Duration,
+          isEdited: isNumberFieldEntryEdited
+        },
+        {
+          id: 'Assignment',
+          element,
+          component: Assignment,
+          isEdited: isTextFieldEntryEdited
+        }
+    );
   }
 
-  entries.push(
-      {
-        id: 'velocity',
-        element,
-        component: Velocity,
-        isEdited: isNumberFieldEntryEdited
-      },
-      {
-        id: 'duration',
-        element,
-        component: Duration,
-        isEdited: isNumberFieldEntryEdited
-      }
-  );
-
-  return entries;
+  return properties;
 }
 
+
 function Guard(props) {
-  const { element, id } = props;
+  const {element, id} = props;
 
   const modeling = useService('modeling');
   const translate = useService('translate');
@@ -70,18 +73,18 @@ function Guard(props) {
   }
 
   return <TextFieldEntry
-    id={ id }
-    element={ element }
-    description={ translate('') }
-    label={ translate('Guard') }
-    getValue={ getValue }
-    setValue={ setValue }
-    debounce={ debounce }
+      id={id}
+      element={element}
+      description={translate('')}
+      label={translate('Guard')}
+      getValue={getValue}
+      setValue={setValue}
+      debounce={debounce}
   />
 }
 
 function Root(props) {
-  const { element, id, modeler} = props;
+  const {element, id, modeler} = props;
 
   const modeling = useService('modeling');
   const translate = useService('translate');
@@ -91,7 +94,7 @@ function Root(props) {
     return element.businessObject.root || '';
   }
 
-  const getOptions = () =>  createOptions();
+  const getOptions = () => createOptions();
 
   function createOptions(overrides = {}) {
     const {
@@ -102,18 +105,17 @@ function Root(props) {
     //ad ogni nuovo olc:state aggiungiamo l'opzione dinamicamente
     //fire o dispatch cerca.
     var places = modeler._places.get('Elements');
-    var place= places.filter(element => is(element, 'space:Place'));
-    const newOptions =[ {
+    var place = places.filter(element => is(element, 'space:Place'));
+    const newOptions = [{
       label: 'null',
       value: null
     },
       ...options];
 
-    if(places.length===0){
+    if (places.length === 0) {
       return newOptions;
-    }
-    else {
-      for (let i=0; i<place.length; i++) {
+    } else {
+      for (let i = 0; i < place.length; i++) {
         newOptions.push(
             {
               label: `${place[i].name}`,
@@ -122,7 +124,7 @@ function Root(props) {
             ...options
         );
       }
-      // console.log(newOptions);
+      console.log(newOptions);
       return newOptions;
     }
   }
@@ -132,6 +134,7 @@ function Root(props) {
       root: value
     })
   }
+
 
   console.log(element.businessObject)
 
@@ -146,77 +149,79 @@ function Root(props) {
   />
 
 }
-  function Destination(props) {
-    const { element, id, modeler} = props;
+function Destination(props) {
+  const { element, id, modeler } = props;
 
-    const modeling = useService('modeling');
-    const translate = useService('translate');
-    const debounce = useService('debounceInput');
+  const modeling = useService('modeling');
+  const translate = useService('translate');
+  const debounce = useService('debounceInput');
 
+  const getValue = () => {
+    return element.businessObject.destination || '';
+  }
 
+  const getOptions = () => createOptions();
 
-    const getValue = () => {
-      //console.log(element.businessObject.destination);
-      return element.businessObject.destination || '';
-    }
+  function createOptions(overrides = {}) {
+    const {
+      options = []
+    } = overrides;
 
-    const getOptions = () =>  createOptions();
-
-    function createOptions(overrides = {}) {
-      const {
-        options = []
-      } = overrides;
-
-    //definisci un array con le destinazioni che all'inizio è vuoto
-    //ad ogni nuovo olc:state aggiungiamo l'opzione dinamicamente
-     //fire o dispatch cerca.
-     var places = modeler._places.get('Elements');
-     var place= places.filter(element => is(element, 'space:Place'));
-     const newOptions =[ {
+    var places = modeler._places.get('Elements');
+    var place = places.filter(element => is(element, 'space:Place'));
+    const newOptions = [{
       label: 'null',
       value: null
     },
-    ...options];
+      ...options];
 
-    if(places.length===0){
+    if (places.length === 0) {
+      return newOptions;
+    } else {
+      for (let i = 0; i < place.length; i++) {
+        newOptions.push(
+            {
+              label: `${place[i].name}`,
+              value: place[i].id
+            },
+            ...options
+        );
+      }
       return newOptions;
     }
-    else {
-     for (let i=0; i<place.length; i++) {
-      newOptions.push(
-        {
-          label: `${place[i].name}`,
-          value: place[i].id
-        },
-        ...options
-      );
-    }
-    console.log(newOptions);
-    return newOptions;
   }
-}
 
-const setValue = value => {
-  return modeling.updateProperties(element, {
-    destination: value
-  })
-}
+  const setValue = value => {
+    return modeling.updateProperties(element, {
+      destination: value
+    })
+  }
 
-console.log(element.businessObject)
+  console.log(element.businessObject)
 
-    return <SelectEntry
-    id={ id }
-    element={ element }
-    label={ translate('Destination') }
-    getValue={ getValue }
-    getOptions= {getOptions}
-    setValue ={setValue}
-    debounce={ debounce }
-  />
+  // Accesso alla proprietà 'root'
+  const rootValue = element.businessObject.root;
+
+  return (
+      <div>
+        <SelectEntry
+            id={id}
+            element={element}
+            label={translate('Destination')}
+            getValue={getValue}
+            getOptions={getOptions}
+            setValue={setValue}
+            debounce={debounce}
+        />
+        <div>
+          <p>Root: {rootValue}</p>
+        </div>
+      </div>
+  );
 }
 
 function Velocity(props) {
-  const { element, id } = props;
+  const {element, id} = props;
 
   const modeling = useService('modeling');
   const translate = useService('translate');
@@ -232,18 +237,18 @@ function Velocity(props) {
     });
   }
   return <NumberFieldEntry
-  id={ id }
-  element={ element }
-  description={ translate('Define robot velocity') }
-  label={ translate('Velocity') }
-  getValue={ getValue }
-  setValue={ setValue }
-  debounce={ debounce }
-/>
+      id={id}
+      element={element}
+      description={translate('Define robot velocity')}
+      label={translate('Velocity')}
+      getValue={getValue}
+      setValue={setValue}
+      debounce={debounce}
+  />
 }
 
 function Duration(props) {
-  const { element, id } = props;
+  const {element, id} = props;
 
   const modeling = useService('modeling');
   const translate = useService('translate');
@@ -260,12 +265,57 @@ function Duration(props) {
   }
 
   return <NumberFieldEntry
-  id={ id }
-  element={ element }
-  description={ translate('Must be integer number') }
-  label={ translate('Duration') }
-  getValue={ getValue }
-  setValue={ setValue }
-  debounce={ debounce }
-/>
+      id={id}
+      element={element}
+      description={translate('Must be integer number')}
+      label={translate('Duration')}
+      getValue={getValue}
+      setValue={setValue}
+      debounce={debounce}
+  />
+}
+
+function Assignment(props) {
+  const {element, id} = props;
+  const modeling = useService('modeling');
+  const translate = useService('translate');
+  const debounce = useService('debounceInput');
+
+  // Supponiamo che 'assignments' sia un array di stringhe
+  const [assignments, setAssignments] = useState(element.businessObject.assignments || []);
+
+  const addAssignment = () => {
+    setAssignments([...assignments, '']);
+  };
+
+  const removeAssignment = (index) => {
+    const updatedAssignments = assignments.filter((_, i) => i !== index);
+    setAssignments(updatedAssignments);
+    // Aggiorna il modello BPMN qui
+  };
+
+  const setValue = (index, value) => {
+    const updatedAssignments = assignments.map((item, i) => i === index ? value : item);
+    setAssignments(updatedAssignments);
+    // Aggiorna il modello BPMN qui
+  };
+
+  return (
+      <div>
+        {assignments.map((assignment, index) => (
+            <div key={`${id}-${index}`}>
+              <TextFieldEntry
+                  id={`${id}-${index}`}
+                  element={element}
+                  label={translate(`Assignment ${index + 1}`)}
+                  getValue={() => assignments[index]}
+                  setValue={(value) => setValue(index, value)}
+                  debounce={debounce}
+              />
+              <button onClick={() => removeAssignment(index)}>Remove</button>
+            </div>
+        ))}
+        <button onClick={addAssignment}>+ Add Assignment</button>
+      </div>
+  );
 }
