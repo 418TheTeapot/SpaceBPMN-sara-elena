@@ -1,7 +1,7 @@
 import { TextFieldEntry,  isTextFieldEntryEdited } from '@bpmn-io/properties-panel';
 import { useService } from 'bpmn-js-properties-panel';
 import { is } from "../../../../util/Util";
-import {  useState } from "@bpmn-io/properties-panel/preact/hooks";
+import {values} from "lodash";
 
 export default function AssignmentProps(element, modeler) {
     const properties = [];
@@ -21,69 +21,78 @@ export default function AssignmentProps(element, modeler) {
 }
 
 function Assignment(props) {
-    const {element, id} = props;
+    const { element, modeler } = props;
 
     const modeling = useService('modeling');
     const translate = useService('translate');
     const debounce = useService('debounceInput');
 
-
-    // Array di stringhe
-    const [assignments, setAssignments] = useState(element.businessObject.assignment || []);
-
-    const getValue = () => {
-        return element.businessObject.assignment || '';
+    const getValues = () => {
+        let values = element.businessObject.assignment || [];
+        // Assicurati che values sia un array
+        if (!Array.isArray(values)) {
+            // Se values non è un array, convertilo in un array con un unico elemento
+            values = [values];
+        }
+        console.log('Array degli attributi di assegnazione:', values); // Stampare l'array nella console
+        return values;
     };
 
-    const setValue = (value) => {
-        modeling.updateProperties(element, {
+
+    // Esporta la funzione setValues per renderla disponibile all'esterno
+    const setValues = (value) => {
+        return modeling.updateProperties(element, {
             assignment: value
         });
     };
 
-    const addAssignment = () => {
-        const newAssignment = [...assignments, '']; // Aggiungi una nuova stringa vuota
-        setAssignments(newAssignment);
-        setValue(newAssignment);
+    const addAttribute = () => {
+        const newAttribute = { /* struttura del nuovo attributo spaziale */ };
+        const updatedAttributes = [...getValues(), newAttribute];
+        // Utilizza setValues definito all'interno di Assignment
+        setValues(updatedAttributes);
     };
 
-    const removeAssignment = (index) => {
-        const updatedAssignments = [...assignments];
-        updatedAssignments.splice(index, 1); // Rimuovi l'elemento all'indice specificato
-        setAssignments(updatedAssignments);
-        setValue(updatedAssignments);
+    const removeAttribute = (index) => {
+        const updatedAttributes = getValues().filter((_, i) => i !== index);
+        setValues(updatedAttributes);
     };
 
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1px' }}>
                 <span style={{ marginRight: '4px' }}>Add Assignments</span>
-                <button onClick={addAssignment}>+</button>
+                <button onClick={addAttribute}>+</button>
             </div>
-
-            {assignments.map((assignment, index) => (
-                <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '4px' }}>
-                    <div style={{ position: 'relative', marginRight: '4px', width: '100%' }}>
-                        <TextFieldEntry
-                            id={`assignment-${index}`}
-                            element={element}
-                            description={translate('')}
-                            label={`Assignment ${index + 1}`}
-                            getValue={() => assignment}
-                            setValue={(value) => setValue(value, index)}
-                            debounce={debounce}
-                            style={{ paddingLeft: '20px' }}
-                        />
-                        <button
-                            onClick={() => removeAssignment(index)}
-                            style={{ position: 'absolute', right: '0', top: '65%', transform: 'translateY(-50%)' }}>
-                            X
-                        </button>
-                    </div>
+            {getValues().map((attribute, index) => (
+                <div key={index}>
+                    <TextFieldEntry
+                        id={`assignment_${index}`} // ID unico per ogni TextField
+                        element={element}
+                        description={translate('')}
+                        label={`Assignment ${index + 1}`} // Etichetta dinamica
+                        getValue={() => attribute}
+                        setValue={(newValue) => {
+                            const updatedAttributes = getValues().map((attr, i) => {
+                                if (i === index) {
+                                    return newValue;
+                                } else {
+                                    return attr;
+                                }
+                            });
+                            setValues(updatedAttributes);
+                        }}
+                        debounce={debounce}
+                    />
+                    <button
+                        onClick={() => removeAttribute(index)}
+                        style={{ marginTop: '4px' }}>
+                        Remove
+                    </button>
                 </div>
             ))}
+
         </div>
     );
-
 
 }
