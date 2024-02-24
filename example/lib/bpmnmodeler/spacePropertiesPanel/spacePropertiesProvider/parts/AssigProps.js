@@ -21,7 +21,7 @@ export default function AssignmentProps(element, modeler) {
 }
 
 function Assignment(props) {
-    const { element, modeler } = props;
+    const { element, id } = props;
 
     const modeling = useService('modeling');
     const translate = useService('translate');
@@ -29,17 +29,13 @@ function Assignment(props) {
 
     const getValues = () => {
         let values = element.businessObject.assignment || [];
-        // Assicurati che values sia un array
         if (!Array.isArray(values)) {
-            // Se values non è un array, convertilo in un array con un unico elemento
             values = [values];
         }
-        console.log('Array degli attributi di assegnazione:', values); // Stampare l'array nella console
+        console.log('Array degli attributi di assegnazione:', values);
         return values;
     };
 
-
-    // Esporta la funzione setValues per renderla disponibile all'esterno
     const setValues = (value) => {
         return modeling.updateProperties(element, {
             assignment: value
@@ -47,9 +43,8 @@ function Assignment(props) {
     };
 
     const addAttribute = () => {
-        const newAttribute = { /* struttura del nuovo attributo spaziale */ };
+        const newAttribute = {};
         const updatedAttributes = [...getValues(), newAttribute];
-        // Utilizza setValues definito all'interno di Assignment
         setValues(updatedAttributes);
     };
 
@@ -62,36 +57,29 @@ function Assignment(props) {
         <div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1px' }}>
                 <span style={{ marginRight: '4px' }}>Add Assignments</span>
-                <button onClick={addAttribute}>+</button>
+                <button onClick={addAttribute} style={{ background: 'white', color: 'black', border: '2px solid black', borderRadius: '4px',  cursor: 'pointer', fontSize: '16px' }}>+</button>
             </div>
             {getValues().map((attribute, index) => (
-                <div key={index}>
+                <div key={index} style={{ position: 'relative' }}>
                     <TextFieldEntry
-                        id={`assignment_${index}`} // ID unico per ogni TextField
+                        id={id}
                         element={element}
                         description={translate('')}
-                        label={`Assignment ${index + 1}`} // Etichetta dinamica
+                        label={`Assignment ${index + 1}`}
                         getValue={() => attribute}
                         setValue={(newValue) => {
-                            const updatedAttributes = getValues().map((attr, i) => {
-                                if (i === index) {
-                                    return newValue;
-                                } else {
-                                    return attr;
-                                }
-                            });
+                            const updatedAttributes = getValues().map((attr, i) => i === index ? newValue : attr);
                             setValues(updatedAttributes);
                         }}
                         debounce={debounce}
                     />
                     <button
                         onClick={() => removeAttribute(index)}
-                        style={{ marginTop: '4px' }}>
+                        style={{ position: 'absolute', right: '30px', top: '0', background: 'transparent', border: 'none' }}>
                         Remove
                     </button>
                 </div>
             ))}
-
         </div>
     );
 
