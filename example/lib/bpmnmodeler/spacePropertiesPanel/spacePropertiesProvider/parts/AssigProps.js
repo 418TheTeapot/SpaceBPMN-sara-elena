@@ -11,6 +11,7 @@ export default function AssignmentProps(element, modeler) {
             {
                 id: 'Assignment',
                 element,
+                modeler,
                 component: Assignment,
                 isEdited: isTextFieldEntryEdited
             }
