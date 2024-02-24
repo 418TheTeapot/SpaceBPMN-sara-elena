@@ -65,7 +65,7 @@ function Assignment(props) {
                     <TextFieldEntry
                         id={id}
                         element={element}
-                        description={translate('')}
+                        description={translate('Write a Space Attribute" Like What? Boh lo scopriremo')}
                         label={`Assignment ${index + 1}`}
                         getValue={() => attribute.value || ''}
                         setValue={(newValue) => {
