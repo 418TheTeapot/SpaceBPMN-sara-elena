@@ -37,12 +37,10 @@ export default function SpacePropertiesProvider(propertiesPanel, translate, even
       // Add the "magic" group
       if(is(element, 'bpmn:Task')) {
         groups.push(createSpaceGroup(element, translate));
-        groups.push(createAssignmentGroup(element, translate)); // Aggiungiamo il gruppo di assegnazione
 
       }
       if (is(element,'bpmn:Participant')) {
         groups.push(createSpaceGroup(element,translate));
-        groups.push(createAssignmentGroup(element, translate)); // Aggiungiamo il gruppo di assegnazione
 
       }
       if(is(element,'bpmn:Process')){
