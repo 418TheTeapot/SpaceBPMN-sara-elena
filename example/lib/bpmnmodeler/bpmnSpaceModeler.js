@@ -66,19 +66,6 @@ BpmnSpaceModeler.prototype.getDataObjectReferencesInState = function (olcState) 
     );
 }
 
-// Metodo per aggiornare la posizione corrente di un partecipante nel modello BPMN
-BpmnSpaceModeler.prototype.updateParticipantPosition = function (participantElement, newPosition) {
-    this.modeling.updateProperties(participantElement, {
-        root: newPosition
-    });
-}
-
-// Metodo per definire l'output di un task nel modello BPMN
-BpmnSpaceModeler.prototype.defineTaskOutput = function (taskElement, newDestination) {
-    this.modeling.updateProperties(taskElement, {
-        destination: newDestination
-    });
-}
 
 BpmnSpaceModeler.prototype.handleStateDeleted = function (olcPlaces) {
     this.getDataObjectReferencesInState(olcPlaces).forEach((element, gfx) => {

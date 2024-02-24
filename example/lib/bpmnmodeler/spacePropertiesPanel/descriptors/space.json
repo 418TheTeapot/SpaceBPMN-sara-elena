@@ -20,11 +20,6 @@
           "type": "String"
         },
         {
-          "name": "assignment",
-          "isAttr": true,
-          "type": "String"
-        },
-        {
           "name": "root",
           "isAttr": true,
           "type": "space:Place"
@@ -43,6 +38,11 @@
           "name": "duration",
           "isAttr": true,
           "type": "Integer"
+        },
+        {
+          "name": "assignment",
+          "isAttr": true,
+          "type": "String"
         }
       ]
     }

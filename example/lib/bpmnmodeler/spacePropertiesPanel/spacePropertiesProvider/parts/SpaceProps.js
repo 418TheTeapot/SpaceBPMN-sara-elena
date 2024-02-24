@@ -42,12 +42,7 @@ export default function SpaceProps(element, modeler) {
           component: Duration,
           isEdited: isNumberFieldEntryEdited
         },
-        {
-          id: 'Assignment',
-          element,
-          component: Assignment,
-          isEdited: isTextFieldEntryEdited
-        }
+
     );
   }
 
@@ -272,47 +267,6 @@ function Duration(props) {
   />
 }
 
-function Assignment(props) {
-  const {element, id} = props;
-  const modeling = useService('modeling');
-  const translate = useService('translate');
-  const debounce = useService('debounceInput');
 
-  // Supponiamo che 'assignments' sia un array di stringhe
-  const [assignments, setAssignments] = useState(element.businessObject.assignments || []);
+////////Funzione Assignment////////////
 
-  const addAssignment = () => {
-    setAssignments([...assignments, '']);
-  };
-
-  const removeAssignment = (index) => {
-    const updatedAssignments = assignments.filter((_, i) => i !== index);
-    setAssignments(updatedAssignments);
-    // Aggiorna il modello BPMN qui
-  };
-
-  const setValue = (index, value) => {
-    const updatedAssignments = assignments.map((item, i) => i === index ? value : item);
-    setAssignments(updatedAssignments);
-    // Aggiorna il modello BPMN qui
-  };
-
-  return (
-      <div>
-        {assignments.map((assignment, index) => (
-            <div key={`${id}-${index}`}>
-              <TextFieldEntry
-                  id={`${id}-${index}`}
-                  element={element}
-                  label={translate(`Assignment ${index + 1}`)}
-                  getValue={() => assignments[index]}
-                  setValue={(value) => setValue(index, value)}
-                  debounce={debounce}
-              />
-              <button onClick={() => removeAssignment(index)}>Remove</button>
-            </div>
-        ))}
-        <button onClick={addAssignment}>+ Add Assignment</button>
-      </div>
-  );
-}
