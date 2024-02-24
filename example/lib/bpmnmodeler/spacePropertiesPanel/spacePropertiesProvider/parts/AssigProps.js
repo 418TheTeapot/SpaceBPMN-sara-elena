@@ -67,9 +67,9 @@ function Assignment(props) {
                         element={element}
                         description={translate('')}
                         label={`Assignment ${index + 1}`}
-                        getValue={() => attribute}
+                        getValue={() => attribute.value || ''}
                         setValue={(newValue) => {
-                            const updatedAttributes = getValues().map((attr, i) => i === index ? newValue : attr);
+                            const updatedAttributes = getValues().map((attr, i) => i === index ? { ...attr, value: newValue } : attr);
                             setValues(updatedAttributes);
                         }}
                         debounce={debounce}
