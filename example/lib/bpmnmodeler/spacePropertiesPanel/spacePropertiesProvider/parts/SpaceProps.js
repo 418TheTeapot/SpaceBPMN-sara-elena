@@ -2,7 +2,7 @@ import { TextFieldEntry, NumberFieldEntry, isTextFieldEntryEdited, isNumberField
 import { useService } from 'bpmn-js-properties-panel';
 import { is } from "../../../../util/Util";
 import {  useState } from "@bpmn-io/properties-panel/preact/hooks";
-import {Assignment} from "./AssigProps";
+import {Assignment} from "./AssignmentProps";
 
 
 export default function SpaceProps(element, modeler) {
