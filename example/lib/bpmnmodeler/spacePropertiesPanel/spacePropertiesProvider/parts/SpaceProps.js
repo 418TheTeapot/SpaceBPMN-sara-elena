@@ -31,18 +31,18 @@ export default function SpaceProps(element, modeler) {
           component: Destination,
           isEdited: isSelectEntryEdited
         },
-        {
-          id: 'velocity',
-          element,
-          component: Velocity,
-          isEdited: isNumberFieldEntryEdited
-        },
-        {
-          id: 'duration',
-          element,
-          component: Duration,
-          isEdited: isNumberFieldEntryEdited
-        },
+        // {
+        //   id: 'velocity',
+        //   element,
+        //   component: Velocity,
+        //   isEdited: isNumberFieldEntryEdited
+        // },
+        // {
+        //   id: 'duration',
+        //   element,
+        //   component: Duration,
+        //   isEdited: isNumberFieldEntryEdited
+        // },
         {
             id: 'assignment',
             element,
