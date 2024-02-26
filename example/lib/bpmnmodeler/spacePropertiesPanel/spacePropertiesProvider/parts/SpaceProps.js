@@ -2,7 +2,7 @@ import { TextFieldEntry, NumberFieldEntry, isTextFieldEntryEdited, isNumberField
 import { useService } from 'bpmn-js-properties-panel';
 import { is } from "../../../../util/Util";
 import {  useState } from "@bpmn-io/properties-panel/preact/hooks";
-import {Assignment} from "./AssignmentProps";
+import { Assignment } from "./AssignmentProps";
 
 
 export default function SpaceProps(element, modeler) {
@@ -143,7 +143,7 @@ function Root(props) {
   return <SelectEntry
       id={ id }
       element={ element }
-      label={ translate('Current Position') }
+      label={ translate('Initial Position') }
       getValue={ getValue }
       getOptions= {getOptions}
       setValue ={setValue}
@@ -195,14 +195,12 @@ function Destination(props) {
 
   const setValue = value => {
     return modeling.updateProperties(element, {
-      destination: value
+      destination: value,
+      root: value
     })
   }
 
   console.log(element.businessObject)
-
-  // Accesso alla proprietà 'root'
-  const rootValue = element.businessObject.root;
 
   return (
       <div>
