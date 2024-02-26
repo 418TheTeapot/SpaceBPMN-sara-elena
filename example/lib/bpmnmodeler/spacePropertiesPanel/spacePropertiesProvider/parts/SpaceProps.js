@@ -195,8 +195,7 @@ function Destination(props) {
 
   const setValue = value => {
     return modeling.updateProperties(element, {
-      destination: value,
-      root: value
+      destination: value
     })
   }
 
