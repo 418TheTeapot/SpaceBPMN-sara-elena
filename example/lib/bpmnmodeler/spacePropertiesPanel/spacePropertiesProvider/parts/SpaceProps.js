@@ -2,7 +2,7 @@ import { TextFieldEntry, NumberFieldEntry, isTextFieldEntryEdited, isNumberField
 import { useService } from 'bpmn-js-properties-panel';
 import { is } from "../../../../util/Util";
 import {  useState } from "@bpmn-io/properties-panel/preact/hooks";
-import {Assignment} from "./AssignmentProps";
+import { Assignment } from "./AssignmentProps";
 
 
 export default function SpaceProps(element, modeler) {
@@ -31,18 +31,18 @@ export default function SpaceProps(element, modeler) {
           component: Destination,
           isEdited: isSelectEntryEdited
         },
-        {
-          id: 'velocity',
-          element,
-          component: Velocity,
-          isEdited: isNumberFieldEntryEdited
-        },
-        {
-          id: 'duration',
-          element,
-          component: Duration,
-          isEdited: isNumberFieldEntryEdited
-        },
+        // {
+        //   id: 'velocity',
+        //   element,
+        //   component: Velocity,
+        //   isEdited: isNumberFieldEntryEdited
+        // },
+        // {
+        //   id: 'duration',
+        //   element,
+        //   component: Duration,
+        //   isEdited: isNumberFieldEntryEdited
+        // },
         {
             id: 'assignment',
             element,
@@ -143,7 +143,7 @@ function Root(props) {
   return <SelectEntry
       id={ id }
       element={ element }
-      label={ translate('Current Position') }
+      label={ translate('Initial Position') }
       getValue={ getValue }
       getOptions= {getOptions}
       setValue ={setValue}
@@ -200,9 +200,6 @@ function Destination(props) {
   }
 
   console.log(element.businessObject)
-
-  // Accesso alla proprietà 'root'
-  const rootValue = element.businessObject.root;
 
   return (
       <div>
