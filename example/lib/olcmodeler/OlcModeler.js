@@ -271,6 +271,8 @@ OlcModeler.prototype.handleShapeChanges = function (space) {
  console.log(this.get('elementRegistry'))
 }
 
+
+
 OlcModeler.prototype.saveXML = function (options) {
 
   options = options || {};

@@ -128,12 +128,13 @@ var modeler = new BpmnSpaceModeler({
     __init__ : ['mediator'],
     mediator : ['type', mediator.SpaceModelerHook]
   },
-  BpmnPropertiesPanelModule,
-  BpmnPropertiesProviderModule,
+  // BpmnPropertiesPanelModule,
+  // BpmnPropertiesProviderModule,
   TokenSimulationModule,
   //BpmnColorPickerModule,
   AddExporter,
  // ExampleModule
+      
 ],
   propertiesPanel: {
     parent: '#properties-panel'
