@@ -3,11 +3,17 @@
 'use strict'; 
 import $ from 'jquery';
 import TokenSimulationModule from '..';
+//import BpmnColorPickerModule from 'bpmn-js-color-picker';
+//import BpmnModeler from 'bpmn-js/lib/Modeler';
 
 import AddExporter from '@bpmn-io/add-exporter';
+import {
+  BpmnPropertiesPanelModule,
+  BpmnPropertiesProviderModule
+} from 'bpmn-js-properties-panel';
 
-
-
+//import spacePropertiesProviderModule from './lib/spacePropertiesPanel/spacePropertiesProvider/index.js';
+//import spaceModdleDescriptor from './lib/spacePropertiesPanel/descriptors/space.json';
 
 import fileDrop from 'file-drops';
 
@@ -22,9 +28,6 @@ import OlcModeler from './lib/olcmodeler/OlcModeler';
 import Mediator from './lib/mediator/Mediator';
 import BpmnSpaceModeler from './lib/bpmnmodeler/bpmnSpaceModeler';
 import { downloadZIP, uploadZIP } from './lib/util/FileUtil';
-
-
-import {GlobalPropertiesPanelModule, GlobalPropertiesProviderModule} from "./global-js-properties-panel";
 
 const url = new URL(window.location.href);
 const persistent = url.searchParams.has('p');
@@ -61,6 +64,39 @@ if (persistent) {
   hideMessage();
 }
 
+/*const ExampleModule = {
+  __init__: [
+    [ 'eventBus', 'bpmnjs', 'toggleMode', function(eventBus, bpmnjs, toggleMode) {
+
+      if (persistent) {
+        eventBus.on('commandStack.changed', function() {
+          bpmnjs.saveXML().then(result => {
+            localStorage['diagram-xml'] = result.xml;
+          });
+        });
+      }
+
+      if ('history' in window) {
+        eventBus.on('tokenSimulation.toggleMode', event => {
+
+          document.body.classList.toggle('token-simulation-active', event.active);
+
+          if (event.active) {
+            url.searchParams.set('e', '1');
+          } else {
+            url.searchParams.delete('e');
+          }
+
+          history.replaceState({}, document.title, url.toString());
+        });
+      }
+
+      eventBus.on('diagram.init', 500, () => {
+        toggleMode.toggleMode(active);
+      });
+    } ]
+  ]
+};*/
 
 var mediator = new Mediator();
 window.mediator = mediator;
@@ -92,10 +128,8 @@ var modeler = new BpmnSpaceModeler({
     __init__ : ['mediator'],
     mediator : ['type', mediator.SpaceModelerHook]
   },
-
-      GlobalPropertiesProviderModule,
-      GlobalPropertiesPanelModule,
-
+  // BpmnPropertiesPanelModule,
+  // BpmnPropertiesProviderModule,
   TokenSimulationModule,
   //BpmnColorPickerModule,
   AddExporter,
@@ -107,6 +141,8 @@ var modeler = new BpmnSpaceModeler({
   }
 });
 
+//all'inizio il time-execution non deve comparire, compare solo con il toggle
+//document.querySelector("#time-execution").style.display = "none";
 
 //Serve per creare gli XML dei due modeler
 async function createNewDiagram() {

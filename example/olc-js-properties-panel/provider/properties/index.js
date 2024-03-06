@@ -1,0 +1,2 @@
+
+export { NameProps } from './NameProps';
