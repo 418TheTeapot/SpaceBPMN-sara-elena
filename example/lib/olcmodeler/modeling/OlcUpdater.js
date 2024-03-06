@@ -4,6 +4,7 @@ import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 import {
     remove as collectionRemove
   } from 'diagram-js/lib/util/Collections';
+import {getBusinessObject} from "../../util/Util";
 
 export default function OlcUpdater(eventBus, connectionDocking) {
 
@@ -133,3 +134,11 @@ OlcUpdater.prototype.connectionWaypoints = function(source, target) {
     connection.waypoints = this._connectionDocking.getCroppedWaypoints(connection);
     return connection.waypoints;
 }
+
+OlcUpdater.prototype.updateElementName = function(element, newName) {
+    var businessObject = getBusinessObject(element);
+    if (businessObject) {
+        businessObject.name = newName;
+    }
+}
+

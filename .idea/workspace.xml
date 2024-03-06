@@ -4,48 +4,384 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/SpaceBPMN2-main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/animation/Animation.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/animation/Animation.js" afterDir="false" />
+    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="Global !!! da vedere bene gli hook e altro">
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/cmd/MultiCommandHandler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/cmd/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/context/GlobalPropertiesPanelContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/context/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/contextProvider/camunda-platform/TooltipProvider.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/contextProvider/camunda-platform/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/contextProvider/zeebe/TooltipProvider.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/contextProvider/zeebe/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/entries/FeelEntryWithContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/entries/ReferenceSelect.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/hooks/useService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-empty-state.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-association.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-business-rule-task.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-call-activity.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-collaboration.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-conditional-flow.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-connection.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-data-input-output-association.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-data-input.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-data-object.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-data-output.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-data-store.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-default-flow.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-end-event-cancel.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-end-event-compensation.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-end-event-error.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-end-event-escalation.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-end-event-link.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-end-event-message.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-end-event-multiple.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-end-event-none.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-end-event-signal.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-end-event-terminate.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-event-subprocess-expanded.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-gateway-complex.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-gateway-eventbased.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-gateway-none.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-gateway-or.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-gateway-parallel.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-gateway-xor.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-group.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-cancel.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-compensation.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-condition.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-error.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-escalation.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-link.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-message.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-multiple.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-non-interrupting-condition.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-non-interrupting-escalation.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-non-interrupting-message.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-non-interrupting-multiple.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-non-interrupting-parallel.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-non-interrupting-signal.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-non-interrupting-timer.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-parallel-multiple.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-signal.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-catch-timer.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-none.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-throw-compensation.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-throw-escalation.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-throw-link.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-throw-message.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-throw-multiple.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-intermediate-event-throw-signal.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-lane.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-manual-task.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-message-flow.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-participant.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-process.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-receive-task.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-script-task.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-send-task.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-service-task.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-compensation.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-condition.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-error.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-escalation.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-message.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-multiple.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-non-interrupting-condition.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-non-interrupting-escalation.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-non-interrupting-message.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-non-interrupting-multiple.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-non-interrupting-parallel-multiple.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-non-interrupting-signal.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-non-interrupting-timer.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-none.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-parallel-multiple.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-signal.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-start-event-timer.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-subprocess-collapsed.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-subprocess-expanded.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-task-none.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-text-annotation.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-transaction.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-icon-user-task.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/bpmn-multiple-state.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/icons/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/HOCs/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/HOCs/withTooltipContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/HOCs/withVariableContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/CamundaPlatformPropertiesProvider.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/AsynchronousContinuationsProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/BusinessKeyProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/CallActivityProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/CalledBpmnProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/CalledCmmnProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/CandidateStarterProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/ConditionProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/ConnectorInputProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/ConnectorOutputProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/DelegateVariableMappingProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/DmnImplementationProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/Error.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/ErrorProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/ErrorsProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/EscalationProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/ExternalTaskPriorityProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/FieldInjection.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/FieldInjectionProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/FormDataProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/FormField.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/FormFieldConstraint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/FormFieldProperty.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/FormFieldValue.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/FormProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/FormTypeProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/HistoryCleanupProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/ImplementationProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/ImplementationTypeProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/InMappingPropagationProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/InMappingProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/InOutMapping.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/InitiatorProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/InputOutputParameter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/InputProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/JobExecutionProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/ListProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/ListenerProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/MapProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/MultiInstanceProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/OutMappingPropagationProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/OutMappingProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/OutputProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/ProcessVariablesProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/ScriptProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/ScriptTaskProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/TasklistProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/TimerProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/UserAssignmentProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/VersionTagProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/properties/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/utils/ConnectorUtil.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/utils/FormTypeUtils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/utils/ImplementationTypeUtils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/camunda-platform/utils/InputOutputUtil.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/GlobalPropertiesProvider.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/properties/CompensationProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/properties/DocumentationProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/properties/ErrorProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/properties/EscalationProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/properties/ExecutableProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/properties/IdProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/properties/LinkProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/properties/MessageProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/properties/MultiInstanceProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/properties/NameProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/properties/ProcessProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/properties/SignalProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/properties/TimerProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/properties/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/utils/EventDefinitionUtil.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/global/utils/ValidationUtil.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/shared/ExtensionPropertiesProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/shared/ExtensionProperty.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/ZeebePropertiesProvider.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/AssignmentDefinitionProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/BusinessRuleImplementationProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/CalledDecisionProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/ConditionProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/ErrorProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/EscalationProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/FormProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/Header.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/HeaderProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/InputOutputParameter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/InputPropagationProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/InputProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/MessageProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/MultiInstanceProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/OutputPropagationProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/OutputProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/ScriptImplementationProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/ScriptProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/SignalProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/TargetProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/TaskDefinitionProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/TaskScheduleProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/TimerProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/UserTaskImplementationProps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/properties/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/utils/CalledElementUtil.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/utils/FormUtil.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/utils/HeadersUtil.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/utils/InputOutputUtil.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/utils/TimerUtil.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/provider/zeebe/utils/ZeebeServiceTaskUtil.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/render/GlobalPropertiesPanel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/render/GlobalPropertiesPanelRenderer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/render/PanelHeaderProvider.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/render/PanelPlaceholderProvider.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/render/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/utils/ElementUtil.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/utils/EventDefinitionUtil.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/global-js-properties-panel/utils/ExtensionElementsUtil.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/lib/olcmodeler/anotherPP/SpacePropertiesProvider.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/PropertiesPanel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/assets/properties-panel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/DropdownButton.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/Group.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/Header.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/HeaderButton.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/ListGroup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/ListItem.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/Placeholder.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/Popup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/Checkbox.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/Collapsible.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/Description.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/FEEL/Feel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/FEEL/FeelEditor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/FEEL/FeelIcon.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/FEEL/FeelIndicator.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/FEEL/FeelPopup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/FEEL/context/FeelPopupContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/FEEL/context/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/FEEL/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/List.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/NumberField.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/Select.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/Simple.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/TextArea.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/TextField.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/ToggleSwitch.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/Tooltip.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/templating/Templating.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/templating/TemplatingEditor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/entries/templating/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/icons/Arrow.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/icons/Create.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/icons/Delete.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/icons/Drag.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/icons/ExternalLink.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/icons/Feel.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/icons/Popup.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/icons/help.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/icons/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/components/util/dragger.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/context/DescriptionContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/context/ErrorsContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/context/EventContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/context/LayoutContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/context/PropertiesPanelContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/context/TooltipContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/context/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/features/debounce-input/debounceInput.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/features/debounce-input/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/features/feel-popup/FeelPopupModule.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/features/feel-popup/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/features/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/hooks/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/hooks/useDescriptionContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/hooks/useError.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/hooks/useEvent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/hooks/useKeyFactory.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/hooks/useLayoutState.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/hooks/usePrevious.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/hooks/useShowEntryEvent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/hooks/useStaticCallback.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/hooks/useStickyIntersectionObserver.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/hooks/useTooltipContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/properties-panel/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/OlcModeler.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/OlcModeler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcUpdater.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcUpdater.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/modeler.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/modeler.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/modeler.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/modeler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/cmd/MultiCommandHandler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/cmd/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/context/OlcPropertiesPanelContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/context/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/hooks/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/global-js-properties-panel/hooks/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/hooks/useService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/OlcPropertiesProvider.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/NameProps.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/render/OlcPropertiesPanel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/render/OlcPropertiesPanelRender.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/render/PanelHeaderProvider.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/render/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2crJvpx4Ye9zdhl0GFMpc9akn2z" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.dev.executor": "Run",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;provaPP&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sarav/OneDrive/Documenti/GitHub/SpaceBPMN-sara-elena/example&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.3.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\sarav\OneDrive\Documenti\GitHub\SpaceBPMN-sara-elena\example" />
+      <recent name="C:\Users\sarav\OneDrive\Documenti\GitHub\SpaceBPMN-sara-elena\example\lib" />
+      <recent name="C:\Users\sarav\OneDrive\Documenti\GitHub\SpaceBPMN-sara-elena\example\lib\olcmodeler" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sarav\OneDrive\Documenti\GitHub\SpaceBPMN-sara-elena\example" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -72,10 +408,63 @@
       <option name="presentableId" value="Default" />
       <updated>1708863999968</updated>
       <workItem from="1708864004235" duration="991000" />
+      <workItem from="1709727788947" duration="1116000" />
+      <workItem from="1709734057790" duration="3108000" />
+      <workItem from="1709741108608" duration="2976000" />
+      <workItem from="1709745211840" duration="19362000" />
+      <workItem from="1709767257368" duration="387000" />
     </task>
+    <task id="LOCAL-00001" summary="olc-js-pp">
+      <option name="closed" value="true" />
+      <created>1709745333506</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1709745333506</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="provaPP" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="olc-js-pp" />
+    <MESSAGE value="Global !!! da vedere bene gli hook e altro" />
+    <option name="LAST_COMMIT_MESSAGE" value="Global !!! da vedere bene gli hook e altro" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/lib/simulator/behaviors/ActivityBehavior.js</url>
+          <line>179</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
