@@ -20,6 +20,7 @@ import EditorActionsModule from '../common/editor-actions';
 import CopyPasteModule from 'diagram-js/lib/features/copy-paste';
 import KeyboardModule from '../common/keyboard';
 
+// import {OlcPropertiesPanelModule} from '../example/olc-js-properties-panel';
 import OlcPaletteModule from './palette';
 import OlcDrawModule from './draw';
 import OlcRulesModule from './rules';
@@ -30,6 +31,7 @@ import OlcModdle from './moddle';
 import OlcEvents from './OlcEvents';
 import { nextPosition, root, is } from '../util/Util';
 import SpacePropertiesProvider from "./anotherPP/SpacePropertiesProvider";
+import {OlcPropertiesPanelModule, OlcPropertiesProviderModule} from "../../olc-js-properties-panel";
 
 var emptyDiagram =
   `<?xml version="1.0" encoding="UTF-8"?>
@@ -50,7 +52,8 @@ export default function OlcModeler(options) {
   const {
     container,
     additionalModules = [],
-    keyboard
+    keyboard,
+    propertiesPanel
   } = options;
 
   // default modules provided by the toolbox
@@ -80,6 +83,7 @@ export default function OlcModeler(options) {
     OlcRulesModule,
     OlcModelingModule,
     OlcAutoPlaceModule,
+    //OlcPropertiesPanelModule,
     {
       moddle: ['value', new OlcModdle({})],
       olcModeler: ['value', this],
@@ -99,11 +103,12 @@ export default function OlcModeler(options) {
       ...builtinModules,
       ...customModules,
       ...additionalModules
-    ]
+    ],
+    propertiesPanel
   };
 
   Diagram.call(this, diagramOptions);
-  
+
   this.get('eventBus').fire('attach'); // Needed for key listeners to work
 
 }
@@ -125,10 +130,10 @@ OlcModeler.prototype.importXML = function (xml) {
     // hook in pre-parse listeners +
     // allow xml manipulation
     xml = self._emit('import.parse.start', { xml: xml }) || xml;
-   
+
 
     self.get('moddle').fromXML(xml).then(function (result) {
-     
+
       var definitions = result.rootElement;
       var references = result.references;
       var parseWarnings = result.warnings;
@@ -150,7 +155,7 @@ OlcModeler.prototype.importXML = function (xml) {
         definitions: definitions,
         context: context
       }) || definitions;
-    
+
       self.importDefinitions(definitions);
       self._emit('import.done', { error: null, warnings: null });
       resolve();
@@ -285,10 +290,10 @@ OlcModeler.prototype.saveXML = function (options) {
   var self = this;
 
   var definitions = this._definitions;
-  
+
 
   return new Promise(function (resolve, reject) {
-    
+
     if (!definitions) {
       var err = new Error('no xml loaded');
 

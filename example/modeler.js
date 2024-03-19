@@ -1,6 +1,6 @@
 /* global process */
 
-'use strict'; 
+'use strict';
 import $ from 'jquery';
 import TokenSimulationModule from '..';
 //import BpmnColorPickerModule from 'bpmn-js-color-picker';
@@ -28,6 +28,8 @@ import OlcModeler from './lib/olcmodeler/OlcModeler';
 import Mediator from './lib/mediator/Mediator';
 import BpmnSpaceModeler from './lib/bpmnmodeler/bpmnSpaceModeler';
 import { downloadZIP, uploadZIP } from './lib/util/FileUtil';
+import OlcPropertiesProvider from "./olc-js-properties-panel/provider/OlcPropertiesProvider";
+import {OlcPropertiesPanelModule, OlcPropertiesProviderModule} from "./olc-js-properties-panel";
 
 const url = new URL(window.location.href);
 const persistent = url.searchParams.has('p');
@@ -104,21 +106,26 @@ window.mediator = mediator;
 //modeler for space
 var olcModeler = new OlcModeler({
     container: document.querySelector('#olc-canvas'),
-    keyboard: { 
-      bindTo: document.querySelector('#olc-canvas') 
+    keyboard: {
+      bindTo: document.querySelector('#olc-canvas')
     },
     additionalModules: [{
       __init__ : ['mediator'],
       mediator : ['type', mediator.OlcModelerHook]
+    },
+        OlcPropertiesProviderModule,
+        OlcPropertiesPanelModule
+  ],
+    propertiesPanel: {
+        parent: document.querySelector('#olc-properties-panel')
     }
-  ]
 });
 
 //create a bpmn modeler
 var modeler = new BpmnSpaceModeler({
   container:'#canvas',
-  keyboard: { 
-    bindTo: document 
+  keyboard: {
+    bindTo: document
   },
   exporter: {
     name: 'bpmn-js-token-simulation',
@@ -128,13 +135,13 @@ var modeler = new BpmnSpaceModeler({
     __init__ : ['mediator'],
     mediator : ['type', mediator.SpaceModelerHook]
   },
-  // BpmnPropertiesPanelModule,
-  // BpmnPropertiesProviderModule,
+  BpmnPropertiesPanelModule,
+  BpmnPropertiesProviderModule,
   TokenSimulationModule,
   //BpmnColorPickerModule,
   AddExporter,
  // ExampleModule
-      
+
 ],
   propertiesPanel: {
     parent: '#properties-panel'
@@ -279,7 +286,7 @@ async function exportToZip () {
   zip.file('behaviour.bpmn', space);
   const olcs = (await olcModeler.saveXML({ format: true })).xml;
   zip.file('space.xml', olcs);
-  return zip.generateAsync({type : 'base64'}); 
+  return zip.generateAsync({type : 'base64'});
 }
 
 document.querySelector('#download-button').addEventListener('click',  () => exportToZip().then(zip => {
@@ -289,7 +296,11 @@ document.querySelector('#download-button').addEventListener('click',  () => expo
 
 const propertiesPanel = document.querySelector('#properties-panel');
 
+const olcPropertiesPanel = document.querySelector('#olc-properties-panel');
+
 const propertiesPanelResizer = document.querySelector('#properties-panel-resizer');
+
+const olcPropertiesPanelResizer = document.querySelector('#olc-properties-panel-resizer');
 
 let startX, startWidth;
 
@@ -304,10 +315,15 @@ function toggleProperties(open) {
   history.replaceState({}, document.title, url.toString());
 
   propertiesPanel.classList.toggle('open', open);
+  olcPropertiesPanel.classList.toggle('open', open);
 }
 
 propertiesPanelResizer.addEventListener('click', function(event) {
   toggleProperties(!propertiesPanel.classList.contains('open'));
+});
+
+olcPropertiesPanelResizer.addEventListener('click', function(event) {
+    toggleProperties(!olcPropertiesPanel.classList.contains('open'));
 });
 
 propertiesPanelResizer.addEventListener('dragstart', function(event) {
@@ -317,6 +333,15 @@ propertiesPanelResizer.addEventListener('dragstart', function(event) {
 
   startX = event.screenX;
   startWidth = propertiesPanel.getBoundingClientRect().width;
+});
+
+olcPropertiesPanelResizer.addEventListener('dragstart', function(event) {
+    const img = new Image();
+    img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    event.dataTransfer.setDragImage(img, 1, 1);
+
+    startX = event.screenX;
+    startWidth = olcPropertiesPanel.getBoundingClientRect().width;
 });
 
 propertiesPanelResizer.addEventListener('drag', function(event) {
@@ -334,6 +359,23 @@ propertiesPanelResizer.addEventListener('drag', function(event) {
   propertiesPanel.style.width = open ? `${width}px` : null;
 
   toggleProperties(open);
+});
+
+olcPropertiesPanelResizer.addEventListener('drag', function(event) {
+
+    if (!event.screenX) {
+        return;
+    }
+
+    const delta = event.screenX - startX;
+
+    const width = startWidth - delta;
+
+    const open = width > 200;
+
+    olcPropertiesPanel.style.width = open ? `${width}px` : null;
+
+    toggleProperties(open);
 });
 
 const remoteDiagram = url.searchParams.get('diagram');
@@ -365,7 +407,7 @@ toggleProperties(url.searchParams.has('pp'));
 
 
 
-// part for dynamism of the  vertical divider 
+// part for dynamism of the  vertical divider
 var dragTarget = undefined;
 
 window.addEventListener('mousemove', function (e) { dragmove(e); });

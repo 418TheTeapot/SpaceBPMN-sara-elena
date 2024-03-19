@@ -122,6 +122,7 @@ Mediator.prototype.olcShapeChanged = function (shapes1) {
 
 Mediator.prototype.olcCanvaChanged = function (canva1) {
     var canva1 = new CanvaUtil(this.olcModelerHook.modeler.get('canvas'));
+    console.log("olc canvas ", canva1)
     this.spaceModelerHook.modeler.handleCanvaChanged(canva1)
 }
 
@@ -239,7 +240,7 @@ Mediator.prototype.SpaceModelerHook = function (eventBus, spaceModeler) {
     this.mediator.spaceModelerHook = this;
     this.eventBus = eventBus;
 
-   
+
     /*eventBus.on('import.parse.complete', ({warnings}) => {
         warnings.filter(({message}) => message.startsWith('unresolved reference')).forEach(({property, value, element}) => {
             if (property === 'bpmn:Task#destination') {

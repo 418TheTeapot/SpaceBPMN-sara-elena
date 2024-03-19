@@ -1,6 +1,3 @@
-
-
-
 import  OlcPropertiesPanel from "./OlcPropertiesPanel"
 import {
     isUndo,

@@ -1,13 +1,13 @@
-import {
-    getLabel
-} from 'bpmn-js/lib/features/label-editing/LabelUtil';
-
-import {
-    is,
-    getBusinessObject
-} from '../../../../../Desktop/GP/Prototipo/SpaceBPMN-main/nostroSpace/example/lib/util/Util';
-
-
+// import {
+//     getLabel
+// } from 'bpmn-js/lib/features/label-editing/LabelUtil';
+//
+// import {
+//     is,
+//     getBusinessObject
+// } from '../../../../../Desktop/GP/Prototipo/SpaceBPMN-main/nostroSpace/example/lib/util/Util';
+//
+//
 
 
 export function getConcreteType(element) {
