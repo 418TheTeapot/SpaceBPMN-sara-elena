@@ -315,15 +315,30 @@ function toggleProperties(open) {
   history.replaceState({}, document.title, url.toString());
 
   propertiesPanel.classList.toggle('open', open);
-  olcPropertiesPanel.classList.toggle('open', open);
 }
+
+function toggleOlcProperties(open) {
+
+    if (open) {
+        url.searchParams.set('pp', '1');
+    } else {
+        url.searchParams.delete('pp');
+    }
+
+    history.replaceState({}, document.title, url.toString());
+
+    olcPropertiesPanel.classList.toggle('open', open);
+}
+
 
 propertiesPanelResizer.addEventListener('click', function(event) {
   toggleProperties(!propertiesPanel.classList.contains('open'));
+  console.log("open bpmn panel")
 });
 
 olcPropertiesPanelResizer.addEventListener('click', function(event) {
-    toggleProperties(!olcPropertiesPanel.classList.contains('open'));
+    toggleOlcProperties(!olcPropertiesPanel.classList.contains('open'));
+    console.log("open olc panel")
 });
 
 propertiesPanelResizer.addEventListener('dragstart', function(event) {
@@ -375,7 +390,7 @@ olcPropertiesPanelResizer.addEventListener('drag', function(event) {
 
     olcPropertiesPanel.style.width = open ? `${width}px` : null;
 
-    toggleProperties(open);
+    toggleOlcProperties(open);
 });
 
 const remoteDiagram = url.searchParams.get('diagram');
@@ -404,8 +419,7 @@ if (remoteDiagram) {
 }
 
 toggleProperties(url.searchParams.has('pp'));
-
-
+toggleOlcProperties(url.searchParams.has('pp'));
 
 // part for dynamism of the  vertical divider
 var dragTarget = undefined;
