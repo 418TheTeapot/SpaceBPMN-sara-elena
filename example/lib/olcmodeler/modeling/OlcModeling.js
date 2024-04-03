@@ -4,12 +4,12 @@ import BaseModeling from 'diagram-js/lib/features/modeling/Modeling';
 
 export default function OlcModeling(eventBus, elementFactory, commandStack) {
     BaseModeling.call(this, eventBus, elementFactory, commandStack);
-    
+
     eventBus.on('copyPaste.copyElement', function(context) {
         context.descriptor.copiedBusinessObject = context.element.businessObject;
         context.descriptor.type = context.descriptor.copiedBusinessObject.$type;
     });
-    
+
     eventBus.on('copyPaste.pasteElement', function(context) {
         const {copiedBusinessObject} = context.descriptor;
         const newAttrs = {
@@ -35,6 +35,13 @@ OlcModeling.prototype.updateLabel = function (element, newLabel, newBounds, hint
         hints: hints || {}
     });
 };
+
+// OlcModeling.prototype.updateProperties = function(element, newProperties) {
+//     this._commandStack.execute('element.updateProperties', {
+//         element: element,
+//         newProperties: newProperties
+//     });
+// };
 
 OlcModeling.prototype.getHandlers = function () {
     var handlers = BaseModeling.prototype.getHandlers.call(this);

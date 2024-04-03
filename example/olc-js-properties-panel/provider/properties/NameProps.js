@@ -2,6 +2,7 @@ import { TextAreaEntry, isTextAreaEntryEdited } from '@bpmn-io/properties-panel'
 import OlcModeling from "../../../lib/olcmodeler/modeling/OlcModeling";
 import { useTranslation } from 'react-i18next';
 import { debounce } from 'lodash';
+import {is} from "../../../lib/util/Util";
 
 export function NameProps(props) {
     const {
@@ -33,18 +34,16 @@ function Name(props) {
     }
 
     // Define the options for the custom name entry
-    const options = {
+    let options = {
         element,
         id: 'name',
         label: translate('Name'),
         debounce,
         setValue: (value) => {
-            OlcModeling.updateLabel(element,{
-                name: value
-            });
+            OlcModeling.updateElementName(element, value);
         },
         getValue: (element) => {
-            return element.businessObject.type;
+            return element.businessObject.name;
         },
         autoResize: true
     };

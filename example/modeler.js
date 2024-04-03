@@ -80,8 +80,6 @@ var olcModeler = new OlcModeler({
         mediator : ['type', mediator.OlcModelerHook]
     },
 
-        //da fare il Mio Property Panel del provider e del panel
-
         OlcPropertiesProviderModule,
         OlcPropertiesPanelModule
 

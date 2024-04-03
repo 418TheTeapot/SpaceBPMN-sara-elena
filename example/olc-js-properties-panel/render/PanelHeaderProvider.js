@@ -7,12 +7,10 @@ import {
     getBusinessObject
 } from 'bpmn-js/lib/util/ModelUtil';
 
-import {
-    isExpanded,
-    isEventSubProcess,
-    isInterrupting
-} from 'bpmn-js/lib/util/DiUtil';
 
+
+import PlaceEventIcon from '../icons/bpmn-icon-start-event-none.svg';
+import TransitionEventIcon from '../icons/got.svg';
 
 
 
@@ -43,15 +41,31 @@ export const PanelHeaderProvider = {
     },
 
     getElementLabel: (element) => {
-        if (is(element, 'bpmn:Process')) {
+        if (is(element, 'space:Place')) {
             return getBusinessObject(element).name;
         }
 
         return getLabel(element);
     },
 
+
     getElementIcon: (element) => {
-        return null;
+
+        const config = {
+            elementTemplateIconRenderer: (element) => {
+                if (element.type === 'space:Place') {
+                    return PlaceEventIcon;
+                } else if (element.type === 'Space:Transition') {
+                    return TransitionEventIcon;
+                }
+            }
+        };
+
+        if (is(element, 'space:Transition')) {
+            return () => <img class="bio-properties-panel-header-template-icon" width="32" height="32" src={ TransitionEventIcon } />;
+        } else if (is(element, 'space:Place')) {
+            return () => <img class="bio-properties-panel-header-template-icon" width="32" height="32" src={ PlaceEventIcon } />;
+        }
     },
 
     getTypeLabel: (element) => {
@@ -106,19 +120,3 @@ function getEventDefinitionPrefix(eventDefinition) {
 
 
 
-
-// function getTemplatesService() {
-//
-//     // eslint-disable-next-line react-hooks/rules-of-hooks
-//     return useService('elementTemplates', false);
-// }
-
-function getTemplate(element, elementTemplates) {
-    return elementTemplates.get(element);
-}
-
-function getTemplateDocumentation(element, elementTemplates) {
-    const template = getTemplate(element, elementTemplates);
-
-    return template && template.documentationRef;
-}
