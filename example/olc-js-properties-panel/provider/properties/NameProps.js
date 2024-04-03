@@ -1,56 +1,47 @@
-
-import { isAny } from 'bpmn-js/lib/features/modeling/util/ModelingUtil';
-
-
 import { TextAreaEntry, isTextAreaEntryEdited } from '@bpmn-io/properties-panel';
-import {useService} from "../../hooks";
-
-
+import OlcModeling from "../../../lib/olcmodeler/modeling/OlcModeling";
+import {useService} from "bpmn-js-properties-panel";
 
 export function NameProps(props) {
     const {
         element
     } = props;
 
-    if (isAny(element, [ 'bpmn:Collaboration', 'bpmn:DataAssociation', 'bpmn:Association' ])) {
-        return [];
-    }
-
     return [
         {
             id: 'name',
-            component: NameProps,
+            component: Name,
             isEdited: isTextAreaEntryEdited
         }
     ];
 }
 
-function CustomNameEntry(props) {
+function Name(props) {
     const { element } = props;
 
-    const modeling = useService('modeling');
-    const debounce = useService('debounceInput');
     const translate = useService('translate');
 
-    // Definisci le opzioni per l'entry del nome personalizzato
+    if (typeof translate !== 'function') {
+        console.error('Translate service is not a function');
+        return;
+    }
+
+    // Define the options for the custom name entry
     const options = {
         element,
         id: 'name',
         label: translate('Name'),
         debounce,
         setValue: (value) => {
-            modeling.updateProperties(element, {
+            OlcModeling.updateLabel(element,{
                 name: value
             });
         },
         getValue: (element) => {
-            return element.businessObject.name;
+            return element.businessObject.type;
         },
         autoResize: true
     };
 
     return <TextAreaEntry {...options} />;
 }
-
-
-

@@ -11,8 +11,9 @@ import {
     reduce
 } from 'min-dash';
 
-import { PropertiesPanel } from '@bpmn-io/properties-panel';
-import OlcPropertiesPanelContext from '../context/OlcPropertiesPanelContext'; // Assicurati che il percorso sia corretto
+
+import OlcPropertiesPanelContext from '../context/OlcPropertiesPanelContext';
+import {PropertiesPanel} from "@bpmn-io/properties-panel";
 
 
 import { PanelHeaderProvider } from './PanelHeaderProvider';
@@ -138,18 +139,7 @@ export default function OlcPropertiesPanel(props) {
         };
     }, [ selectedElement ]);
 
-    // // (2e) element templates changed
-    // useEffect(() => {
-    //     const onTemplatesChanged = () => {
-    //         _update(selectedElement);
-    //     };
-    //
-    //     eventBus.on('elementTemplates.changed', onTemplatesChanged);
-    //
-    //     return () => {
-    //         eventBus.off('elementTemplates.changed', onTemplatesChanged);
-    //     };
-    // }, [ selectedElement ]);
+
 
     // (3) create properties panel context
     // Creazione del contesto OlcPropertiesPanelContext

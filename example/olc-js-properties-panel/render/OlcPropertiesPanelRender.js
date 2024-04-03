@@ -180,13 +180,6 @@ function isImplicitRoot(element) {
     return element && (element.isImplicit || element.id === '__implicitroot');
 }
 
-/**
- * Setup keyboard bindings (undo, redo) on the given container.
- *
- * @param {Element} container
- * @param {EventBus} eventBus
- * @param {CommandStack} commandStack
- */
 function setupKeyboard(container, eventBus, commandStack) {
 
     function cancel(event) {
