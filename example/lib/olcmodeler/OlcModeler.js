@@ -251,6 +251,19 @@ OlcModeler.prototype.showOlcById = function (id) {
   }
 }
 
+
+//function to obtain the id of selected element
+OlcModeler.prototype.getIdSelectedElement = function() {
+    var element = this.get('selection').get();
+    if (element.length > 0) {
+        return element[0].id;
+
+    } else {
+        return null;
+    }
+
+}
+
 OlcModeler.prototype.getCurrentOlc = function () {
   return this._space;
 }

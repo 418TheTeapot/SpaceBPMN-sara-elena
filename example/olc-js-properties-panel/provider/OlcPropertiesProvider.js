@@ -3,14 +3,17 @@ import { Group } from '@bpmn-io/properties-panel';
 import {
 
     NameProps,
+    IdProps
 
 } from './properties';
+
 
 function GeneralGroup(element, injector) {
     const translate = injector.get('translate');
 
     const entries = [
         ...NameProps({ element }),
+        ...IdProps({ element }),
 
     ];
 
