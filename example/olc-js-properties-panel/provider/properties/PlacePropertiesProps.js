@@ -1,10 +1,9 @@
-import {TextFieldEntry, isSelectEntryEdited, isTextAreaEntryEdited, TextAreaEntry} from '@bpmn-io/properties-panel';
-import { useService } from 'bpmn-js-properties-panel';
+import {isTextAreaEntryEdited, TextAreaEntry} from '@bpmn-io/properties-panel';
+import {useService} from 'bpmn-js-properties-panel';
 import {is} from "bpmn-js/lib/util/ModelUtil";
 import {useTranslation} from "react-i18next";
 import {debounce} from "lodash";
 import OlcModeling from "../../../lib/olcmodeler/modeling/OlcModeling";
-import {value} from "lodash/seq";
 
 
 export function PlacePropertiesProps(element) {
@@ -71,10 +70,11 @@ function PlaceProperties(props) {
         label: translate('Place Properties'),
         debounce,
         getValue: () => {
-            let value = element.businessObject.placeProperties || null;
-            return value;
+            return element.businessObject.placeProperties || '';
         },
-        setValue: setValue,
+        setValue: (value) => {
+            OlcModeling.updatePlaceProps(element, value);
+        },
         autoResize: true
     };
 

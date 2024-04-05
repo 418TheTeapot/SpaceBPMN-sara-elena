@@ -60,7 +60,7 @@ export default function OlcUpdater(eventBus, connectionDocking) {
         'connection.create'
     ], (event) => {
         var context = event.context,
-            element = context.connection;            
+            element = context.connection;
 
         element.businessObject.sourcePlace = element.source.businessObject;
         element.businessObject.targetPlace = element.target.businessObject;
@@ -139,6 +139,13 @@ OlcUpdater.prototype.updateElementName = function(element, newName) {
     var businessObject = getBusinessObject(element);
     if (businessObject) {
         businessObject.name = newName;
+    }
+}
+
+OlcUpdater.prototype.updatePlaceProps = function(element, props) {
+    var businessObject = getBusinessObject(element);
+    if (businessObject) {
+        businessObject.placeProperties = props;
     }
 }
 
