@@ -3,7 +3,8 @@ import { Group } from '@bpmn-io/properties-panel';
 import {
 
     NameProps,
-    IdProps
+    IdProps,
+    PlacePropertiesProps
 
 } from './properties';
 
@@ -26,15 +27,45 @@ function GeneralGroup(element, injector) {
 
 }
 
+function PlaceGroup(element, injector) {
+    const translate = injector.get('translate');
+
+    // const entries = [
+    //     ...PlacePropertiesProps({element})
+    // ];
+
+    return {
+        id: 'place',
+        label: translate('Space Properties'),
+        entries: PlacePropertiesProps(element),
+        component: Group
+    };
+
+}
+
 function getGroups(element, injector) {
 
     const groups = [
         GeneralGroup(element, injector),
-
+        // PlaceGroup(element, injector)
     ];
+
+    if(element, 'space:Place') {
+        groups.push(PlaceGroup(element, injector))
+    }
 
     // contract: if a group returns null, it should not be displayed at all
     return groups.filter(group => group !== null);
+
+    // return function(groups) {
+    //
+    //     groups.push(GeneralGroup(element, injector));
+    //     // Add the "magic" group
+    //     if(is(element, 'space:Place')) {
+    //         groups.push(PlaceGroup(element, injector));
+    //     }
+    //     return groups;
+    // }
 }
 
 export default class OlcPropertiesProvider {
