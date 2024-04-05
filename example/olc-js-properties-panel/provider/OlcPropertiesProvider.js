@@ -3,9 +3,11 @@ import { Group } from '@bpmn-io/properties-panel';
 import {
 
     NameProps,
-    IdProps
+    IdProps, AssignmentOlc
 
 } from './properties';
+import {Assignment} from "../../lib/bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/parts/AssignmentProps";
+import {is} from "bpmn-js/lib/util/ModelUtil";
 
 
 function GeneralGroup(element, injector) {
@@ -26,10 +28,30 @@ function GeneralGroup(element, injector) {
 
 }
 
+
+function SpaceOlcGroup(element, injector) {
+    const translate = injector.get('translate');
+
+    const entries = [
+        // ...Assignment({ element })
+        ...AssignmentOlc({ element }),
+    ];
+
+    return {
+        id: 'space-olc',
+        label: translate('SpaceOLC properties'),
+        entries,
+        component: Group
+    };
+
+}
+
+
 function getGroups(element, injector) {
 
     const groups = [
         GeneralGroup(element, injector),
+        SpaceOlcGroup(element, injector),
 
     ];
 

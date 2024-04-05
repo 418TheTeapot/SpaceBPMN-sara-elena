@@ -5,7 +5,6 @@ import bpmnExtension from './moddle/bpmnextension.json';
 import spacePropertiesProviderModule from '../bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/index.js'
 import spaceModdleDescriptor from '../bpmnmodeler/spacePropertiesPanel/descriptors/space.json'
 import { is } from 'bpmn-js/lib/util/ModelUtil';
-//import executionTimeProvider from '../bpmnmodeler/exectionTime/executionTimeProvider/index.js'
 import executionTimeDescriptor from '../bpmnmodeler/exectionTime/descriptors/time.json'
 export default function BpmnSpaceModeler(options) {
 //modeler for bpmn
@@ -26,7 +25,6 @@ const customModules = [
     ];
 
     options.moddleExtensions = {
-        //global:globalModdleDescriptor,
         space: spaceModdleDescriptor,
         time: executionTimeDescriptor,
         JP: bpmnExtension
