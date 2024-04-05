@@ -3,7 +3,7 @@ import { Group } from '@bpmn-io/properties-panel';
 import {
 
     NameProps,
-    IdProps, AssignmentOlc
+    IdProps, AssignmentOlc, LuxProps
 
 } from './properties';
 import {Assignment} from "../../lib/bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/parts/AssignmentProps";
@@ -35,6 +35,7 @@ function SpaceOlcGroup(element, injector) {
     const entries = [
         // ...Assignment({ element })
         ...AssignmentOlc({ element }),
+        ...LuxProps({ element })
     ];
 
     return {
