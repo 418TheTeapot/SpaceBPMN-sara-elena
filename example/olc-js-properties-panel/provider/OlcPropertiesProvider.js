@@ -7,6 +7,8 @@ import {
     PlacePropertiesProps
 
 } from './properties';
+import TentativoProps from "./properties/TentativoProps";
+import {is} from "bpmn-js/lib/util/ModelUtil";
 
 
 function GeneralGroup(element, injector) {
@@ -43,6 +45,18 @@ function PlaceGroup(element, injector) {
 
 }
 
+function ProvaGroup(element, injector) {
+    const translate = injector.get('translate');
+
+    return {
+        id: 'place',
+        label: translate('Prova Properties'),
+        entries: TentativoProps(element),
+        component: Group
+    };
+
+}
+
 function getGroups(element, injector) {
 
     const groups = [
@@ -50,7 +64,7 @@ function getGroups(element, injector) {
         // PlaceGroup(element, injector)
     ];
 
-    if(element, 'space:Place') {
+    if(is(element, 'space:Place')) {
         groups.push(PlaceGroup(element, injector))
     }
 

@@ -1,4 +1,4 @@
-import {isTextAreaEntryEdited, TextAreaEntry} from '@bpmn-io/properties-panel';
+import {isSelectEntryEdited, isTextAreaEntryEdited, TextAreaEntry} from '@bpmn-io/properties-panel';
 import {useService} from 'bpmn-js-properties-panel';
 import {is} from "bpmn-js/lib/util/ModelUtil";
 import {useTranslation} from "react-i18next";
@@ -6,32 +6,20 @@ import {debounce} from "lodash";
 import OlcModeling from "../../../lib/olcmodeler/modeling/OlcModeling";
 
 
-export function PlacePropertiesProps(element) {
+export function PlacePropertiesProps(props) {
     console.log(("Olc Props"))
 
-    const properties = [];
+    const {
+        element
+    } = props;
 
-    if(is(element, 'space:Place')) {
-        properties.push({
+    return [
+        {
             id: 'placeProperties',
             component: PlaceProperties,
-            isEdited: isTextAreaEntryEdited
-        })
-    }
-
-    return properties;
-
-    // const {
-    //     element
-    // } = props;
-
-    // return [
-    //     {
-    //         id: 'placeProperties',
-    //         component: PlaceProperties,
-    //         isEdited: isTextAreaEntryEdited
-    //     }
-    // ];
+            isEdited: isSelectEntryEdited // isTextAreaEntryEdited
+        }
+    ];
 }
 
 function PlaceProperties(props) {
@@ -69,11 +57,11 @@ function PlaceProperties(props) {
         id: 'placeProperties',
         label: translate('Place Properties'),
         debounce,
-        getValue: () => {
-            return element.businessObject.placeProperties || '';
-        },
         setValue: (value) => {
             OlcModeling.updatePlaceProps(element, value);
+        },
+        getValue: () => {
+            return element.businessObject.placeProperties || {};
         },
         autoResize: true
     };
