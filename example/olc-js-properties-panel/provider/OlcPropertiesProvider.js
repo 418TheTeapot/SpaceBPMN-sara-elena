@@ -61,7 +61,7 @@ function getGroups(element, injector) {
 
     const groups = [
         GeneralGroup(element, injector),
-        // PlaceGroup(element, injector)
+        ProvaGroup(element, injector)
     ];
 
     if(is(element, 'space:Place')) {

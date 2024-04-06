@@ -29,10 +29,6 @@ function PlaceProperties(props) {
     } = props;
 
 
-    const modeling = useService('modeling');
-    // const translate = useService('translate');
-    // const debounce = useService('debounceInput');
-
     const { t: translate } = useTranslation();
 
     if (typeof debounce !== 'function') {
@@ -45,12 +41,6 @@ function PlaceProperties(props) {
         return;
     }
 
-    const setValue = (value) => {
-        return modeling.updateProperties(element, {
-            placeProperties: value
-        });
-    };
-
     // Define the options for the custom name entry
     let options = {
         element,
@@ -58,10 +48,10 @@ function PlaceProperties(props) {
         label: translate('Place Properties'),
         debounce,
         setValue: (value) => {
-            OlcModeling.updatePlaceProps(element, value);
+            element.businessObject.placeProperties = value;
         },
         getValue: () => {
-            return element.businessObject.placeProperties || {};
+            return element.businessObject.placeProperties || '';
         },
         autoResize: true
     };
