@@ -1,0 +1,39 @@
+{
+  "name": "olcSpace",
+  "prefix": "SA",
+  "uri": "http://bptlab/schema/SAspace",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "associations": [],
+  "types": [
+    {
+      "name": "DataConfiguration",
+      "extends": ["space:Place"],
+      "properties": [
+        {
+          "name": "places",
+          "isAttr": true,
+          "isReference": true,
+          "type": "space:Place",
+          "isMany": true
+        },
+        {
+          "name": "shapes",
+          "isAttr": true,
+          "isReference": true,
+          "type": "space:Place",
+          "isMany": true
+        },
+        {
+          "name": "canvaspace",
+          "isAttr": true,
+          "isReference": true,
+          "type": "space:Place",
+          "isMany": true
+        }
+      ]
+
+    }
+  ]
+}

@@ -36,12 +36,12 @@ OlcModeling.prototype.updateLabel = function (element, newLabel, newBounds, hint
     });
 };
 
-// OlcModeling.prototype.updateProperties = function(element, newProperties) {
-//     this._commandStack.execute('element.updateProperties', {
-//         element: element,
-//         newProperties: newProperties
-//     });
-// };
+OlcModeling.prototype.updateProperties = function(element, newProperties) {
+    this._commandStack.execute('element.updateProperties', {
+        element: element,
+        newProperties: newProperties
+    });
+};
 
 OlcModeling.prototype.getHandlers = function () {
     var handlers = BaseModeling.prototype.getHandlers.call(this);

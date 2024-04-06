@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="caprie come estendere il json">
+    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="Lux appare ma non salva XML">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/parts/SpaceProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/parts/SpaceProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/OlcModeler.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/OlcModeler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/moddle/olc.json" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/moddle/olc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/modeler.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/modeler.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/OlcPropertiesProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/OlcPropertiesProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/NameProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/NameProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/viewer.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/viewer.bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcModeling.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcModeling.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/context/OlcPropertiesPanelContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/context/OlcPropertiesPanelContext.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +108,7 @@
       <workItem from="1712162309456" duration="4366000" />
       <workItem from="1712391315190" duration="429000" />
       <workItem from="1712391762386" duration="4253000" />
-      <workItem from="1712408505217" duration="2307000" />
+      <workItem from="1712408505217" duration="4892000" />
     </task>
     <task id="LOCAL-00001" summary="olc-js-pp">
       <option name="closed" value="true" />
@@ -140,7 +134,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712344882942</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Lux appare ma non salva XML">
+      <option name="closed" value="true" />
+      <created>1712411066758</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1712411066758</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,7 +177,8 @@
     <MESSAGE value="Si attaaccaaaaaaaaaaaaaaaaaaaaaaa" />
     <MESSAGE value="prova Assi" />
     <MESSAGE value="caprie come estendere il json" />
-    <option name="LAST_COMMIT_MESSAGE" value="caprie come estendere il json" />
+    <MESSAGE value="Lux appare ma non salva XML" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lux appare ma non salva XML" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
