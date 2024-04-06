@@ -1,12 +1,7 @@
 import { TextAreaEntry, isTextAreaEntryEdited } from '@bpmn-io/properties-panel';
 import { useTranslation } from 'react-i18next';
-import { debounce } from 'lodash';
-import {OlcPropertiesPanelContext} from "../../context";
-import {useContext} from "preact/hooks";
-import OlcModeling from "../../../lib/olcmodeler/modeling/OlcModeling";
-import {useService} from "../../hooks";
-import modeling from "../../../lib/olcmodeler/modeling";
 
+import {debounce} from "lodash";
 
 export function NameProps(props) {
     const {

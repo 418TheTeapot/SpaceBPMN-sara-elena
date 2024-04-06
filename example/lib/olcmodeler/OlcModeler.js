@@ -82,6 +82,7 @@ export default function OlcModeler(options) {
     OlcRulesModule,
     OlcModelingModule,
     OlcAutoPlaceModule,
+
     {
       moddle: ['value', new OlcModdle({})],
       olcModeler: ['value', this],

@@ -11,6 +11,11 @@
       "isAbstract": true,
       "properties": [
         {
+          "name": "myAttribute",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
           "name": "name",
           "isAttr": true,
           "type": "String"
