@@ -61,7 +61,7 @@ export class SpaceProps extends React.Component {
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                             <button
                                 onClick={() => this.toggleOff(index)}
-                                style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '12px', marginRight: '5px' }}>
+                                style={{ marginLeft: '8px', background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '12px', marginRight: '5px' }}>
                                 {attribute.isOff ? 'On' : 'Off'}
                             </button>
                             <button

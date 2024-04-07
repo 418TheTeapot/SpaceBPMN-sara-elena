@@ -39,7 +39,7 @@ function PlaceGroup(element, injector) {
     return {
         id: 'place',
         label: translate('Space Properties'),
-        entries: PlacePropertiesProps(element),
+        entries: TentativoProps(element),
         component: Group
     };
 
@@ -61,7 +61,7 @@ function getGroups(element, injector) {
 
     const groups = [
         GeneralGroup(element, injector),
-        ProvaGroup(element, injector)
+        // ProvaGroup(element, injector)
     ];
 
     if(is(element, 'space:Place')) {
