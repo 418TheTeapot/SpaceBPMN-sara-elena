@@ -45,7 +45,6 @@ export class SpaceProps extends React.Component {
                     </button>
                 </div>
                 {this.state.attributes.map((attribute, index) => (
-                    !attribute.isOff &&
                     <div key={index} style={{ position: 'relative' }}>
                         <TextFieldEntry
                             id={id}
