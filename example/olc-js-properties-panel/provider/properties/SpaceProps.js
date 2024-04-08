@@ -30,7 +30,8 @@ export class SpaceProps extends React.Component {
         const updatedCustomProperties = { ...this.state.customProperties };
         delete updatedCustomProperties[propertyName];
         this.setState({ customProperties: updatedCustomProperties });
-        console.log('Array di proprietà:', this.state.attributes)
+        console.log('custom properties:', this.state.customProperties)
+        console.log('attributes:', this.state.attributes)
 
     };
 
@@ -66,11 +67,11 @@ export class SpaceProps extends React.Component {
                     </button>
                 </div>
                 {Object.entries(this.state.customProperties).map(([propertyName, propertyValue]) => (
-                    <div key={propertyName} style={{ position: 'relative' }}>
-                        <div>{propertyName}</div>
+                    <div key={propertyName} style={{ marginLeft: '8px', display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+                        <div style={{ marginRight: '8px' }}>{propertyName}</div>
                         <button
                             onClick={() => this.toggleCustomProperty(propertyName)}
-                            style={{ background: propertyValue ? 'green' : 'red', border: 'none', cursor: 'pointer', fontSize: '12px' }}>
+                            style={{ background: propertyValue ? 'green' : 'red', border: 'none', cursor: 'pointer', fontSize: '12px', marginRight: '4px' }}>
                             {propertyValue ? 'On' : 'Off'}
                         </button>
                         <button
@@ -96,4 +97,5 @@ export class SpaceProps extends React.Component {
             </div>
         );
     }
+
 }
