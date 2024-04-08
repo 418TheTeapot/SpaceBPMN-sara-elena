@@ -28,7 +28,12 @@
       "superClass": [
         "SpaceElement"
       ],
-      "properties": []
+      "properties": [
+        {
+          "name": "customProperties",
+          "type": "CustomProperties"
+        }
+      ]
     },
     {
       "name": "Transition",

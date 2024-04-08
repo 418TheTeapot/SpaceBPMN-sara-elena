@@ -7,27 +7,43 @@ export class SpaceProps extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            attributes: props.element.businessObject.prova || []
+            attributes: props.element.businessObject.prova || [],
+            customProperties: {} // Inizializza le proprietà personalizzate come un oggetto vuoto
         };
     }
 
-    addAttribute = () => {
-        const newAttribute = { value: '', isOff: false };
-        this.setState(prevState => ({
-            attributes: [...prevState.attributes, newAttribute]
-        }));
+    componentDidMount() {
+        console.log('Array di proprietà inizializzato:', this.state.attributes);
+    }
+
+    // Aggiunta di una nuova proprietà personalizzata
+    addCustomProperty = (propertyName, propertyValue) => {
+        const updatedCustomProperties = { ...this.state.customProperties };
+        updatedCustomProperties[propertyName] = propertyValue;
+        this.setState({ customProperties: updatedCustomProperties });
+        console.log('custom properties:', this.state.customProperties)
+        console.log('attributes:', this.state.attributes)
     };
 
-    removeAttribute = (index) => {
-        this.setState(prevState => ({
-            attributes: prevState.attributes.filter((_, i) => i !== index)
-        }));
+    // Rimozione di una proprietà personalizzata esistente
+    removeCustomProperty = (propertyName) => {
+        const updatedCustomProperties = { ...this.state.customProperties };
+        delete updatedCustomProperties[propertyName];
+        this.setState({ customProperties: updatedCustomProperties });
+        console.log('Array di proprietà:', this.state.attributes)
+
     };
 
-    toggleOff = (index) => {
-        this.setState(prevState => ({
-            attributes: prevState.attributes.map((attr, i) => i === index ? { ...attr, isOff: !attr.isOff } : attr)
-        }));
+    // Cambia lo stato della proprietà personalizzata tra On e Off
+    toggleCustomProperty = (propertyName) => {
+        const updatedCustomProperties = { ...this.state.customProperties };
+        updatedCustomProperties[propertyName] = !updatedCustomProperties[propertyName];
+        this.setState({ customProperties: updatedCustomProperties });
+    };
+
+    handleChange = (index, newValue) => {
+        const updatedAttributes = this.state.attributes.map((attr, i) => i === index ? { ...attr, value: newValue } : attr);
+        this.setState({ attributes: updatedAttributes });
     };
 
     render() {
@@ -39,11 +55,31 @@ export class SpaceProps extends React.Component {
                 <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
                     <span style={{ marginRight: '0.25px' }}>Add property</span>
                     <button
-                        onClick={this.addAttribute}
+                        onClick={() => {
+                            const propertyName = prompt('Enter property name:');
+                            if (propertyName) {
+                                this.addCustomProperty(propertyName, true); // Aggiunge la proprietà con valore iniziale true
+                            }
+                        }}
                         style={{ background: 'white', color: 'black', border: '1px solid white', cursor: 'pointer', fontSize: '16px' }}>
                         +
                     </button>
                 </div>
+                {Object.entries(this.state.customProperties).map(([propertyName, propertyValue]) => (
+                    <div key={propertyName} style={{ position: 'relative' }}>
+                        <div>{propertyName}</div>
+                        <button
+                            onClick={() => this.toggleCustomProperty(propertyName)}
+                            style={{ background: propertyValue ? 'green' : 'red', border: 'none', cursor: 'pointer', fontSize: '12px' }}>
+                            {propertyValue ? 'On' : 'Off'}
+                        </button>
+                        <button
+                            onClick={() => this.removeCustomProperty(propertyName)}
+                            style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '12px' }}>
+                            Remove
+                        </button>
+                    </div>
+                ))}
                 {this.state.attributes.map((attribute, index) => (
                     <div key={index} style={{ position: 'relative' }}>
                         <TextFieldEntry
@@ -52,24 +88,9 @@ export class SpaceProps extends React.Component {
                             description={translate('')}
                             label={`Property ${index + 1}`}
                             getValue={() => attribute.value || ''}
-                            setValue={(newValue) => {
-                                const updatedAttributes = this.state.attributes.map((attr, i) => i === index ? { ...attr, value: newValue } : attr);
-                                this.setState({ attributes: updatedAttributes });
-                            }}
+                            setValue={(newValue) => this.handleChange(index, newValue)}
                             debounce={debounce}
                         />
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <button
-                                onClick={() => this.toggleOff(index)}
-                                style={{ marginLeft: '8px', background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '12px', marginRight: '5px' }}>
-                                {attribute.isOff ? 'On' : 'Off'}
-                            </button>
-                            <button
-                                onClick={() => this.removeAttribute(index)}
-                                style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '12px' }}>
-                                Remove
-                            </button>
-                        </div>
                     </div>
                 ))}
             </div>
