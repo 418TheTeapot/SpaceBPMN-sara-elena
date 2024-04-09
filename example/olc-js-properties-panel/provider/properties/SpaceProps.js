@@ -13,26 +13,34 @@ export class SpaceProps extends React.Component {
     }
 
     componentDidMount() {
-        console.log('Array di proprietà inizializzato:', this.state.attributes);
+        const { element } = this.props;
+        if (!element.businessObject.prova) {
+            // Inizializza prova se è vuoto
+            this.addCustomProperty('prova', 'valore iniziale');
+        }
+        console.log('prova', element.businessObject.prova)
     }
 
     // Aggiunta di una nuova proprietà personalizzata
     addCustomProperty = (propertyName, propertyValue) => {
         const updatedCustomProperties = { ...this.state.customProperties };
         updatedCustomProperties[propertyName] = propertyValue;
-        this.setState({ customProperties: updatedCustomProperties });
-        console.log('custom properties:', this.state.customProperties)
-        console.log('attributes:', this.state.attributes)
+        const updatedAttributes = Object.entries(updatedCustomProperties).map(([key, value]) => ({ name: key, value }));
+        this.setState({ customProperties: updatedCustomProperties, attributes: updatedAttributes }, () => {
+            console.log('attributes:', this.state.attributes);
+            console.log('custom properties:', this.state.customProperties)
+            console.log('lux', this.state.attributes[1])
+        });
     };
 
     // Rimozione di una proprietà personalizzata esistente
     removeCustomProperty = (propertyName) => {
         const updatedCustomProperties = { ...this.state.customProperties };
         delete updatedCustomProperties[propertyName];
-        this.setState({ customProperties: updatedCustomProperties });
-        console.log('custom properties:', this.state.customProperties)
-        console.log('attributes:', this.state.attributes)
-
+        this.setState({ customProperties: updatedCustomProperties }, () => {
+            console.log('attributes:', this.state.attributes);
+            console.log('custom properties:', this.state.customProperties)
+        });
     };
 
     // Cambia lo stato della proprietà personalizzata tra On e Off
@@ -44,7 +52,9 @@ export class SpaceProps extends React.Component {
 
     handleChange = (index, newValue) => {
         const updatedAttributes = this.state.attributes.map((attr, i) => i === index ? { ...attr, value: newValue } : attr);
-        this.setState({ attributes: updatedAttributes });
+        this.setState({ attributes: updatedAttributes }, () => {
+            console.log('handle change attributes:', this.state.attributes);
+        });
     };
 
     render() {
