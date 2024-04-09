@@ -7,19 +7,18 @@ export class SpaceProps extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            attributes: props.element.businessObject.prova || [],
+            attributes: [],
             customProperties: {} // Inizializza le proprietà personalizzate come un oggetto vuoto
         };
     }
 
-    componentDidMount() {
-        const { element } = this.props;
-        if (!element.businessObject.prova) {
-            // Inizializza prova se è vuoto
-            this.addCustomProperty('prova', 'valore iniziale');
-        }
-        console.log('prova', element.businessObject.prova)
-    }
+    // componentDidMount() {
+    //     const { element } = this.props;
+    //     this.setState({
+    //         attributes: element.businessObject.prova || []
+    //     });
+    //     console.log('prova', element.businessObject.prova)
+    // }
 
     // Aggiunta di una nuova proprietà personalizzata
     addCustomProperty = (propertyName, propertyValue) => {
@@ -29,7 +28,9 @@ export class SpaceProps extends React.Component {
         this.setState({ customProperties: updatedCustomProperties, attributes: updatedAttributes }, () => {
             console.log('attributes:', this.state.attributes);
             console.log('custom properties:', this.state.customProperties)
-            console.log('lux', this.state.attributes[1])
+            console.log('lux', this.state.attributes[0])
+            // console.log('prova', element.businessObject.prova)
+            // console.log('element.businessObject.customProperties', element.businessObject.customProperties)
         });
     };
 
@@ -91,19 +92,19 @@ export class SpaceProps extends React.Component {
                         </button>
                     </div>
                 ))}
-                {this.state.attributes.map((attribute, index) => (
-                    <div key={index} style={{ position: 'relative' }}>
-                        <TextFieldEntry
-                            id={id}
-                            element={element}
-                            description={translate('')}
-                            label={`Property ${index + 1}`}
-                            getValue={() => attribute.value || ''}
-                            setValue={(newValue) => this.handleChange(index, newValue)}
-                            debounce={debounce}
-                        />
-                    </div>
-                ))}
+                {/*{this.state.attributes.map((attribute, index) => (*/}
+                {/*    <div key={index} style={{ position: 'relative' }}>*/}
+                {/*        <TextFieldEntry*/}
+                {/*            id={id}*/}
+                {/*            element={element}*/}
+                {/*            description={translate('')}*/}
+                {/*            label={`Property ${index + 1}`}*/}
+                {/*            getValue={() => attribute.value || ''}*/}
+                {/*            setValue={(newValue) => this.handleChange(index, newValue)}*/}
+                {/*            debounce={debounce}*/}
+                {/*        />*/}
+                {/*    </div>*/}
+                {/*))}*/}
             </div>
         );
     }
