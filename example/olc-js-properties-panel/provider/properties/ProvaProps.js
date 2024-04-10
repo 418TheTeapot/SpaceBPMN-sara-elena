@@ -1,29 +1,29 @@
 import { TextFieldEntry,  isTextFieldEntryEdited } from '@bpmn-io/properties-panel';
 import {useTranslation} from "react-i18next";
 import {debounce} from "lodash";
-import {useState} from "preact/hooks";
 
 export function Prova(props) {
     const { element, id } = props;
 
     const { t: translate } = useTranslation();
-    const [attributes, setAttributes] = useState(element.businessObject.prova || []);
 
     const getValues = () => {
         let values = element.businessObject.prova || [];
         if (!Array.isArray(values)) {
             values = [values];
         }
-        console.log('Array dei properties:', values);
         return values;
     };
 
+    console.log('proprietà', getValues());
+
     const setValues = (value) => {
+        console.log(element.businessObject.prova)
         return element.businessObject.prova = value;
     };
 
     const addAttribute = () => {
-        const newAttribute = {};
+        const newAttribute = {isOff: true};
         const updatedAttributes = [...getValues(), newAttribute];
         setValues(updatedAttributes);
     };
@@ -34,9 +34,10 @@ export function Prova(props) {
     };
 
     const toggleOff = (index) => {
-        const updatedAttributes = [...attributes];
+        const updatedAttributes = getValues();
         updatedAttributes[index].isOff = !updatedAttributes[index].isOff;
         setValues(updatedAttributes);
+        console.log('toggle off/on', updatedAttributes);
     };
 
     return (
