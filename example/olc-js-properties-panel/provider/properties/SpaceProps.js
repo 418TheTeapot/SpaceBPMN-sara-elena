@@ -2,6 +2,7 @@ import React from 'react';
 import { TextFieldEntry } from '@bpmn-io/properties-panel';
 import { useTranslation } from 'react-i18next';
 import { debounce } from 'lodash';
+import OlcModeler from "../../../lib/olcmodeler/OlcModeler";
 
 export class SpaceProps extends React.Component {
     constructor(props) {
@@ -29,8 +30,6 @@ export class SpaceProps extends React.Component {
             console.log('attributes:', this.state.attributes);
             console.log('custom properties:', this.state.customProperties)
             console.log('lux', this.state.attributes[0])
-            // console.log('prova', element.businessObject.prova)
-            // console.log('element.businessObject.customProperties', element.businessObject.customProperties)
         });
     };
 

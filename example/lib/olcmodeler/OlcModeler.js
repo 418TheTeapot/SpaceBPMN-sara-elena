@@ -228,6 +228,19 @@ console.log(this.get('eventBus'));
   this._emit(OlcEvents.SELECTED_OLC_CHANGED, { space: space });
 }
 
+OlcModeler.prototype.updatePlaceProperties = function(placeId, customProperties) {
+  // Trova il place corrispondente dall'ID
+  const place = this.getStateById(placeId);
+
+  // Aggiorna le proprietà del place con le proprietà personalizzate
+  place.customProperties = customProperties;
+
+  // Aggiorna la visualizzazione del place nell'editor
+  // Potresti dover implementare questa parte in base alla tua logica specifica
+  // Ad esempio, aggiornando l'interfaccia utente per riflettere le nuove proprietà personalizzate
+};
+
+
 OlcModeler.prototype.getDefinitions = function() {
   return this._definitions;
 };

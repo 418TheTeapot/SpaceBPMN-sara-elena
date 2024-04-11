@@ -9,6 +9,7 @@ import {
 } from './properties';
 import TentativoProps from "./properties/TentativoProps";
 import {is} from "bpmn-js/lib/util/ModelUtil";
+import {LuxProps} from "./properties/LuxProps";
 
 
 function GeneralGroup(element, injector) {
@@ -39,18 +40,6 @@ function PlaceGroup(element, injector) {
     return {
         id: 'place',
         label: translate('Space Properties'),
-        entries: TentativoProps(element),
-        component: Group
-    };
-
-}
-
-function ProvaGroup(element, injector) {
-    const translate = injector.get('translate');
-
-    return {
-        id: 'place',
-        label: translate('Prova Properties'),
         entries: TentativoProps(element),
         component: Group
     };

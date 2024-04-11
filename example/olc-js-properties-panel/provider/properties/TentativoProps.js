@@ -7,15 +7,13 @@ import olcModeler from 'example/lib/olcmodeler/OlcModeler.js';
 
 export default function TentativoProps(element) {
     const properties = [];
-    const placeId = element.id; // Ricava l'ID del place dalla variabile element
 
     if (is(element, 'space:Place')) {
         properties.push({
             id: 'prova',
             element,
             component: Prova,
-            //component: () => <SpaceProps element={element} placeId={placeId} olcModeler={olcModeler} />,
-            isEdited: isSelectEntryEdited
+            isEdited: isTextFieldEntryEdited
         });
     }
 

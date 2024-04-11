@@ -36,12 +36,14 @@ OlcModeling.prototype.updateLabel = function (element, newLabel, newBounds, hint
     });
 };
 
-// OlcModeling.prototype.updateProperties = function(element, newProperties) {
-//     this._commandStack.execute('element.updateProperties', {
-//         element: element,
-//         newProperties: newProperties
-//     });
-// };
+OlcModeling.prototype.updateProperties = function(element, newProperties, newBounds, hints) {
+    this._commandStack.execute('element.updateProperties', {
+        element: element,
+        newProperties: newProperties,
+        newBounds: newBounds,
+        hints: hints || {}
+    });
+};
 
 OlcModeling.prototype.getHandlers = function () {
     var handlers = BaseModeling.prototype.getHandlers.call(this);
@@ -61,5 +63,19 @@ UpdateLabelHandler.prototype.execute = function (context) {
 }
 
 UpdateLabelHandler.prototype.revert = function (context) {
+    //TODO implement at some point
+}
+
+function UpdatePropertyHandler() {
+
+}
+
+UpdatePropertyHandler.prototype.execute = function (context) {
+    var { element, newProperties } = context;
+    element.businessObject.name = newProperties;
+    return element;
+}
+
+UpdatePropertyHandler.prototype.revert = function (context) {
     //TODO implement at some point
 }
