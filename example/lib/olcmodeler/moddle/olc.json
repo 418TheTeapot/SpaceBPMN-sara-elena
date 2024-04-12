@@ -32,7 +32,7 @@
         {
           "name": "property",
           "isAttr": true,
-          "type": "String"
+          "type": "Array"
         },
         {
           "name": "value",

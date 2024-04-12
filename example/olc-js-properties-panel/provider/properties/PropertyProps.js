@@ -18,8 +18,8 @@ export function Property(props) {
     console.log('proprietà', getValues());
 
     const setValues = (value) => {
-        console.log(element.businessObject.property);
         element.businessObject.property = value;
+        console.log(element.businessObject.property);
         return getValues();
     };
 
@@ -34,18 +34,79 @@ export function Property(props) {
         setValues(updatedAttributes);
     };
 
-    // const toggleOff = (index) => {
-    //     const updatedAttributes = getValues();
-    //     updatedAttributes[index].isOff = !updatedAttributes[index].isOff;
-    //     setValues(updatedAttributes);
-    //     console.log('toggle off/on', updatedAttributes);
-    // };
-
-    const toggleOff = () => {
-        const updatedValue = isOffValue ? 'on' : 'off'; // Cambia il valore tra 'on' e 'off'
-        setValues(updatedValue);
+    const toggleOff = (index) => {
+        const updatedAttributes = getValues();
+        updatedAttributes[index].isOff = !updatedAttributes[index].isOff;
+        //setValues(updatedAttributes);
+        if (isOffValue) {
+            element.businessObject.value = 'off';
+        } else {
+            element.businessObject.value = 'on';
+        }
+        console.log('toggle off/on', updatedAttributes);
     };
 
+    // const toggleOff = () => {
+    //     const updatedValue = isOffValue ? 'on' : 'off'; // Cambia il valore tra 'on' e 'off'
+    //     setValues(updatedValue);
+    //     if (isOffValue) {
+    //         element.businessObject.value = 'on';
+    //     } else {
+    //         element.businessObject.value = 'off';
+    //     }
+    // };
+
+
+return (
+  <div>
+     <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
+         <span style={{ marginRight: '0.25px' }}>Add property</span>
+         <button
+             onClick={addAttribute}
+             style={{ background: 'white', color: 'black', border: '1px solid white', cursor: 'pointer', fontSize: '16px' }}>
+             +
+         </button>
+     </div>
+     {getValues().map((attribute, index) => (
+         <div key={index} style={{position: 'relative'}}>
+             <TextFieldEntry
+                 id={id}
+                 element={element}
+                 description={translate('')}
+                 label={`Property ${index + 1}`}
+                 getValue={() => attribute.value || ''}
+                 setValue={(newValue) => {
+                     const updatedAttributes = getValues().map((attr, i) => i === index ? {
+                         ...attr,
+                         value: newValue
+                     } : attr);
+                     setValues(updatedAttributes);
+                 }}
+                 debounce={debounce}
+             />
+             <div style={{display: 'flex', alignItems: 'center'}}>
+                 <button
+                     onClick={() => toggleOff(index)}
+                     style={{marginLeft: '8px', background: 'transparent',  border: 'none',  cursor: 'pointer',  fontSize: '12px',  marginRight: '5px'
+                     }}>
+                     {attribute.isOff ? 'Off' : 'On'}
+                 </button>
+                 <button
+                     onClick={() => removeAttribute(index)}
+                     style={{background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '12px'}}>
+                     Remove
+                 </button>
+             </div>
+         </div>
+     ))}
+ </div>
+);
+
+}
+
+
+
+/*
     return (
         <div>
             <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
@@ -53,10 +114,9 @@ export function Property(props) {
                 <button
                     onClick={toggleOff}
                     style={{ background: 'white', color: 'black', border: '1px solid white', cursor: 'pointer', fontSize: '16px' }}>
-                    {isOffValue ? 'Off' : 'On'} {/* Visualizza 'Off' se il pulsante è stato attivato, altrimenti 'On' */}
+                    {isOffValue ? 'Off' : 'On'}
                 </button>
             </div>
-            {/* Aggiungi un campo per la proprietà */}
             <TextFieldEntry
                 id={id}
                 element={element}
@@ -68,52 +128,5 @@ export function Property(props) {
             />
         </div>
     );
-}
-    /*
-    return (
-        <div>
-            <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
-                <span style={{ marginRight: '0.25px' }}>Add property</span>
-                <button
-                    onClick={addAttribute}
-                    style={{ background: 'white', color: 'black', border: '1px solid white', cursor: 'pointer', fontSize: '16px' }}>
-                    +
-                </button>
-            </div>
-            {getValues().map((attribute, index) => (
-                <div key={index} style={{position: 'relative'}}>
-                    <TextFieldEntry
-                        id={id}
-                        element={element}
-                        description={translate('')}
-                        label={`Property ${index + 1}`}
-                        getValue={() => attribute.value || ''}
-                        setValue={(newValue) => {
-                            const updatedAttributes = getValues().map((attr, i) => i === index ? {
-                                ...attr,
-                                value: newValue
-                            } : attr);
-                            setValues(updatedAttributes);
-                        }}
-                        debounce={debounce}
-                    />
-                    <div style={{display: 'flex', alignItems: 'center'}}>
-                        <button
-                            onClick={() => toggleOff(index)}
-                            style={{marginLeft: '8px', background: 'transparent',  border: 'none',  cursor: 'pointer',  fontSize: '12px',  marginRight: '5px'
-                            }}>
-                            {attribute.isOff ? 'On' : 'Off'}
-                        </button>
-                        <button
-                            onClick={() => removeAttribute(index)}
-                            style={{background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '12px'}}>
-                            Remove
-                        </button>
-                    </div>
-                </div>
-            ))}
-        </div>
-    );
-
 }
 */
