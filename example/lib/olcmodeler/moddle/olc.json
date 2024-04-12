@@ -30,7 +30,7 @@
       ],
       "properties": [
         {
-          "name": "prova",
+          "name": "property",
           "isAttr": true,
           "type": "String"
         },

@@ -3,11 +3,10 @@ import { Group } from '@bpmn-io/properties-panel';
 import {
 
     NameProps,
-    IdProps,
-    PlacePropertiesProps
+    IdProps
 
 } from './properties';
-import TentativoProps from "./properties/TentativoProps";
+import PlaceProps from "./properties/PlaceProps";
 import {is} from "bpmn-js/lib/util/ModelUtil";
 import {LuxProps} from "./properties/LuxProps";
 
@@ -40,7 +39,7 @@ function PlaceGroup(element, injector) {
     return {
         id: 'place',
         label: translate('Space Properties'),
-        entries: TentativoProps(element),
+        entries: PlaceProps(element),
         component: Group
     };
 
@@ -50,7 +49,6 @@ function getGroups(element, injector) {
 
     const groups = [
         GeneralGroup(element, injector),
-        // ProvaGroup(element, injector)
     ];
 
     if(is(element, 'space:Place')) {

@@ -1,18 +1,16 @@
 import { TextFieldEntry, NumberFieldEntry, isTextFieldEntryEdited, isNumberFieldEntryEdited, SelectEntry, isSelectEntryEdited } from '@bpmn-io/properties-panel';
-import { useService } from 'bpmn-js-properties-panel';
-import { Prova } from "./ProvaProps";
 import {is} from "bpmn-js/lib/util/ModelUtil";
 import {SpaceProps} from "./SpaceProps";
-import olcModeler from 'example/lib/olcmodeler/OlcModeler.js';
+import {Property} from "./PropertyProps";
 
-export default function TentativoProps(element) {
+export default function PlaceProps(element) {
     const properties = [];
 
     if (is(element, 'space:Place')) {
         properties.push({
-            id: 'prova',
+            id: 'property',
             element,
-            component: Prova,
+            component: Property,
             isEdited: isTextFieldEntryEdited
         });
     }

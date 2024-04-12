@@ -2,13 +2,13 @@ import { TextFieldEntry,  isTextFieldEntryEdited } from '@bpmn-io/properties-pan
 import {useTranslation} from "react-i18next";
 import {debounce} from "lodash";
 
-export function Prova(props) {
+export function Property(props) {
     const { element, id } = props;
 
     const { t: translate } = useTranslation();
 
     const getValues = () => {
-        let values = element.businessObject.prova || [];
+        let values = element.businessObject.property || [];
         if (!Array.isArray(values)) {
             values = [values];
         }
@@ -18,8 +18,8 @@ export function Prova(props) {
     console.log('proprietà', getValues());
 
     const setValues = (value) => {
-        console.log(element.businessObject.prova);
-        element.businessObject.prova = value;
+        console.log(element.businessObject.property);
+        element.businessObject.property = value;
         return getValues();
     };
 
