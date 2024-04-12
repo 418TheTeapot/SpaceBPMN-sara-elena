@@ -35,6 +35,16 @@
           "type": "String"
         },
         {
+          "name": "value",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "placeProperties",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
           "name": "lux",
           "isAttr": true,
           "type": "String"

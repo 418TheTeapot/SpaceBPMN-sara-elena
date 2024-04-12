@@ -7,7 +7,6 @@ import OlcModeling from "../../../lib/olcmodeler/modeling/OlcModeling";
 
 
 export function PlacePropertiesProps(props) {
-    console.log(("Olc Props"))
 
     const {
         element
@@ -17,16 +16,14 @@ export function PlacePropertiesProps(props) {
         {
             id: 'placeProperties',
             component: PlaceProperties,
-            isEdited: isSelectEntryEdited // isTextAreaEntryEdited
+            isEdited: isTextAreaEntryEdited
         }
     ];
 }
 
 function PlaceProperties(props) {
 
-    const {
-        element
-    } = props;
+    const { element, id } = props;
 
 
     const { t: translate } = useTranslation();
@@ -44,7 +41,7 @@ function PlaceProperties(props) {
     // Define the options for the custom name entry
     let options = {
         element,
-        id: 'placeProperties',
+        id,
         label: translate('Place Properties'),
         debounce,
         setValue: (value) => {
@@ -55,6 +52,8 @@ function PlaceProperties(props) {
         },
         autoResize: true
     };
+
+    console.log(element.businessObject.placeProperties)
 
     return <TextAreaEntry {...options} />;
     //

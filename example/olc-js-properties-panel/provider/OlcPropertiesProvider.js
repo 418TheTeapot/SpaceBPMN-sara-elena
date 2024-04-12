@@ -3,7 +3,8 @@ import { Group } from '@bpmn-io/properties-panel';
 import {
 
     NameProps,
-    IdProps
+    IdProps,
+    PlacePropertiesProps
 
 } from './properties';
 import PlaceProps from "./properties/PlaceProps";
@@ -32,8 +33,9 @@ function PlaceGroup(element, injector) {
     const translate = injector.get('translate');
 
     const entries = [
-        ...PlaceProps({element}),
-        ...LuxProps({ element })
+        ...PlaceProps(element),
+        ...PlacePropertiesProps({element}),
+        ...LuxProps({ element }),
     ];
 
     return {
