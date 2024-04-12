@@ -8,7 +8,7 @@ export function Property(props) {
     const { t: translate } = useTranslation();
 
     const getValues = () => {
-        let values = element.businessObject.property || [];
+        let values = element.businessObject.properties || [];
         if (!Array.isArray(values)) {
             values = [values];
         }
@@ -16,10 +16,23 @@ export function Property(props) {
     };
 
     console.log('proprietà', getValues());
+    // console.log(getValues().value);
+    // console.log(getValues().isOff);
+    {getValues().map((attribute, index) => (
+        console.log(attribute.isOff),
+        console.log(attribute.value)
+    ))}
+
 
     const setValues = (value) => {
-        element.businessObject.property = value;
+        element.businessObject.properties = value;
+        {getValues().map((attribute, index) => (
+            element.businessObject.property = attribute.value,
+            element.businessObject.value = attribute.isOff
+        ))}
         console.log(element.businessObject.property);
+        // console.log(element.businessObject.property.value);
+        // console.log(element.businessObject.property.isOff);
         return getValues();
     };
 
@@ -37,7 +50,7 @@ export function Property(props) {
     const toggleOff = (index) => {
         const updatedAttributes = getValues();
         updatedAttributes[index].isOff = !updatedAttributes[index].isOff;
-        //setValues(updatedAttributes);
+        setValues(updatedAttributes);
         if (isOffValue) {
             element.businessObject.value = 'off';
         } else {
