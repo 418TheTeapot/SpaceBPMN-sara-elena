@@ -16,8 +16,7 @@ function GeneralGroup(element, injector) {
 
     const entries = [
         ...NameProps({ element }),
-        ...IdProps({ element }),
-
+        ...IdProps({ element })
     ];
 
     return {
@@ -32,14 +31,15 @@ function GeneralGroup(element, injector) {
 function PlaceGroup(element, injector) {
     const translate = injector.get('translate');
 
-    // const entries = [
-    //     ...PlacePropertiesProps({element})
-    // ];
+    const entries = [
+        ...PlaceProps({element}),
+        ...LuxProps({ element })
+    ];
 
     return {
         id: 'place',
         label: translate('Space Properties'),
-        entries: PlaceProps(element),
+        entries,
         component: Group
     };
 
