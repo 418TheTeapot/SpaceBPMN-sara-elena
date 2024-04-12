@@ -3,7 +3,7 @@ import {useTranslation} from "react-i18next";
 import {debounce} from "lodash";
 
 export function Property(props) {
-    const { element, id } = props;
+    const { element, id, propertyValue, isOffValue } = props;
 
     const { t: translate } = useTranslation();
 
@@ -34,13 +34,42 @@ export function Property(props) {
         setValues(updatedAttributes);
     };
 
-    const toggleOff = (index) => {
-        const updatedAttributes = getValues();
-        updatedAttributes[index].isOff = !updatedAttributes[index].isOff;
-        setValues(updatedAttributes);
-        console.log('toggle off/on', updatedAttributes);
+    // const toggleOff = (index) => {
+    //     const updatedAttributes = getValues();
+    //     updatedAttributes[index].isOff = !updatedAttributes[index].isOff;
+    //     setValues(updatedAttributes);
+    //     console.log('toggle off/on', updatedAttributes);
+    // };
+
+    const toggleOff = () => {
+        const updatedValue = isOffValue ? 'on' : 'off'; // Cambia il valore tra 'on' e 'off'
+        setValues(updatedValue);
     };
 
+    return (
+        <div>
+            <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
+                <span style={{ marginRight: '0.25px' }}>Add property</span>
+                <button
+                    onClick={toggleOff}
+                    style={{ background: 'white', color: 'black', border: '1px solid white', cursor: 'pointer', fontSize: '16px' }}>
+                    {isOffValue ? 'Off' : 'On'} {/* Visualizza 'Off' se il pulsante è stato attivato, altrimenti 'On' */}
+                </button>
+            </div>
+            {/* Aggiungi un campo per la proprietà */}
+            <TextFieldEntry
+                id={id}
+                element={element}
+                description={translate('')}
+                label={`Property`}
+                getValue={() => propertyValue || ''}
+                setValue={(newValue) => setValues(newValue)}
+                debounce={debounce}
+            />
+        </div>
+    );
+}
+    /*
     return (
         <div>
             <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
@@ -87,3 +116,4 @@ export function Property(props) {
     );
 
 }
+*/

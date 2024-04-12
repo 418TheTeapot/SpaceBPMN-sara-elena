@@ -7,11 +7,16 @@ export default function PlaceProps(element) {
     const properties = [];
 
     if (is(element, 'space:Place')) {
+        const propertyValue = element.businessObject.property || '';
+        const isOffValue = propertyValue === 'off';
+
         properties.push({
             id: 'property',
             element,
             component: Property,
-            isEdited: isTextFieldEntryEdited
+            propertyValue,
+            isOffValue,
+            isEdited: isTextFieldEntryEdited,
         });
     }
 
