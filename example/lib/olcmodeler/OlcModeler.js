@@ -32,7 +32,7 @@ import OlcEvents from './OlcEvents';
 import { nextPosition, root, is } from '../util/Util';
 
 
-import olcextension from 'example/olc-js-properties-panel/provider/descriptor/olcextension.json';
+// import olcextension from 'example/olc-js-properties-panel/provider/descriptor/olcextension.json';
 
 
 var emptyDiagram =
@@ -89,9 +89,9 @@ export default function OlcModeler(options) {
 
     {
       moddle: ['value', new OlcModdle({
-        moddleExtensions: {
-          space:olcextension
-        }
+        // moddleExtensions: {
+        //   space:olcextension
+        // }
       })],
       olcModeler: ['value', this],
     },

@@ -25,6 +25,21 @@
           "name": "lux",
           "isAttr": true,
           "type": "String"
+        },
+        {
+          "name": "temperature",
+          "isAttr": true,
+          "type": "Integer"
+        },
+        {
+          "name": "alarm",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "assignment",
+          "isAttr": true,
+          "type": "String"
         }
       ]
     },

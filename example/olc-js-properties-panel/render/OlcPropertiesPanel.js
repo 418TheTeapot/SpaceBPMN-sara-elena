@@ -93,23 +93,24 @@ export default function OlcPropertiesPanel(props) {
     }, []);
 
     // (2b) selected element changed
+
     useEffect(() => {
-        const onElementsChanged = (e) => {
-            const elements = e.elements;
-
-            const updatedElement = findElement(elements, selectedElement);
-
-            if (updatedElement && elementExists(updatedElement, elementRegistry)) {
-                _update(updatedElement);
+        const handlePropertyChange = (event) => {
+            if (event.element === selectedElement) {
+                setState(prevState => ({
+                    ...prevState,
+                    selectedElement: { ...event.element }
+                }));
             }
         };
 
-        eventBus.on('elements.changed', onElementsChanged);
+        eventBus.on('element.changed', handlePropertyChange);
 
         return () => {
-            eventBus.off('elements.changed', onElementsChanged);
+            eventBus.off('element.changed', handlePropertyChange);
         };
-    }, [ selectedElement ]);
+    }, [eventBus, selectedElement]);
+
 
     // (2c) root element changed
     useEffect(() => {

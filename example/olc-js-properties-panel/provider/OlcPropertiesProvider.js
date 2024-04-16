@@ -3,9 +3,13 @@ import { Group } from '@bpmn-io/properties-panel';
 import {
 
     NameProps,
-    IdProps, LuxProps,
+    IdProps,
 
 } from './properties';
+
+
+import {AssignmentProps, LuxProps, TemperatureProps} from "./properties/PlaceProps";
+import {AlarmProps} from "./properties/PlaceProps/Alarm";
 
 
 
@@ -27,13 +31,19 @@ function GeneralGroup(element, injector) {
 
 }
 
-
 function SpaceOlcGroup(element, injector) {
     const translate = injector.get('translate');
 
     const entries = [
         ...LuxProps({ element }),
-        // ...TemperatureProps({ element })
+        ...TemperatureProps({ element }),
+        ...AlarmProps({ element }),
+        // ...AssignmentProps({ element }),
+        {
+            id: 'assignment',
+            component: AssignmentProps,
+            element
+        }
     ];
 
     return {

@@ -84,6 +84,7 @@
     "min-dash": "^4.1.0",
     "min-dom": "^4.1.0",
     "preact": "^10.20.1",
+    "preact-hooks": "^0.0.0-0.0.0",
     "randomcolor": "^0.6.2",
     "raw-loader": "^4.0.2",
     "react-i18next": "^14.1.0",

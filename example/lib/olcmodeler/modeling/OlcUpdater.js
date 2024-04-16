@@ -76,6 +76,20 @@ export default function OlcUpdater(eventBus, connectionDocking) {
         businessObject.set('x', x);
         businessObject.set('y', y);
     });
+
+
+    this.executed(['property.update'], (event) => {
+        const { element, properties } = event.context;
+        for (const propName in properties) {
+            // Assicurati di emettere un evento 'element.changed' ogni volta che una proprietà viene aggiornata
+            eventBus.fire('element.changed', {
+                element: element,
+                properties: propName
+            });
+        }
+    });
+
+
 }
 
 function reflectiveEdge(element) {
