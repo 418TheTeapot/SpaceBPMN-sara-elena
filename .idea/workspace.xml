@@ -4,22 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="Assignment FIXED">
+    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="TRANSITION PROP OK">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js-properties-panel/assets/element-templates.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js-properties-panel/assets/element-templates.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js-properties-panel/assets/properties-panel.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js-properties-panel/assets/properties-panel.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn-codes.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn-codes.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn-embedded.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn-embedded.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/font/bpmn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/font/bpmn.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-js.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-js.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/diagram-js.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/diagram-js.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/moddle/olc.json" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/moddle/olc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/modeler.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/modeler.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/OlcPropertiesProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/OlcPropertiesProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/CustomProps.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/NameProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/NameProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/viewer.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/viewer.bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/render/PanelHeaderProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/render/PanelHeaderProvider.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +109,7 @@
       <workItem from="1712391315190" duration="429000" />
       <workItem from="1712391762386" duration="4253000" />
       <workItem from="1712408505217" duration="4892000" />
-      <workItem from="1713284781312" duration="19296000" />
+      <workItem from="1713284781312" duration="20012000" />
     </task>
     <task id="LOCAL-00001" summary="olc-js-pp">
       <option name="closed" value="true" />
@@ -204,7 +191,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713301409197</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="TRANSITION PROP OK">
+      <option name="closed" value="true" />
+      <created>1713305052206</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1713305052206</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,7 +240,8 @@
     <MESSAGE value="Assignment c'è" />
     <MESSAGE value="Assignment c'è , ma fix" />
     <MESSAGE value="Assignment FIXED" />
-    <option name="LAST_COMMIT_MESSAGE" value="Assignment FIXED" />
+    <MESSAGE value="TRANSITION PROP OK" />
+    <option name="LAST_COMMIT_MESSAGE" value="TRANSITION PROP OK" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

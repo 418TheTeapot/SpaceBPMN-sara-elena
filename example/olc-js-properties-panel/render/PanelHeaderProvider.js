@@ -42,11 +42,13 @@ export const PanelHeaderProvider = {
 
     getElementLabel: (element) => {
         if (is(element, 'space:Place')) {
-            return getBusinessObject(element).name;
+            return getBusinessObject(element).name || 'Place'; // Restituisce il nome del Place o un placeholder
+        } else if (is(element, 'space:Transition')) {
+            return getBusinessObject(element).name || 'Transition'; // Restituisce il nome della Transition o un placeholder
         }
-
-        return getLabel(element);
+        return getLabel(element) || 'Space_Diagram'; // Fallback per altri tipi
     },
+
 
 
     getElementIcon: (element) => {
@@ -94,11 +96,7 @@ export const PanelHeaderProvider = {
 
 // helpers ///////////////////////
 
-function isCancelActivity(element) {
-    const businessObject = getBusinessObject(element);
 
-    return businessObject && businessObject.cancelActivity !== false;
-}
 
 function getEventDefinition(element) {
     const businessObject = getBusinessObject(element),
