@@ -38,6 +38,7 @@
         },
         {
           "name": "assignment",
+          "isMany": true,
           "isAttr": true,
           "type": "String"
         }
