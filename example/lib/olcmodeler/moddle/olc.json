@@ -22,6 +22,20 @@
           "isId": true
         },
         {
+          "name": "assignment",
+          "isMany": true,
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "Place",
+      "superClass": [
+        "SpaceElement"
+      ],
+      "properties": [
+        {
           "name": "lux",
           "isAttr": true,
           "type": "String"
@@ -35,21 +49,8 @@
           "name": "alarm",
           "isAttr": true,
           "type": "String"
-        },
-        {
-          "name": "assignment",
-          "isMany": true,
-          "isAttr": true,
-          "type": "String"
         }
       ]
-    },
-    {
-      "name": "Place",
-      "superClass": [
-        "SpaceElement"
-      ],
-      "properties": []
     },
     {
       "name": "Transition",
@@ -68,6 +69,26 @@
           "isAttr": true,
           "isReference": true,
           "type": "Place"
+        },
+        {
+          "name": "distance",
+          "isAttr": true,
+          "type": "Integer"
+        },
+        {
+          "name": "slope",
+          "isAttr": true,
+          "type": "Integer"
+        },
+        {
+          "name": "priority",
+          "isAttr": true,
+          "type": "Integer"
+        },
+        {
+          "name": "condition",
+          "isAttr": true,
+          "type": "String"
         }
       ]
     },

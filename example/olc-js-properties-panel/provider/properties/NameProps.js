@@ -2,6 +2,7 @@ import { TextAreaEntry, isTextAreaEntryEdited } from '@bpmn-io/properties-panel'
 import { useTranslation } from 'react-i18next';
 
 import {debounce} from "lodash";
+import {is} from "../../../lib/util/Util";
 
 export function NameProps(props) {
     const {
@@ -27,7 +28,7 @@ function Name(props) {
     let options = {
         element,
         id: 'name',
-        label: translate('Name'),
+        label: is(element,'space:Transition') ? translate('Weight') : translate('Name'),
         debounce,
         setValue: (value) => {
             element.businessObject.name = value;
