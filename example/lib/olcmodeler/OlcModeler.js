@@ -32,6 +32,9 @@ import OlcEvents from './OlcEvents';
 import { nextPosition, root, is } from '../util/Util';
 
 
+import olcextension from 'example/olc-js-properties-panel/provider/descriptor/olcextension.json';
+
+
 var emptyDiagram =
   `<?xml version="1.0" encoding="UTF-8"?>
 <space:definitions xmlns:space="http://bptlab/schema/spaceModeler" >
@@ -46,6 +49,7 @@ var emptyDiagram =
  *
  * @return {Diagram}
  */
+
 export default function OlcModeler(options) {
 
   const {
@@ -84,12 +88,14 @@ export default function OlcModeler(options) {
     OlcAutoPlaceModule,
 
     {
-      moddle: ['value', new OlcModdle({})],
+      moddle: ['value', new OlcModdle({
+        moddleExtensions: {
+          space:olcextension
+        }
+      })],
       olcModeler: ['value', this],
-    }
+    },
   ];
-
-
 
   const diagramOptions = {
     canvas: {
@@ -110,7 +116,6 @@ export default function OlcModeler(options) {
 
 }
 inherits(OlcModeler, Diagram);
-
 
 
 OlcModeler.prototype.createNew = function () {
@@ -316,7 +321,6 @@ OlcModeler.prototype.saveXML = function (options) {
     }) || definitions;
 
     self.get('moddle').toXML(definitions, options).then(function (result) {
-
       var xml = result.xml;
 
       try {
@@ -335,7 +339,6 @@ OlcModeler.prototype.saveXML = function (options) {
 
       return resolve({ xml: xml });
     }).catch(function (err) {
-
       return reject(err);
     });
   });

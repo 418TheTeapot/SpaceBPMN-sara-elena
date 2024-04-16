@@ -11,11 +11,6 @@
       "isAbstract": true,
       "properties": [
         {
-          "name": "myAttribute",
-          "isAttr": true,
-          "type": "String"
-        },
-        {
           "name": "name",
           "isAttr": true,
           "type": "String"
@@ -25,6 +20,11 @@
           "isAttr": true,
           "type": "String",
           "isId": true
+        },
+        {
+          "name": "lux",
+          "isAttr": true,
+          "type": "String"
         }
       ]
     },

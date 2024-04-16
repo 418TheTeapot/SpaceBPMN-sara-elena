@@ -3,8 +3,7 @@ import { Group } from '@bpmn-io/properties-panel';
 import {
 
     NameProps,
-    IdProps,
-    LuxProps
+    IdProps, LuxProps,
 
 } from './properties';
 
@@ -33,9 +32,8 @@ function SpaceOlcGroup(element, injector) {
     const translate = injector.get('translate');
 
     const entries = [
-        // ...Assignment({ element })
-        // ...AssignmentOlc({ element }),
-        ...LuxProps({ element })
+        ...LuxProps({ element }),
+        // ...TemperatureProps({ element })
     ];
 
     return {
@@ -44,8 +42,8 @@ function SpaceOlcGroup(element, injector) {
         entries,
         component: Group
     };
-
 }
+
 
 
 function getGroups(element, injector) {
