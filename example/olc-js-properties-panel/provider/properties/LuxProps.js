@@ -1,5 +1,5 @@
 
-/*
+
 
 import { useTranslation } from "react-i18next";
 import { isSelectEntryEdited, SelectEntry } from "@bpmn-io/properties-panel";
@@ -50,9 +50,11 @@ function Lux(props) {
     />
 }
 
-*/
 
 
+
+
+/*
 import { isTextAreaEntryEdited, TextAreaEntry} from '@bpmn-io/properties-panel';
 import {useTranslation} from "react-i18next";
 import {debounce} from "lodash";
@@ -71,9 +73,8 @@ export  function LuxProps(props) {
 }
 
 function Lux(props) {
-    const { element, injector } = props;
+    const { element, } = props;
     const { t: translate } = useTranslation();
-    // const modeling = injector.get('modeling');
 
     let options = {
         element,
@@ -92,3 +93,4 @@ function Lux(props) {
 
     return <TextAreaEntry {...options} />;
 }
+*/
