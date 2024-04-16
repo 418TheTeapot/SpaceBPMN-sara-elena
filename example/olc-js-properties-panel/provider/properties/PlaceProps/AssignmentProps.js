@@ -17,7 +17,6 @@ export function AssignmentProps(props) {
     const [assignments, setAssignments] = useState(getValues());
 
     useEffect(() => {
-        console.log("Element updated, fetching values again.");  // Debugging line
         setAssignments(getValues());
     }, [element]);
 
