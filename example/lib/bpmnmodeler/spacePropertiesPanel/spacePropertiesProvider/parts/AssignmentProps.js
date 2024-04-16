@@ -1,7 +1,7 @@
-import { TextFieldEntry,  isTextFieldEntryEdited } from '@bpmn-io/properties-panel';
+import { TextFieldEntry, isTextFieldEntryEdited } from '@bpmn-io/properties-panel';
 import { useService } from 'bpmn-js-properties-panel';
 import { is } from "../../../../util/Util";
-import {values} from "lodash";
+import { values } from "lodash";
 
 export function Assignment(props) {
     const { element, id } = props;
@@ -10,27 +10,27 @@ export function Assignment(props) {
     const translate = useService('translate');
     const debounce = useService('debounceInput');
 
+    // Funzione per ottenere gli attuali valori di assignment
     const getValues = () => {
         let values = element.businessObject.assignment || [];
-        if (!Array.isArray(values)) {
-            values = [values];
-        }
-        console.log('Array degli attributi di assegnazione:', values);
-        return values;
+        return Array.isArray(values) ? values : [values];
     };
 
-    const setValues = (value) => {
-        return modeling.updateProperties(element, {
-            assignment: value
+    // Funzione per impostare nuovi valori di assignment
+    const setValues = (values) => {
+        modeling.updateProperties(element, {
+            assignment: values
         });
     };
 
+    // Aggiunge una stringa vuota al posto di un oggetto vuoto
     const addAttribute = () => {
-        const newAttribute = {};
+        const newAttribute = '';
         const updatedAttributes = [...getValues(), newAttribute];
         setValues(updatedAttributes);
     };
 
+    // Rimuove un attributo in base all'indice
     const removeAttribute = (index) => {
         const updatedAttributes = getValues().filter((_, i) => i !== index);
         setValues(updatedAttributes);
@@ -42,20 +42,22 @@ export function Assignment(props) {
                 <span style={{ marginRight: '8px' }}>Add Assignment</span>
                 <button
                     onClick={addAttribute}
-                    style={{ background: 'white', color: 'black', border: '1px solid black', borderRadius: '3px',  cursor: 'pointer', fontSize: '16px' }}>
+                    style={{ background: 'white', color: 'black', border: '1px solid black', borderRadius: '3px', cursor: 'pointer', fontSize: '16px' }}>
                     +
                 </button>
             </div>
-            {getValues().map((attribute, index) => (
+            {getValues().map((value, index) => (
                 <div key={index} style={{ position: 'relative' }}>
                     <TextFieldEntry
-                        id={id}
+                        id={`${id}-${index}`}
                         element={element}
                         description={translate('')}
                         label={`Assignment ${index + 1}`}
-                        getValue={() => attribute.value || ''}
+                        getValue={() => value || ''}
                         setValue={(newValue) => {
-                            const updatedAttributes = getValues().map((attr, i) => i === index ? { ...attr, value: newValue } : attr);
+                            const updatedAttributes = getValues().map((attr, i) =>
+                                i === index ? newValue : attr
+                            );
                             setValues(updatedAttributes);
                         }}
                         debounce={debounce}
@@ -69,5 +71,4 @@ export function Assignment(props) {
             ))}
         </div>
     );
-
 }

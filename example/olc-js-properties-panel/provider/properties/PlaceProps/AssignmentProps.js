@@ -8,27 +8,24 @@ export function AssignmentProps(props) {
     const { element, id } = props;
 
     const getValues = () => {
+        // Assicuriamoci che `assignment` sia sempre trattato come array
         let values = element.businessObject.assignment || [];
-        console.log("Initial values fetched:", values);  // Debugging line
         return Array.isArray(values) ? values : [values];
     };
 
-    // Initialize state and set it based on element changes
     const [assignments, setAssignments] = useState(getValues());
 
     useEffect(() => {
         setAssignments(getValues());
     }, [element]);
 
-    const setValues = (value) => {
-        console.log("Setting values:", value);  // Debugging line
-        element.businessObject.assignment = value;
-        setAssignments(value);  // Update the state as well to trigger re-render
+    const setValues = (values) => {
+        element.businessObject.assignment = values;
+        setAssignments(values);  // Update the state as well to trigger re-render
     };
 
     const addAttribute = () => {
-        const newAttribute = { value: '' };  // Assuming new attributes are simple objects with a 'value' property
-        const updatedAttributes = [...assignments, newAttribute];
+        const updatedAttributes = [...assignments, ''];  // Aggiunge una stringa vuota per un nuovo assignment
         setValues(updatedAttributes);
     };
 
@@ -38,9 +35,8 @@ export function AssignmentProps(props) {
     };
 
     const updateValue = (index, newValue) => {
-        console.log(`Updating index ${index} with value`, newValue);  // Debugging line
         const updatedAttributes = assignments.map((attr, idx) =>
-            idx === index ? { ...attr, value: newValue } : attr
+            idx === index ? newValue : attr
         );
         setValues(updatedAttributes);
     };
@@ -55,14 +51,14 @@ export function AssignmentProps(props) {
                     +
                 </button>
             </div>
-            {assignments.map((attribute, index) => (
+            {assignments.map((value, index) => (
                 <div key={index} style={{ position: 'relative' }}>
                     <TextFieldEntry
                         id={`${id}-${index}`}
                         element={element}
                         description={translate('')}
                         label={`Assignment ${index + 1}`}
-                        getValue={() => attribute.value || ''}
+                        getValue={() => value || ''}
                         setValue={(newValue) => updateValue(index, newValue)}
                         debounce={debounce}
                     />
@@ -76,3 +72,5 @@ export function AssignmentProps(props) {
         </div>
     );
 }
+
+
