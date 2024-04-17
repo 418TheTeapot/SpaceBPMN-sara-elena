@@ -6,10 +6,32 @@
     "tagAlias": "lowerCase"
   },
   "types": [
+
+    {
+      "name": "UserProperty",
+      "properties": [
+        {
+          "name": "key",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "value",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+
     {
       "name": "SpaceElement",
       "isAbstract": true,
       "properties": [
+        {
+          "name": "userProperties",
+          "type": "UserProperty",
+          "isMany": true
+        },
         {
           "name": "name",
           "isAttr": true,
@@ -146,3 +168,4 @@
     }
   ]
 }
+

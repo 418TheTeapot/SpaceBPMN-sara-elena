@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="TRANSITION PROP OK">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_15_2024_9_15_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_15_2024_9_15_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_7_2024_12_37_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_7_2024_12_37_AM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_7_2024_12_38_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_7_2024_12_38_AM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_7_2024_12_39_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_7_2024_12_39_AM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/render/PanelHeaderProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/render/PanelHeaderProvider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/moddle/olc.json" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/moddle/olc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/OlcPropertiesProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/OlcPropertiesProvider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="elena" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -110,6 +116,7 @@
       <workItem from="1712391762386" duration="4253000" />
       <workItem from="1712408505217" duration="4892000" />
       <workItem from="1713284781312" duration="20012000" />
+      <workItem from="1713384309332" duration="375000" />
     </task>
     <task id="LOCAL-00001" summary="olc-js-pp">
       <option name="closed" value="true" />

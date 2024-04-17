@@ -1,6 +1,6 @@
 import { Group } from '@bpmn-io/properties-panel';
 
-import { NameProps, IdProps } from './properties';
+import {NameProps, IdProps, AttributeProps} from './properties';
 import { AssignmentProps, LuxProps, TemperatureProps } from "./properties/PlaceProps";
 import { AlarmProps } from "./properties/PlaceProps/Alarm";
 import { is } from "../../lib/util/Util";
@@ -21,12 +21,19 @@ function GeneralGroup(element, injector) {
 }
 
 function SpacePlaceGroup(element, translate) {
-    return [
+    const entries = [
         ...LuxProps({ element }),
         ...TemperatureProps({ element }),
         ...AlarmProps({ element }),
+        {
+            id: 'custom-attributes',
+            component: AttributeProps,
+            element
+        }
     ];
+    return entries;
 }
+
 
 function SpaceTransitionGroup(element, translate) {
     return [
