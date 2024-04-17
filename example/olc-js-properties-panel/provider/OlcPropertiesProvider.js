@@ -34,8 +34,8 @@ function PlaceGroup(element, injector) {
 
     const entries = [
         ...PlaceProps(element),
-        ...PlacePropertiesProps({element}),
-        ...LuxProps({ element }),
+        //...PlacePropertiesProps({element}),
+        //...LuxProps({ element }),
     ];
 
     return {

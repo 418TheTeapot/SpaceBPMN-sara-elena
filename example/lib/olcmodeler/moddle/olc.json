@@ -30,9 +30,21 @@
       ],
       "properties": [
         {
+          "name": "properties",
+          "isAttr": true,
+          "isMany": true,
+          "type": "Array[Map]"
+        },
+        {
+          "name": "spaceProperties",
+          "isAttr": true,
+          "isMany": true,
+          "type": "Array[String]"
+        },
+        {
           "name": "property",
           "isAttr": true,
-          "type": "Array"
+          "type": "String"
         },
         {
           "name": "value",

@@ -19,25 +19,55 @@ export function Property(props) {
     // console.log(getValues().value);
     // console.log(getValues().isOff);
     {getValues().map((attribute, index) => (
-        console.log(attribute.isOff),
-        console.log(attribute.value)
+        // console.log(attribute.isOff),
+        // console.log(attribute.value),
+        // console.log(attribute.isOff.toString()),
+        //     console.log(attribute && attribute.value ? attribute.value.toString() : "No value available"),
+        console.log(attribute),
+        index++
     ))}
 
 
     const setValues = (value) => {
+        value.forEach(attribute => {
+            attribute.isOff = attribute.isOff.toString();
+            attribute.value = attribute.value ? attribute.value.toString() : ''; // Gestisci il caso in cui attribute.value sia undefined o null
+        });
         element.businessObject.properties = value;
-        {getValues().map((attribute, index) => (
-            element.businessObject.property = attribute.value,
-            element.businessObject.value = attribute.isOff
-        ))}
-        console.log(element.businessObject.property);
-        // console.log(element.businessObject.property.value);
-        // console.log(element.businessObject.property.isOff);
-        return getValues();
+        console.log(element.businessObject.properties);
+        element.businessObject.spaceProperties = printAttributes(getValues());
+        console.log(element.businessObject.spaceProperties)
+        return value;
+        // const updatedProperties = value.map(attribute => ({
+        //     isOff: attribute.isOff.toString(),
+        //     value: attribute.value ? attribute.value.toString() : ''
+        // }));
+        // element.businessObject.properties = updatedProperties;
+        // console.log(element.businessObject.properties);
+        // return updatedProperties;
+        // element.businessObject.properties = value;
+        // {getValues().map((attribute, index) => (
+        //     element.businessObject.property = attribute.value,
+        //     element.businessObject.value = attribute.isOff
+        // ))}
+        // console.log(element.businessObject.properties);
+        // return getValues();
     };
 
+    const formatAttributeToString = (attribute) => {
+        return `${attribute.value}=${attribute.isOff}`;
+    };
+
+// Funzione per stampare gli attributi come stringhe formattate
+    const printAttributes = (values) => {
+        return values.map(attribute => formatAttributeToString(attribute)).join(', ');
+    };
+
+// Utilizzo della funzione printAttributes per stampare gli attributi come stringhe formattate
+    console.log(printAttributes(getValues()));
+
     const addAttribute = () => {
-        const newAttribute = {isOff: true};
+        const newAttribute = {isOff: 'true'};
         const updatedAttributes = [...getValues(), newAttribute];
         setValues(updatedAttributes);
     };
@@ -49,7 +79,8 @@ export function Property(props) {
 
     const toggleOff = (index) => {
         const updatedAttributes = getValues();
-        updatedAttributes[index].isOff = !updatedAttributes[index].isOff;
+        updatedAttributes[index].isOff = updatedAttributes[index].isOff === 'true' ? 'false' : 'true'; // Converti in stringa
+        //updatedAttributes[index].isOff = !updatedAttributes[index].isOff;
         setValues(updatedAttributes);
         if (isOffValue) {
             element.businessObject.value = 'off';
