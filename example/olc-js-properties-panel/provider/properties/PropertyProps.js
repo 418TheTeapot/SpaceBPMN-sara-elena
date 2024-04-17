@@ -17,16 +17,16 @@ export function Property(props) {
 
     console.log('proprietà', getValues());
 
-    {getValues().map((attribute, index) => (
-        console.log(attribute),
-        index++
+    {getValues().map((property, index) => (
+        console.log(property),
+            index++
     ))}
 
 
     const setValues = (value) => {
-        value.forEach(attribute => {
-            attribute.isOff = attribute.isOff.toString();
-            attribute.value = attribute.value ? attribute.value.toString() : '';
+        value.forEach(property => {
+            property.value = property.value ? property.value.toString() : '';
+            property.attribute = property.attribute ? property.attribute.toString() : '';
         });
         element.businessObject.properties = value;
         console.log(element.businessObject.properties);
@@ -36,19 +36,19 @@ export function Property(props) {
         return value;
     };
 
-    const formatAttributeToString = (attribute) => {
-        return `${attribute.value}=${attribute.isOff}`;
+    const formatAttributeToString = (property) => {
+        return `${property.value}=${property.attribute}`;
     };
 
     // Funzione per stampare gli attributi come stringhe formattate
     const printAttributes = (values) => {
-        return values.map(attribute => formatAttributeToString(attribute)).join(', ');
+        return values.map(property => formatAttributeToString(property)).join(', ');
     };
 
     console.log(printAttributes(getValues()));
 
     const addAttribute = () => {
-        const newAttribute = {isOff: 'true'};
+        const newAttribute = { value: '', attribute: '' }; // Inizializza newAttribute con valori vuoti
         const updatedAttributes = [...getValues(), newAttribute];
         setValues(updatedAttributes);
     };
@@ -58,94 +58,58 @@ export function Property(props) {
         setValues(updatedAttributes);
     };
 
-    const toggleOff = (index) => {
-        const updatedAttributes = getValues();
-        updatedAttributes[index].isOff = updatedAttributes[index].isOff === 'true' ? 'false' : 'true'; // Converti in stringa
-        setValues(updatedAttributes);
-        console.log('toggle off/on', updatedAttributes);
-    };
-
-    // const toggleOff = () => {
-    //     const updatedValue = isOffValue ? 'on' : 'off'; // Cambia il valore tra 'on' e 'off'
-    //     setValues(updatedValue);
-    //     if (isOffValue) {
-    //         element.businessObject.value = 'on';
-    //     } else {
-    //         element.businessObject.value = 'off';
-    //     }
-    // };
-
-
-return (
-  <div>
-     <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
-         <span style={{ marginRight: '0.25px' }}>Add property</span>
-         <button
-             onClick={addAttribute}
-             style={{ background: 'white', color: 'black', border: '1px solid white', cursor: 'pointer', fontSize: '16px' }}>
-             +
-         </button>
-     </div>
-     {getValues().map((attribute, index) => (
-         <div key={index} style={{position: 'relative'}}>
-             <TextFieldEntry
-                 id={id}
-                 element={element}
-                 description={translate('')}
-                 label={`Property ${index + 1}`}
-                 getValue={() => attribute.value || ''}
-                 setValue={(newValue) => {
-                     const updatedAttributes = getValues().map((attr, i) => i === index ? {
-                         ...attr,
-                         value: newValue
-                     } : attr);
-                     setValues(updatedAttributes);
-                 }}
-                 debounce={debounce}
-             />
-             <div style={{display: 'flex', alignItems: 'center'}}>
-                 <button
-                     onClick={() => toggleOff(index)}
-                     style={{marginLeft: '8px', background: 'transparent',  border: 'none',  cursor: 'pointer',  fontSize: '12px',  marginRight: '5px'
-                     }}>
-                     {attribute.isOff ? 'Off' : 'On'}
-                 </button>
-                 <button
-                     onClick={() => removeAttribute(index)}
-                     style={{background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '12px'}}>
-                     Remove
-                 </button>
-             </div>
-         </div>
-     ))}
- </div>
-);
-
-}
-
-
-
-/*
     return (
         <div>
             <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
                 <span style={{ marginRight: '0.25px' }}>Add property</span>
                 <button
-                    onClick={toggleOff}
+                    onClick={addAttribute}
                     style={{ background: 'white', color: 'black', border: '1px solid white', cursor: 'pointer', fontSize: '16px' }}>
-                    {isOffValue ? 'Off' : 'On'}
+                    +
                 </button>
             </div>
-            <TextFieldEntry
-                id={id}
-                element={element}
-                description={translate('')}
-                label={`Property`}
-                getValue={() => propertyValue || ''}
-                setValue={(newValue) => setValues(newValue)}
-                debounce={debounce}
-            />
+            {getValues().map((property, index) => (
+                <div key={index} style={{position: 'relative'}}>
+                    <TextFieldEntry
+                        id={id}
+                        element={element}
+                        description={translate('')}
+                        label={`Property ${index + 1}`}
+                        getValue={() => property.value || ''}
+                        setValue={(newValue) => {
+                            const updatedAttributes = getValues().map((prop, i) => i === index ? {
+                                ...prop,
+                                value: newValue
+                            } : prop);
+                            setValues(updatedAttributes);
+                        }}
+                        debounce={debounce}
+                    />
+                    <TextFieldEntry
+                        id={id}
+                        element={element}
+                        description={translate('')}
+                        label={`Attribute property ${index + 1}`}
+                        getValue={() => property.attribute || ''}
+                        setValue={(newValue) => {
+                            const updatedAttributes = getValues().map((prop, i) => i === index ? {
+                                ...prop,
+                                attribute: newValue
+                            } : prop);
+                            setValues(updatedAttributes);
+                        }}
+                        debounce={debounce}
+                    />
+                    <div style={{display: 'flex', alignItems: 'center'}}>
+                        <button
+                            onClick={() => removeAttribute(index)}
+                            style={{background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '12px'}}>
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            ))}
         </div>
     );
+
 }
-*/
