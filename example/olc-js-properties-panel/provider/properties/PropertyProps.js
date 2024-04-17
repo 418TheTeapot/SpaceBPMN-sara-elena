@@ -35,8 +35,8 @@ export function Property(props) {
         });
         element.businessObject.properties = value;
         console.log(element.businessObject.properties);
-        element.businessObject.spaceProperties = printAttributes(getValues());
-        console.log(element.businessObject.spaceProperties)
+        element.businessObject.placeProperties = printAttributes(getValues());
+        console.log(element.businessObject.placeProperties)
         return value;
         // const updatedProperties = value.map(attribute => ({
         //     isOff: attribute.isOff.toString(),
@@ -82,11 +82,11 @@ export function Property(props) {
         updatedAttributes[index].isOff = updatedAttributes[index].isOff === 'true' ? 'false' : 'true'; // Converti in stringa
         //updatedAttributes[index].isOff = !updatedAttributes[index].isOff;
         setValues(updatedAttributes);
-        if (isOffValue) {
-            element.businessObject.value = 'off';
-        } else {
-            element.businessObject.value = 'on';
-        }
+        // if (isOffValue) {
+        //     element.businessObject.value = 'off';
+        // } else {
+        //     element.businessObject.value = 'on';
+        // }
         console.log('toggle off/on', updatedAttributes);
     };
 

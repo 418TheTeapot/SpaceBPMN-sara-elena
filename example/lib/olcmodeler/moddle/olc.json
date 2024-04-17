@@ -30,36 +30,9 @@
       ],
       "properties": [
         {
-          "name": "properties",
-          "isAttr": true,
-          "isMany": true,
-          "type": "Array[Map]"
-        },
-        {
-          "name": "spaceProperties",
-          "isAttr": true,
-          "isMany": true,
-          "type": "Array[String]"
-        },
-        {
-          "name": "property",
-          "isAttr": true,
-          "type": "String"
-        },
-        {
-          "name": "value",
-          "isAttr": true,
-          "type": "String"
-        },
-        {
           "name": "placeProperties",
           "isAttr": true,
-          "type": "String"
-        },
-        {
-          "name": "lux",
-          "isAttr": true,
-          "type": "String"
+          "type": "Array[String]"
         }
       ]
     },

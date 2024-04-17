@@ -11,7 +11,7 @@ export default function PlaceProps(element) {
         const isOffValue = propertyValue === 'off';
 
         properties.push({
-            id: 'property',
+            id: 'placeProperties',
             element,
             component: Property,
             propertyValue,
