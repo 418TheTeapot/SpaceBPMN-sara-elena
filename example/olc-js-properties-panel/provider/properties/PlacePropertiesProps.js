@@ -14,7 +14,7 @@ export function PlacePropertiesProps(props) {
 
     return [
         {
-            id: 'placeProperties',
+            id: 'properties',
             component: PlaceProperties,
             isEdited: isTextAreaEntryEdited
         }
@@ -23,10 +23,10 @@ export function PlacePropertiesProps(props) {
 
 function PlaceProperties(props) {
 
-    const { element, id } = props;
+    const {element, id} = props;
 
 
-    const { t: translate } = useTranslation();
+    const {t: translate} = useTranslation();
 
     if (typeof debounce !== 'function') {
         console.error('debounce is not a function');
@@ -38,125 +38,21 @@ function PlaceProperties(props) {
         return;
     }
 
-    // Define the options for the custom name entry
     let options = {
         element,
         id,
         label: translate('Place Properties'),
         debounce,
         setValue: (value) => {
-            element.businessObject.placeProperties = value;
+            element.businessObject.properties = value;
         },
         getValue: () => {
-            return element.businessObject.placeProperties || '';
+            return element.businessObject.properties || '';
         },
         autoResize: true
     };
 
-    console.log(element.businessObject.placeProperties)
+    console.log(element.businessObject.properties)
 
     return <TextAreaEntry {...options} />;
-    //
-    // const getValues = () => {
-    //     let values = element.businessObject.placeProperties || [];
-    //     if (!Array.isArray(values)) {
-    //         values = [values];
-    //     }
-    //     console.log('Array delle propietà del place:', values);
-    //     return values;
-    // };
-    //
-    // const setValues = (value) => {
-    //     return modeling.updateProperties(element, {
-    //         placeProperties: value
-    //     });
-    // };
-    //
-    // const addAttribute = () => {
-    //     const newAttribute = {};
-    //     const updatedAttributes = [...getValues(), newAttribute];
-    //     setValues(updatedAttributes);
-    // };
-    //
-    // const removeAttribute = (index) => {
-    //     const updatedAttributes = getValues().filter((_, i) => i !== index);
-    //     setValues(updatedAttributes);
-    // };
-    //
-    // return (
-    //     <div>
-    //         <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
-    //             <span style={{ marginRight: '8px' }}>Add Place Property</span>
-    //             <button
-    //                 onClick={addAttribute}
-    //                 style={{ background: 'white', color: 'black', border: '1px solid black', borderRadius: '3px',  cursor: 'pointer', fontSize: '16px' }}>
-    //                 +
-    //             </button>
-    //         </div>
-    //         {getValues().map((attribute, index) => (
-    //             <div key={index} style={{ position: 'relative' }}>
-    //                 <TextFieldEntry
-    //                     id={id}
-    //                     element={element}
-    //                     description={translate('')}
-    //                     label={`PlaceProperties ${index + 1}`}
-    //                     getValue={() => attribute.value || ''}
-    //                     setValue={(newValue) => {
-    //                         const updatedAttributes = getValues().map((attr, i) => i === index ? { ...attr, value: newValue } : attr);
-    //                         setValues(updatedAttributes);
-    //                     }}
-    //                     debounce={debounce}
-    //                 />
-    //                 <button
-    //                     onClick={() => removeAttribute(index)}
-    //                     style={{ position: 'absolute', right: '30px', top: '0', background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '12px' }}>
-    //                     Remove
-    //                 </button>
-    //             </div>
-    //         ))}
-    //     </div>
-    // );
-
-//
-//     if (is(element, 'space:Place')) {
-//         properties.push({
-//             id: 'id',
-//             element,
-//             olcModeler,
-//             component: Light,
-//             isEdited: isSelectEntryEdited
-//         });
-//     }
-//     return properties;
-// }
-//
-//
-// function Light(props) {
-//     const {element, id} = props;
-//
-//     const modeling = useService('modeling');
-//     const translate = useService('translate');
-//     const debounce = useService('debounceInput');
-//
-//     console.log("Light")
-//
-//     const getValue = () => {
-//         return element.businessObject.light || '';
-//     }
-//
-//     const setValue = value => {
-//         return modeling.updateProperties(element, {
-//             light: value
-//         });
-//     }
-//
-//     return <TextFieldEntry
-//         id={id}
-//         element={element}
-//         description={translate('')}
-//         label={translate('Light')}
-//         getValue={getValue}
-//         setValue={setValue}
-//         debounce={debounce}
-//     />
 }

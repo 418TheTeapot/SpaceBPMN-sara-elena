@@ -55,33 +55,3 @@ function Lux(props) {
         debounce={ debounce }
     />
 }
-
-
-/*
-export function Lux(props) {
-    const {element, id} = props;
-    const { t: translate } = useTranslation();
-    const options = ['ON', 'OFF'];
-
-    const getValue = () => element.businessObject.lux || '';
-    const getOptions = () => options.map(option => ({ label: option, value: option }));
-    const setValue = value => {
-        if (options.includes(value)) {
-            element.businessObject.lux = value;
-        } else {
-            console.error(`Invalid value: ${value}. Must be one of ${options.join(', ')}`);
-            element.businessObject.lux = 'OFF';
-        }
-    }
-
-    return <SelectEntry
-        id={ id }
-        element={ element }
-        label={ translate('Lux') }
-        getValue={ getValue }
-        getOptions= {getOptions}
-        setValue ={setValue}
-        debounce={ debounce }
-    />
-}
-*/
