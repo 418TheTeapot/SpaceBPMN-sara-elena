@@ -1,8 +1,13 @@
 import { TextFieldEntry } from '@bpmn-io/properties-panel';
 import { useService } from 'bpmn-js-properties-panel';
+import {is} from "../../../../util/Util";
+//import modeler from "../../../../../../lib/modeler";
 
 export function Assignment(props) {
-    const { element, id } = props;
+    const { element, id, modeler } = props;
+
+    const places = modeler._places.get('Elements');
+    const place = places.filter(element => is(element, 'space:Place'));
 
     const modeling = useService('modeling');
     const translate = useService('translate');
@@ -45,9 +50,39 @@ export function Assignment(props) {
             }
             else if (stringValue && stringValue.includes("=")) {
                 console.log(`La stringa "${stringValue}" contiene "=".`);
+                parseAssignment(stringValue);
             }
         });
     };
+
+    const parseAssignment = (stringValue) => {
+        const components = stringValue.split('=');
+        console.log("components: ", components)
+        if (components.length === 2) {
+            const key = components[0].trim();
+            const value = components[1].trim();
+            console.log(key)
+            console.log(value)
+            const otherComponents = key.split('.');
+            console.log("otherComponents: ", otherComponents)
+            if (otherComponents.length === 2) {
+                const place = otherComponents[0].trim();
+                const attribute = otherComponents[1].trim();
+                console.log(place)
+                console.log(attribute)
+                return manageAttributes(place, attribute, value);
+            }
+        }
+    }
+
+        const manageAttributes = (placeName, attribute, value) => {
+            const place = places.find(place => place.name === placeName);
+            console.log(place.attribute)
+            if (place.attribute === attribute) {
+                return place.value = value;
+            }
+        };
+
 
 
     return (
