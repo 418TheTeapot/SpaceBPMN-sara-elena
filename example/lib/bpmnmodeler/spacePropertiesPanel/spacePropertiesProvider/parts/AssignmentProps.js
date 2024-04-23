@@ -1,7 +1,5 @@
-import { TextFieldEntry,  isTextFieldEntryEdited } from '@bpmn-io/properties-panel';
+import { TextFieldEntry } from '@bpmn-io/properties-panel';
 import { useService } from 'bpmn-js-properties-panel';
-import { is } from "../../../../util/Util";
-import {values} from "lodash";
 
 export function Assignment(props) {
     const { element, id } = props;
@@ -15,11 +13,13 @@ export function Assignment(props) {
         if (!Array.isArray(values)) {
             values = [values];
         }
-        console.log('Array degli attributi di assegnazione:', values);
+        console.log('Array degli attributi: ', values);
         return values;
     };
 
     const setValues = (value) => {
+        checkAssignments(value)
+        console.log(element.businessObject.assignment)
         return modeling.updateProperties(element, {
             assignment: value
         });
@@ -35,6 +35,20 @@ export function Assignment(props) {
         const updatedAttributes = getValues().filter((_, i) => i !== index);
         setValues(updatedAttributes);
     };
+
+    const checkAssignments = (values) => {
+        values.forEach(attribute => {
+            const stringValue = attribute.value;
+            console.log(stringValue)
+            if (stringValue && stringValue.includes("delete")) {
+                console.log(`La stringa "${stringValue}" contiene "delete".`);
+            }
+            else if (stringValue && stringValue.includes("=")) {
+                console.log(`La stringa "${stringValue}" contiene "=".`);
+            }
+        });
+    };
+
 
     return (
         <div>
