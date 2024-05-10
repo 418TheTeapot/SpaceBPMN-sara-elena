@@ -1,16 +1,17 @@
-import { Group } from '@bpmn-io/properties-panel';
+import {Group} from '@bpmn-io/properties-panel';
 
-import {NameProps, IdProps, AttributeProps} from './properties';
-import { AssignmentProps, LuxProps, TemperatureProps } from "./properties/PlaceProps";
-import { AlarmProps } from "./properties/PlaceProps/Alarm";
-import { is } from "../../lib/util/Util";
-import { ConditionProps, DistanceProps, PriorityProps, SlopeProps } from "./properties/TransitionProps";
+import {AuthorProps, ColorProps, CustomProps, IdProps, NameProps} from './properties';
+import {is} from "../../lib/util/Util";
+
+import modeling from "../../lib/olcmodeler/modeling";
 
 function GeneralGroup(element, injector) {
     const translate = injector.get('translate');
+
     const entries = [
         ...NameProps({ element }),
         ...IdProps({ element }),
+        ...AuthorProps({ element}),
     ];
     return {
         id: 'general',
@@ -21,26 +22,17 @@ function GeneralGroup(element, injector) {
 }
 
 function SpacePlaceGroup(element, translate) {
-    const entries = [
-        ...LuxProps({ element }),
-        ...TemperatureProps({ element }),
-        ...AlarmProps({ element }),
-        {
-            id: 'custom-attributes',
-            component: AttributeProps,
-            element
-        }
+    return [
+        // ...ColorProps({ element }),
+        ...CustomProps({ element }),
+
     ];
-    return entries;
 }
+
 
 
 function SpaceTransitionGroup(element, translate) {
     return [
-        ...DistanceProps({ element }),
-        ...SlopeProps({ element }),
-        ...PriorityProps({ element }),
-        ...ConditionProps({ element }),
     ];
 }
 
@@ -54,12 +46,6 @@ function SpaceOlcGroup(element, injector) {
         entries = SpaceTransitionGroup(element, translate);
     }
 
-    // Always include AssignmentProps if needed
-    entries.push({
-        id: 'assignment',
-        component: AssignmentProps,
-        element
-    });
 
     return {
         id: 'space-olc',
@@ -81,6 +67,8 @@ export default class OlcPropertiesProvider {
     constructor(propertiesPanel, injector) {
         propertiesPanel.registerProvider(this);
         this._injector = injector;
+
+
     }
 
     getGroups(element) {
@@ -90,5 +78,6 @@ export default class OlcPropertiesProvider {
         };
     }
 }
+
 
 OlcPropertiesProvider.$inject = ['propertiesPanel', 'injector'];

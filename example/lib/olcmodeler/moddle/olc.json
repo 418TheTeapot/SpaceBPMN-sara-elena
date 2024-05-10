@@ -6,32 +6,10 @@
     "tagAlias": "lowerCase"
   },
   "types": [
-
-    {
-      "name": "UserProperty",
-      "properties": [
-        {
-          "name": "key",
-          "isAttr": true,
-          "type": "String"
-        },
-        {
-          "name": "value",
-          "isAttr": true,
-          "type": "String"
-        }
-      ]
-    },
-
     {
       "name": "SpaceElement",
       "isAbstract": true,
       "properties": [
-        {
-          "name": "userProperties",
-          "type": "UserProperty",
-          "isMany": true
-        },
         {
           "name": "name",
           "isAttr": true,
@@ -42,12 +20,6 @@
           "isAttr": true,
           "type": "String",
           "isId": true
-        },
-        {
-          "name": "assignment",
-          "isMany": true,
-          "isAttr": true,
-          "type": "String"
         }
       ]
     },
@@ -56,23 +28,7 @@
       "superClass": [
         "SpaceElement"
       ],
-      "properties": [
-        {
-          "name": "lux",
-          "isAttr": true,
-          "type": "String"
-        },
-        {
-          "name": "temperature",
-          "isAttr": true,
-          "type": "Integer"
-        },
-        {
-          "name": "alarm",
-          "isAttr": true,
-          "type": "String"
-        }
-      ]
+      "properties": []
     },
     {
       "name": "Transition",
@@ -91,26 +47,6 @@
           "isAttr": true,
           "isReference": true,
           "type": "Place"
-        },
-        {
-          "name": "distance",
-          "isAttr": true,
-          "type": "Integer"
-        },
-        {
-          "name": "slope",
-          "isAttr": true,
-          "type": "Integer"
-        },
-        {
-          "name": "priority",
-          "isAttr": true,
-          "type": "Integer"
-        },
-        {
-          "name": "condition",
-          "isAttr": true,
-          "type": "String"
         }
       ]
     },
@@ -168,4 +104,3 @@
     }
   ]
 }
-

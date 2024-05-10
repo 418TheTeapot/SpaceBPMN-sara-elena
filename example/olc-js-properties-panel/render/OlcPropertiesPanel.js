@@ -32,6 +32,7 @@ export default function OlcPropertiesPanel(props) {
     const eventBus = injector.get('eventBus');
     const translate = injector.get('translate');
 
+
     const [ state, setState ] = useState({
         selectedElement: element
     });

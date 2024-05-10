@@ -23,7 +23,7 @@ export default class OlcPropertiesPanelRenderer {
             parent,
             layout: layoutConfig,
             description: descriptionConfig,
-                  } = config || {};
+        } = config || {};
 
         this._eventBus = eventBus;
         this._injector = injector;

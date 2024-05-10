@@ -41,12 +41,21 @@ export const PanelHeaderProvider = {
     },
 
     getElementLabel: (element) => {
+        let elementType = '';
+        let elementName = '';
+
         if (is(element, 'space:Place')) {
-            return getBusinessObject(element).name || 'Place'; // Restituisce il nome del Place o un placeholder
+            elementType = 'Place';
+            elementName = getBusinessObject(element).name || 'Unnamed';
         } else if (is(element, 'space:Transition')) {
-            return getBusinessObject(element).name || 'Transition'; // Restituisce il nome della Transition o un placeholder
+            elementType = 'Transition';
+            elementName = getBusinessObject(element).name || 'Unnamed';
+        } else {
+            elementType = 'Space_Diagram';
+            elementName = getLabel(element) || 'Unnamed';
         }
-        return getLabel(element) || 'Space_Diagram'; // Fallback per altri tipi
+
+        return `${elementType}: ${elementName}`;
     },
 
 
@@ -75,22 +84,7 @@ export const PanelHeaderProvider = {
         return null;
     },
 
-    //     const elementTemplates = getTemplatesService();
-    //
-    //     if (elementTemplates) {
-    //         const template = getTemplate(element, elementTemplates);
-    //
-    //         if (template && template.name) {
-    //             return template.name;
-    //         }
-    //     }
-    //
-    //     const concreteType = getConcreteType(element);
-    //
-    //     return concreteType
-    //         .replace(/(\B[A-Z])/g, ' $1')
-    //         .replace(/(\bNon Interrupting)/g, '($1)');
-    // }
+
 
 };
 
