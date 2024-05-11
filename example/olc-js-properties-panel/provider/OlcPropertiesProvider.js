@@ -2,7 +2,7 @@ import { Group } from '@bpmn-io/properties-panel';
 
 import {
     NameProps,
-    IdProps, CustomPros,
+    IdProps, CustomProps, AssignmentOlcProps,
 } from './properties';
 import {is} from "bpmn-js/lib/util/ModelUtil";
 
@@ -27,7 +27,8 @@ function PlaceGroup(element, injector) {
     const translate = injector.get('translate');
 
     const entries = [
-        ...CustomPros({ element })
+        ...CustomProps({ element }),
+            ...AssignmentOlcProps({ element })
     ];
 
     return {

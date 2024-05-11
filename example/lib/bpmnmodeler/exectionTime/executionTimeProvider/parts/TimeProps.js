@@ -23,7 +23,6 @@ function ExecutionTime(props) {
   const translate = useService('translate');
   const debounce = useService('debounceInput');
 
-  console.log(modeler._definitions.diagrams[0].$parent.rootElements[0].executionTime    )
   const getValue = () => {
     return modeler._definitions.diagrams[0].$parent.rootElements[0].executionTime || '';
   }

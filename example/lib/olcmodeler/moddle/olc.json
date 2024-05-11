@@ -1,3 +1,4 @@
+
 {
   "name": "Space Modeler",
   "uri": "http://bptlab/schema/spaceModeler",
@@ -21,6 +22,11 @@
           "type": "String"
         },
         {
+          "name": "assignment",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
           "name": "id",
           "isAttr": true,
           "type": "String",
@@ -33,13 +39,7 @@
       "superClass": [
         "SpaceElement"
       ],
-      "properties": [
-        {
-          "name": "customAttributes",
-          "isAttr": true,
-          "type": "String"
-        }
-      ]
+      "properties": [     ]
     },
     {
       "name": "Transition",

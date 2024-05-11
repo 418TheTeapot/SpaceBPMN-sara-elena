@@ -31,18 +31,7 @@ export default function SpaceProps(element, modeler) {
           component: Destination,
           isEdited: isSelectEntryEdited
         },
-        // {
-        //   id: 'velocity',
-        //   element,
-        //   component: Velocity,
-        //   isEdited: isNumberFieldEntryEdited
-        // },
-        // {
-        //   id: 'duration',
-        //   element,
-        //   component: Duration,
-        //   isEdited: isNumberFieldEntryEdited
-        // },
+
         {
             id: 'assignment',
             element,
@@ -138,7 +127,7 @@ function Root(props) {
   }
 
 
-  console.log(element.businessObject)
+  // console.log(element.businessObject)
 
   return <SelectEntry
       id={ id }

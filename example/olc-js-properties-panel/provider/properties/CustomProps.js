@@ -3,7 +3,7 @@ import { TextAreaEntry, isTextAreaEntryEdited } from '@bpmn-io/properties-panel'
 import {is} from "../../../lib/util/Util";
 import {useService} from "../../hooks";
 
-export function CustomPros(props) {
+export function CustomProps(props) {
     const { element } = props;
 
     return [

@@ -2,7 +2,6 @@
 export { NameProps } from './NameProps';
 export {IdProps} from './IdProps';
 
-export {ColorProps} from './toDelete/ColorProps';
+export {AssignmentOlcProps} from './AssignmentOlcProps';
 
-
-export { CustomPros } from './CustomProps';
+export {CustomProps} from './CustomProps';
