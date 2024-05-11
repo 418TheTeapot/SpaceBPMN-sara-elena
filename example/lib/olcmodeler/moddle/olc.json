@@ -16,6 +16,11 @@
           "type": "String"
         },
         {
+          "name": "description",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
           "name": "id",
           "isAttr": true,
           "type": "String",
@@ -28,7 +33,13 @@
       "superClass": [
         "SpaceElement"
       ],
-      "properties": []
+      "properties": [
+        {
+          "name": "customAttributes",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
     },
     {
       "name": "Transition",

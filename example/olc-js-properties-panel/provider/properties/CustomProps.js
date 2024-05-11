@@ -1,86 +1,49 @@
-import {isTextAreaEntryEdited, TextAreaEntry} from "@bpmn-io/properties-panel";
+import { TextAreaEntry, isTextAreaEntryEdited } from '@bpmn-io/properties-panel';
+
+import {is} from "../../../lib/util/Util";
 import {useService} from "../../hooks";
 
-
-
-export function CustomProps(props) {
-    const {
-        element
-    } = props;
+export function CustomPros(props) {
+    const { element } = props;
 
     return [
         {
-            id: 'customProps',
-            component: CustomProperty,
+            id: 'description',
+            component: Description,  // Componente per la descrizione
             isEdited: isTextAreaEntryEdited
         }
     ];
-
 }
 
-
-
-
-function CustomProperty(props) {
-    const { element, property } = props;
+// Definizione del componente Description che funziona simile al componente Name
+function Description(props) {
+    const { element } = props;
+    if (!element || !element.businessObject) {
+        console.error('Element or businessObject is undefined');
+        return null; // Ritorna null o un placeholder se l'elemento non è valido
+    }
 
     const modeling = useService('modeling');
-    const translate = useService('translate')
+    const translate = useService('translate');
     const debounce = useService('debounceInput');
 
-    function setCustomProps(element, name, value) {
-    // Check if the element exists
-    if (element) {
-        // Create the customProps object
-        let customProps = {
-            name: name,
-            value: value
-        };
+    let options = {
+        element,
+        id: 'description',
+        label: translate('Description'),
+        debounce,
+        setValue: (value) => {
+            if (element && element.businessObject) {
+                modeling.updateProperties(element, { description: value });
+            }
+        },
+        getValue: () => {
+            return element.businessObject ? element.businessObject.description || '' : '';
+        },
+        autoResize: true
+    };
 
-        // Update the customProps of the element
-        modeling.updateModdleProperties(element, element.businessObject, { customProps });
-        modeling.updateProperties(element, { customProps });
-    }
+    return <TextAreaEntry {...options} />;
 }
 
-let nameOptions = {
-    element,
-    id: 'propertyName',
-    label: translate('Property Name'),
-    debounce,
-    setValue: (name) => {
-        if (element && property) {
-            setCustomProps(element, name, property.value);
-        }
-    },
-    getValue: (element) => {
-        return property ? property.name || '' : '';
-    },
-    autoResize: true
-};
 
-
-let valueOptions = {
-    element,
-    id: 'propertyValue',
-    label: translate('Property Value'),
-    debounce,
-
-    setValue: (value) => {
-        if (element && property) {
-            setCustomProps(element, property.name, value);
-        }
-    },
-    getValue: (element) => {
-        return property ? property.value || '' : '';
-    },
-    autoResize: true
-};
-
-    return (
-        <>
-            <TextAreaEntry {...nameOptions} />
-            <TextAreaEntry {...valueOptions} />
-        </>
-    );
-}

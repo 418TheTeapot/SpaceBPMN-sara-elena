@@ -60,11 +60,23 @@ OlcModeling.prototype.updateModdleProperties = function(element, moddleElement, 
 
 }
 
+
+
+
 OlcModeling.prototype.updateProperties = function(element, newProperties) {
+    // Here, extend the logic to handle previously undefined properties
+    Object.keys(newProperties).forEach(prop => {
+        if (typeof element.businessObject[prop] === 'undefined') {
+            // If the property does not exist, initialize it
+            element.businessObject[prop] = newProperties[prop];
+        }
+    });
+
     this._commandStack.execute('element.updateProperties', {
         element: element,
         newProperties: newProperties
     });
 };
+
 
 

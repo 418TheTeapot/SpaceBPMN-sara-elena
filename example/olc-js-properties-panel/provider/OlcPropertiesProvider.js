@@ -1,18 +1,20 @@
-import {Group} from '@bpmn-io/properties-panel';
+import { Group } from '@bpmn-io/properties-panel';
 
-import {AuthorProps, ColorProps, CustomProps, IdProps, NameProps} from './properties';
-import {is} from "../../lib/util/Util";
+import {
+    NameProps,
+    IdProps, CustomPros,
+} from './properties';
+import {is} from "bpmn-js/lib/util/ModelUtil";
 
-import modeling from "../../lib/olcmodeler/modeling";
 
 function GeneralGroup(element, injector) {
     const translate = injector.get('translate');
 
     const entries = [
         ...NameProps({ element }),
-        ...IdProps({ element }),
-        ...AuthorProps({ element}),
+        ...IdProps({ element })
     ];
+
     return {
         id: 'general',
         label: translate('General'),
@@ -21,54 +23,41 @@ function GeneralGroup(element, injector) {
     };
 }
 
-function SpacePlaceGroup(element, translate) {
-    return [
-        // ...ColorProps({ element }),
-        ...CustomProps({ element }),
-
-    ];
-}
-
-
-
-function SpaceTransitionGroup(element, translate) {
-    return [
-    ];
-}
-
-function SpaceOlcGroup(element, injector) {
+function PlaceGroup(element, injector) {
     const translate = injector.get('translate');
-    let entries = [];
 
-    if (is(element, 'space:Place')) {
-        entries = SpacePlaceGroup(element, translate);
-    } else if (is(element, 'space:Transition')) {
-        entries = SpaceTransitionGroup(element, translate);
-    }
-
+    const entries = [
+        ...CustomPros({ element })
+    ];
 
     return {
-        id: 'space-olc',
-        label: translate('SpaceOLC properties'),
+        id: 'place',
+        label: translate('Place'),
         entries,
         component: Group
     };
 }
 
 function getGroups(element, injector) {
+
     const groups = [
         GeneralGroup(element, injector),
-        SpaceOlcGroup(element, injector),
     ];
+
+    if(is(element, 'space:Place')) {
+        groups.push(PlaceGroup(element, injector))
+    }
+
+    // contract: if a group returns null, it should not be displayed at all
     return groups.filter(group => group !== null);
+
 }
 
 export default class OlcPropertiesProvider {
+
     constructor(propertiesPanel, injector) {
         propertiesPanel.registerProvider(this);
         this._injector = injector;
-
-
     }
 
     getGroups(element) {
@@ -77,7 +66,7 @@ export default class OlcPropertiesProvider {
             return groups;
         };
     }
+
 }
 
-
-OlcPropertiesProvider.$inject = ['propertiesPanel', 'injector'];
+OlcPropertiesProvider.$inject = [ 'propertiesPanel', 'injector' ];

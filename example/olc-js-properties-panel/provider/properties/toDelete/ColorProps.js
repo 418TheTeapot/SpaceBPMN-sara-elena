@@ -13,7 +13,7 @@ export function ColorProps(props) {
     ];
 }
 
-import { useService } from "../../hooks";
+import { useService } from "../../../hooks";
 
 function Color(props) {
     const { element } = props;

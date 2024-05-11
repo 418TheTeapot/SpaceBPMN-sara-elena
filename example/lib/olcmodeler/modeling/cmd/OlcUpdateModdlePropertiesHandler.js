@@ -4,14 +4,20 @@ import {
     forEach
 } from 'min-dash';
 import {getBusinessObject, is} from "../../../util/Util";
+import OlcModdle from "../../moddle/OlcModdle";
 
 
 
 
-export default function OlcUpdateModdlePropertiesHandler(elementRegistry, commandStack) {
+export default function OlcUpdateModdlePropertiesHandler(elementRegistry, commandStack, olcModdle) {
     this._elementRegistry = elementRegistry;
     this._commandStack = commandStack;
+    this._olcModdle = olcModdle;  // Store the OlcModdle instance
+
+    console.log('OlMoodle Attuale:',olcModdle);
+
 }
+
 
 OlcUpdateModdlePropertiesHandler.$inject = [ 'elementRegistry', 'commandStack' ];
 
@@ -78,7 +84,18 @@ function getModdleProperties(moddleElement, propertyNames) {
 
 function setModdleProperties(moddleElement, properties) {
     forEach(properties, function(value, key) {
-        moddleElement.set(key, value);
+        // Se stai cercando di aggiornare l'ID dell'attributo
+        if (key === 'id') {
+            // Aggiorna l'ID nell'oggetto moddleElement
+            moddleElement.$attrs[key] = value;
+        } else {
+            moddleElement.set(key, value);
+        }
+    });
+
+    // Serializza l'oggetto Moddle aggiornato in una stringa XML
+    this._olcModdle.toXML(moddleElement).then(xmlStr => {
+        console.log('Updated XML:', xmlStr);
     });
 }
 

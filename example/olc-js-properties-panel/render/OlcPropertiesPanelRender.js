@@ -1,4 +1,4 @@
-import  OlcPropertiesPanel from "./OlcPropertiesPanel"
+
 import {
     isUndo,
     isRedo
@@ -16,6 +16,8 @@ import {
 
 const DEFAULT_PRIORITY = 1000;
 
+import OlcPropertiesPanel from './OlcPropertiesPanel';
+
 export default class OlcPropertiesPanelRenderer {
 
     constructor(config, injector, eventBus) {
@@ -23,12 +25,16 @@ export default class OlcPropertiesPanelRenderer {
             parent,
             layout: layoutConfig,
             description: descriptionConfig,
+            tooltip: tooltipConfig,
+            feelPopupContainer
         } = config || {};
 
         this._eventBus = eventBus;
         this._injector = injector;
         this._layoutConfig = layoutConfig;
         this._descriptionConfig = descriptionConfig;
+        this._tooltipConfig = tooltipConfig;
+        this._feelPopupContainer = feelPopupContainer;
 
         this._container = domify(
             '<div style="height: 100%" class="bio-properties-panel-container"></div>'
@@ -55,6 +61,7 @@ export default class OlcPropertiesPanelRenderer {
         });
     }
 
+
     attachTo(container) {
         if (!container) {
             throw new Error('container required');
@@ -79,9 +86,6 @@ export default class OlcPropertiesPanelRenderer {
         this._eventBus.fire('propertiesPanel.attach');
     }
 
-    /**
-     * Detach the properties panel from its parent node.
-     */
     detach() {
         const parentNode = this._container.parentNode;
 
@@ -91,7 +95,6 @@ export default class OlcPropertiesPanelRenderer {
             this._eventBus.fire('propertiesPanel.detach');
         }
     }
-
 
     registerProvider(priority, provider) {
 
@@ -115,10 +118,7 @@ export default class OlcPropertiesPanelRenderer {
         this._eventBus.fire('propertiesPanel.providersChanged');
     }
 
-    /**
-     * Updates the layout of the properties panel.
-     * @param {Object} layout
-     */
+
     setLayout(layout) {
         this._eventBus.fire('propertiesPanel.setLayout', { layout });
     }
@@ -152,7 +152,8 @@ export default class OlcPropertiesPanelRenderer {
                 getProviders={ this._getProviders.bind(this) }
                 layoutConfig={ this._layoutConfig }
                 descriptionConfig={ this._descriptionConfig }
-
+                tooltipConfig={ this._tooltipConfig }
+                feelPopupContainer={ this._feelPopupContainer }
             />,
             this._container
         );

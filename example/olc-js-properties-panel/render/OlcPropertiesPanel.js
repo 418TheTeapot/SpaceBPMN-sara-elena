@@ -11,12 +11,15 @@ import {
     reduce
 } from 'min-dash';
 
+import { PropertiesPanel } from '@bpmn-io/properties-panel';
 
-import OlcPropertiesPanelContext from '../context/OlcPropertiesPanelContext';
-import {PropertiesPanel} from "@bpmn-io/properties-panel";
+import {
+    OlcPropertiesPanelContext
+} from '../context';
 
+import { OlcPanelPlaceholderProvider } from './OlcPanelPlaceholderProvider';
+import {OlcPanelHeaderProvider} from "./OlcPanelHeaderProvider";
 
-import { PanelHeaderProvider } from './PanelHeaderProvider';
 
 export default function OlcPropertiesPanel(props) {
     const {
@@ -25,6 +28,8 @@ export default function OlcPropertiesPanel(props) {
         getProviders,
         layoutConfig: initialLayoutConfig,
         descriptionConfig,
+        tooltipConfig,
+        feelPopupContainer
     } = props;
 
     const canvas = injector.get('canvas');
@@ -32,13 +37,11 @@ export default function OlcPropertiesPanel(props) {
     const eventBus = injector.get('eventBus');
     const translate = injector.get('translate');
 
-
     const [ state, setState ] = useState({
         selectedElement: element
     });
 
     const selectedElement = state.selectedElement;
-
 
     const _update = (element) => {
 
@@ -94,24 +97,23 @@ export default function OlcPropertiesPanel(props) {
     }, []);
 
     // (2b) selected element changed
-
     useEffect(() => {
-        const handlePropertyChange = (event) => {
-            if (event.element === selectedElement) {
-                setState(prevState => ({
-                    ...prevState,
-                    selectedElement: { ...event.element }
-                }));
+        const onElementsChanged = (e) => {
+            const elements = e.elements;
+
+            const updatedElement = findElement(elements, selectedElement);
+
+            if (updatedElement && elementExists(updatedElement, elementRegistry)) {
+                _update(updatedElement);
             }
         };
 
-        eventBus.on('element.changed', handlePropertyChange);
+        eventBus.on('elements.changed', onElementsChanged);
 
         return () => {
-            eventBus.off('element.changed', handlePropertyChange);
+            eventBus.off('elements.changed', onElementsChanged);
         };
-    }, [eventBus, selectedElement]);
-
+    }, [ selectedElement ]);
 
     // (2c) root element changed
     useEffect(() => {
@@ -141,17 +143,25 @@ export default function OlcPropertiesPanel(props) {
         };
     }, [ selectedElement ]);
 
+    // (2e) element templates changed
+    useEffect(() => {
+        const onTemplatesChanged = () => {
+            _update(selectedElement);
+        };
 
+        eventBus.on('elementTemplates.changed', onTemplatesChanged);
+
+        return () => {
+            eventBus.off('elementTemplates.changed', onTemplatesChanged);
+        };
+    }, [ selectedElement ]);
 
     // (3) create properties panel context
-    // Creazione del contesto OlcPropertiesPanelContext
     const olcPropertiesPanelContext = {
         selectedElement,
         injector,
         getService(type, strict) { return injector.get(type, strict); }
     };
-
-
 
     // (4) retrieve groups for selected element
     const providers = getProviders(selectedElement);
@@ -197,17 +207,26 @@ export default function OlcPropertiesPanel(props) {
         });
     };
 
-
+    // (7) notify tooltip changes
+    const onTooltipLoaded = (tooltip) => {
+        eventBus.fire('propertiesPanel.tooltipLoaded', {
+            tooltip
+        });
+    };
 
     return <OlcPropertiesPanelContext.Provider value={ olcPropertiesPanelContext }>
         <PropertiesPanel
             element={ selectedElement }
-            headerProvider={ PanelHeaderProvider }
+            headerProvider={ OlcPanelHeaderProvider } // pass the object directly
+            placeholderProvider={ OlcPanelPlaceholderProvider(translate) }
             groups={ groups }
             layoutConfig={ layoutConfig }
             layoutChanged={ onLayoutChanged }
             descriptionConfig={ descriptionConfig }
             descriptionLoaded={ onDescriptionLoaded }
+            tooltipConfig={ tooltipConfig }
+            tooltipLoaded={ onTooltipLoaded }
+            feelPopupContainer={ feelPopupContainer }
             eventBus={ eventBus } />
     </OlcPropertiesPanelContext.Provider>;
 }
@@ -217,7 +236,6 @@ export default function OlcPropertiesPanel(props) {
 
 function isImplicitRoot(element) {
 
-    // Backwards compatibility for diagram-js<7.4.0, see https://github.com/bpmn-io/bpmn-properties-panel/pull/102
     return element && (element.isImplicit || element.id === '__implicitroot');
 }
 

@@ -2,8 +2,7 @@
 export { NameProps } from './NameProps';
 export {IdProps} from './IdProps';
 
-export {ColorProps} from './ColorProps';
+export {ColorProps} from './toDelete/ColorProps';
 
-export {CustomProps} from './CustomProps';
 
-export {AuthorProps} from './AuthorProps';
+export { CustomPros } from './CustomProps';

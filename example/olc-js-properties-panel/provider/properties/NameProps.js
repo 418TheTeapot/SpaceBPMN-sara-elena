@@ -21,18 +21,10 @@ export function NameProps(props) {
 function Name(props) {
     const { element } = props;
 
-    // const { t: translate } = useTranslation();
-    // const modeling = useService('modeling');
-
     const modeling = useService('modeling');
     const translate = useService('translate')
     const debounce = useService('debounceInput');
 
-    // console.log("Name function element: ", element);  // Log the element object
-    // console.log("Name function olcmodeling: ", modeling);  // Log the modeling object
-    // console.log("Name function debounce : ", debounce);  // Log the translate object
-    //
-    // console.log("Name function translate: ", translate);  // Log the translate object
 
     let options = {
         element,

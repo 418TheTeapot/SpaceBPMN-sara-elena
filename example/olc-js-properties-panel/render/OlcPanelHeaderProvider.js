@@ -34,7 +34,7 @@ export function getConcreteType(element) {
     return type;
 }
 
-export const PanelHeaderProvider = {
+export const OlcPanelHeaderProvider = {
 
     getDocumentationRef: (element) => {
         return null;
