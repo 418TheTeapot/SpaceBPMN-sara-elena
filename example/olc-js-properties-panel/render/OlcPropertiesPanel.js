@@ -17,10 +17,9 @@ import {
     OlcPropertiesPanelContext
 } from '../context';
 
-import { OlcPanelPlaceholderProvider } from './OlcPanelPlaceholderProvider';
 import {OlcPanelHeaderProvider} from "./OlcPanelHeaderProvider";
 
-
+import {OlcPanelPlaceholderProvider} from "./OlcPanelPlaceholderProvider";
 export default function OlcPropertiesPanel(props) {
     const {
         element,

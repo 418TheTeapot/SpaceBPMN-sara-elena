@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="panel render ok">
+    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="ass da richiamare">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/bpmnmodeler/exectionTime/executionTimeProvider/parts/TimeProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/bpmnmodeler/exectionTime/executionTimeProvider/parts/TimeProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/parts/SpaceProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/parts/SpaceProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/moddle/olc.json" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/moddle/olc.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/OlcPropertiesProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/OlcPropertiesProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/CustomProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/CustomProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/render/OlcPropertiesPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/render/OlcPropertiesPanel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/render/OlcPropertiesPanelRender.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/render/OlcPropertiesPanelRender.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="elena" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -123,6 +120,7 @@
       <workItem from="1715356149610" duration="5219000" />
       <workItem from="1715363363952" duration="15750000" />
       <workItem from="1715418007491" duration="3575000" />
+      <workItem from="1715429903941" duration="736000" />
     </task>
     <task id="LOCAL-00001" summary="olc-js-pp">
       <option name="closed" value="true" />
@@ -236,7 +234,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715414454897</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="ass da richiamare">
+      <option name="closed" value="true" />
+      <created>1715428964112</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1715428964112</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,15 +286,16 @@
     <MESSAGE value="TRANSITION PROP OK" />
     <MESSAGE value="no latency" />
     <MESSAGE value="panel render ok" />
-    <option name="LAST_COMMIT_MESSAGE" value="panel render ok" />
+    <MESSAGE value="ass da richiamare" />
+    <option name="LAST_COMMIT_MESSAGE" value="ass da richiamare" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/CustomProps.js</url>
-          <line>19</line>
-          <option name="timeStamp" value="3" />
+          <url>file://$PROJECT_DIR$/lib/simulator/behaviors/ActivityBehavior.js</url>
+          <line>197</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

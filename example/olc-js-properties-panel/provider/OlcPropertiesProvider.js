@@ -28,7 +28,7 @@ function PlaceGroup(element, injector) {
 
     const entries = [
         ...CustomProps({ element }),
-            ...AssignmentOlcProps({ element })
+        ...AssignmentOlcProps({ element })
     ];
 
     return {

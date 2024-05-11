@@ -18,6 +18,7 @@ const DEFAULT_PRIORITY = 1000;
 
 import OlcPropertiesPanel from './OlcPropertiesPanel';
 
+
 export default class OlcPropertiesPanelRenderer {
 
     constructor(config, injector, eventBus) {
