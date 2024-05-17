@@ -95,7 +95,7 @@ function setModdleProperties(moddleElement, properties) {
 
     // Serializza l'oggetto Moddle aggiornato in una stringa XML
     this._olcModdle.toXML(moddleElement).then(xmlStr => {
-        console.log('Updated XML:', xmlStr);
+        // console.log('Updated XML:', xmlStr);
     });
 }
 

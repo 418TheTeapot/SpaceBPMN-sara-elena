@@ -1,70 +1,77 @@
 import { TextFieldEntry, isTextFieldEntryEdited } from '@bpmn-io/properties-panel';
 import { useService } from 'bpmn-js-properties-panel';
-import { is } from "../../../../util/Util";
-import { values } from "lodash";
+
 
 export function Assignment(props) {
     const { element, id } = props;
-
     const modeling = useService('modeling');
     const translate = useService('translate');
     const debounce = useService('debounceInput');
 
-    // Funzione per ottenere gli attuali valori di assignment
     const getValues = () => {
-        let values = element.businessObject.assignment || [];
-        return Array.isArray(values) ? values : [values];
-    };
-
-    // Funzione per impostare nuovi valori di assignment
-    const setValues = (values) => {
-        modeling.updateProperties(element, {
-            assignment: values
+        const assignmentString = element.businessObject.assignment|| '';
+        return assignmentString.split(',').map(pair => {
+            const [key, value] = pair.split('=').map(part => part.trim()); // Split key and value and trim whitespace
+            return { key, value }; // Return as an object
         });
     };
 
-    // Aggiunge una stringa vuota al posto di un oggetto vuoto
-    const addAttribute = () => {
-        const newAttribute = '';
-        const updatedAttributes = [...getValues(), newAttribute];
-        setValues(updatedAttributes);
+    const setValues = (updatedItems) => {
+        const assignmentString = updatedItems.map(item => `${item.key}=${item.value}`).join(', ');
+        modeling.updateProperties(element, { assignment: assignmentString });
     };
 
-    // Rimuove un attributo in base all'indice
+    const addAttribute = () => {
+        const updatedItems = [...getValues(), { key: '', value: '' }];
+        setValues(updatedItems);
+    };
+
     const removeAttribute = (index) => {
-        const updatedAttributes = getValues().filter((_, i) => i !== index);
-        setValues(updatedAttributes);
+        const updatedItems = getValues().filter((_, i) => i !== index);
+        setValues(updatedItems);
     };
 
     return (
         <div>
             <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
-                <span style={{ marginRight: '8px' }}>Add Assignment</span>
+                <span style={{ marginRight: '8px' }}>{translate('Add Assignment')}</span>
                 <button
                     onClick={addAttribute}
                     style={{ background: 'white', color: 'black', border: '1px solid black', borderRadius: '3px', cursor: 'pointer', fontSize: '16px' }}>
                     +
                 </button>
             </div>
-            {getValues().map((value, index) => (
-                <div key={index} style={{ position: 'relative' }}>
+            {getValues().map((item, index) => (
+                <div key={index} style={{ display: 'flex', marginBottom: '5px' }}>
                     <TextFieldEntry
-                        id={`${id}-${index}`}
+                        id={`${id}-key-${index}`}
                         element={element}
-                        description={translate('')}
-                        label={`Assignment ${index + 1}`}
-                        getValue={() => value || ''}
+                        description={translate('Edit the key')}
+                        label={`Key ${index + 1}`}
+                        getValue={() => item.key}
+                        setValue={(newKey) => {
+                            const updatedItems = getValues();
+                            updatedItems[index].key = newKey;
+                            setValues(updatedItems);
+                        }}
+                        debounce={debounce}
+                    />
+                    <TextFieldEntry
+                        id={`${id}-value-${index}`}
+                        element={element}
+                        description={translate('Edit the value')}
+                        label={`Value ${index + 1}`}
+                        getValue={() => item.value}
                         setValue={(newValue) => {
-                            const updatedAttributes = getValues().map((attr, i) =>
-                                i === index ? newValue : attr
-                            );
-                            setValues(updatedAttributes);
+                            const updatedItems = getValues();
+                            updatedItems[index].value = newValue;
+                            setValues(updatedItems);
                         }}
                         debounce={debounce}
                     />
                     <button
                         onClick={() => removeAttribute(index)}
-                        style={{ position: 'absolute', right: '30px', top: '0', background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '12px' }}>
+                        style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '16px', marginLeft: '10px' }}>
                         Remove
                     </button>
                 </div>
@@ -72,3 +79,5 @@ export function Assignment(props) {
         </div>
     );
 }
+
+export default Assignment;

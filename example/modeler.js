@@ -90,8 +90,8 @@ var olcModeler = new OlcModeler({
 });
 
 
-console.log("BpmnPropertiesProviderModule ",BpmnPropertiesProviderModule)
-console.log("BpmnPropertiesPanelModule ",BpmnPropertiesPanelModule)
+// console.log("BpmnPropertiesProviderModule ",BpmnPropertiesProviderModule)
+// console.log("BpmnPropertiesPanelModule ",BpmnPropertiesPanelModule)
 
 
 //create a bpmn modeler

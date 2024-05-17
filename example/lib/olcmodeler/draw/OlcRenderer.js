@@ -253,8 +253,8 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
 
       var semantic = element.businessObject || {name: '< unknown >'};
       
-      console.log(element)
-      console.log(parentGfx)
+      // console.log(element)
+      // console.log(parentGfx)
 
       var label = renderLabel(parentGfx, semantic.name, {
         fitBox:true,
@@ -268,14 +268,14 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
       
       var midPoint = transition.getPointAtLength(transition.getTotalLength() / 2);
       var labelBounds = label.getBBox();
-      console.log(labelBounds)
+      // console.log(labelBounds)
       
       var translateX, translateY;
 
         translateX = midPoint.x;// - labelBounds.width / 2,
         translateY = midPoint.y;
       
-      console.log(labelBounds.height/2)
+      // console.log(labelBounds.height/2)
       
 
       transform(label, translateX, translateY, 0);

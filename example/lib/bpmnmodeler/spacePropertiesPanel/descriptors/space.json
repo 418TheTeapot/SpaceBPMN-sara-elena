@@ -42,7 +42,7 @@
         {
           "name": "assignment",
           "isAttr": true,
-          "type": "String"
+          "type": "Array[String]"
         }
       ]
     }

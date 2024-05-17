@@ -4,11 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="ass da richiamare">
+    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="add strano">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_05_2024_14_01__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_05_2024_14_01__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_15_2024_9_15_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_15_2024_9_15_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_7_2024_12_37_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_7_2024_12_37_AM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_7_2024_12_38_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_7_2024_12_38_AM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_7_2024_12_39_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_7_2024_12_39_AM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/OlcPropertiesProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/OlcPropertiesProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/render/OlcPropertiesPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/render/OlcPropertiesPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/render/OlcPropertiesPanelRender.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/render/OlcPropertiesPanelRender.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js-properties-panel/assets/element-templates.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js-properties-panel/assets/element-templates.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js-properties-panel/assets/properties-panel.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js-properties-panel/assets/properties-panel.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn-codes.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn-codes.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn-embedded.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn-embedded.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/font/bpmn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-font/font/bpmn.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-js.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/bpmn-js.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/diagram-js.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/dist/vendor/bpmn-js/assets/diagram-js.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/bpmnmodeler/spacePropertiesPanel/descriptors/space.json" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/bpmnmodeler/spacePropertiesPanel/descriptors/space.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/parts/AssignmentProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/parts/AssignmentProps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/parts/SpaceProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/parts/SpaceProps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/draw/OlcRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/draw/OlcRenderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/moddle/olc.json" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/moddle/olc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/cmd/OlcUpdateModdlePropertiesHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/cmd/OlcUpdateModdlePropertiesHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/palette/PaletteProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/palette/PaletteProvider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/modeler.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/modeler.bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/modeler.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/modeler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/AssignmentOlcProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/AssignmentOlcProps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/viewer.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/viewer.bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/simulator/behaviors/ActivityBehavior.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/simulator/behaviors/ActivityBehavior.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +144,16 @@
       <workItem from="1715363363952" duration="15750000" />
       <workItem from="1715418007491" duration="3575000" />
       <workItem from="1715429903941" duration="736000" />
+      <workItem from="1715706490705" duration="5722000" />
+      <workItem from="1715713272440" duration="136000" />
+      <workItem from="1715713424429" duration="2040000" />
+      <workItem from="1715715495896" duration="1708000" />
+      <workItem from="1715749747734" duration="38000" />
+      <workItem from="1715787518326" duration="926000" />
+      <workItem from="1715788465250" duration="3205000" />
+      <workItem from="1715792174776" duration="5453000" />
+      <workItem from="1715961765503" duration="654000" />
+      <workItem from="1715962707990" duration="2873000" />
     </task>
     <task id="LOCAL-00001" summary="olc-js-pp">
       <option name="closed" value="true" />
@@ -287,15 +320,16 @@
     <MESSAGE value="no latency" />
     <MESSAGE value="panel render ok" />
     <MESSAGE value="ass da richiamare" />
-    <option name="LAST_COMMIT_MESSAGE" value="ass da richiamare" />
+    <MESSAGE value="add strano" />
+    <option name="LAST_COMMIT_MESSAGE" value="add strano" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/lib/simulator/behaviors/ActivityBehavior.js</url>
-          <line>197</line>
-          <option name="timeStamp" value="21" />
+          <line>317</line>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

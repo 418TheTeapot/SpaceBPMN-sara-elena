@@ -188,7 +188,7 @@ function Destination(props) {
     })
   }
 
-  console.log(element.businessObject)
+  // console.log(element.businessObject)
 
   return (
       <div>
