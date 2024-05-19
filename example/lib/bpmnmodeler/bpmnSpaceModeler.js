@@ -73,12 +73,19 @@ BpmnSpaceModeler.prototype.handleStateDeleted = function (olcPlaces) {
 }
 
 // Funzione per creare un place e una transizione tra due places
+/**
+ * NON SERVE AD UN CAZZO!
+ * @param sourcePlaceData
+ * @param targetPlaceData
+ * @param transitionData
+ */
 BpmnSpaceModeler.prototype.createPlaceAndTransition = function(sourcePlaceData, targetPlaceData, transitionData) {
     const olcElementFactory = this.get('olcElementFactory');
     const olcUpdater = this.get('olcUpdater');
-    const canvas = this.get('canvas');
+    // const canvas = this.get('canvas');
+    const canvas = this._spaceModeler._canvaspace.canvas.get(canvas); // Ottieni correttamente il canvas
 
-    console.log('Creating places and transition... in ceh canvas:', canvas);
+    console.log('Creating places and transition... in canvas:', canvas);
 
     function createPlace(placeData) {
         const placeBusinessObject = olcElementFactory.createBusinessObject('space:Place', {
@@ -92,7 +99,8 @@ BpmnSpaceModeler.prototype.createPlaceAndTransition = function(sourcePlaceData, 
             businessObject: placeBusinessObject,
             id: placeBusinessObject.id,
             width: placeData.width || 100,
-            height: placeData.height || 100
+            height: placeData.height || 100,
+            parent: canvas.getRootElement() // Specifica l'elemento genitore
         });
     }
 
