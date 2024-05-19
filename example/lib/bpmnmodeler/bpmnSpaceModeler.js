@@ -8,12 +8,14 @@ import {is} from 'bpmn-js/lib/util/ModelUtil';
 import executionTimeDescriptor from '../bpmnmodeler/exectionTime/descriptors/time.json';
 import OlcElementFactory from "../olcmodeler/modeling/OlcElementFactory";
 import olc from '../olcmodeler/moddle/olc.json';
+import OlcUpdater from "../olcmodeler/modeling/OlcUpdater";
 
 export default function BpmnSpaceModeler(options) {
     const customModules = [
         spacePropertiesProviderModule,
         {
             'olcElementFactory': ['type', OlcElementFactory],
+            'olcUpdater': ['type', OlcUpdater],
             spaceModeler: ['value', this],
         }
     ];

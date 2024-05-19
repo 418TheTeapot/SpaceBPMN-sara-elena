@@ -1,4 +1,6 @@
-import {assign} from 'min-dash';
+import {
+    assign
+} from 'min-dash';
 import inherits from 'inherits';
 import BaseElementFactory from 'diagram-js/lib/core/ElementFactory';
 import Ids from 'ids';
@@ -63,31 +65,6 @@ OlcElementFactory.prototype.create = function (elementType, attrs) {
 
     return this.baseCreate(elementType, attrs);
 };
-
-// In OlcElementFactory.js
-
-
-
-OlcElementFactory.prototype.createTransition = function (sourcePlace, targetPlace, waypoints) {
-    console.log('Creating element of type:', ); // Aggiungi questo console log
-
-    const businessObject = this.createBusinessObject('space:Transition', {
-        sourceRef: sourcePlace.businessObject,
-        targetRef: targetPlace.businessObject,
-        waypoints: waypoints
-    });
-
-    return this.baseCreate('connection', {
-        type: 'space:Transition',
-        name: 'Transition',
-        source: sourcePlace,
-        target: targetPlace,
-        businessObject: businessObject,
-        waypoints: waypoints
-    });
-};
-
-
 
 OlcElementFactory.prototype.defaultSizeForType = function (type) {
     return { width: 100, height: 100 };
