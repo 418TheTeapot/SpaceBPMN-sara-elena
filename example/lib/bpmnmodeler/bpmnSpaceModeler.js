@@ -1,35 +1,23 @@
 import inherits from 'inherits';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
-import { without } from 'min-dash';
+import {without} from 'min-dash';
 import bpmnExtension from './moddle/bpmnextension.json';
-import spacePropertiesProviderModule from '../bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/index.js'
-import spaceModdleDescriptor from '../bpmnmodeler/spacePropertiesPanel/descriptors/space.json'
-import { is } from 'bpmn-js/lib/util/ModelUtil';
-import executionTimeDescriptor from '../bpmnmodeler/exectionTime/descriptors/time.json'
+import spacePropertiesProviderModule from '../bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/index.js';
+import spaceModdleDescriptor from '../bpmnmodeler/spacePropertiesPanel/descriptors/space.json';
+import {is} from 'bpmn-js/lib/util/ModelUtil';
+import executionTimeDescriptor from '../bpmnmodeler/exectionTime/descriptors/time.json';
 import OlcElementFactory from "../olcmodeler/modeling/OlcElementFactory";
-import OlcModdle from "../olcmodeler/moddle";
-
-import olc from '../olcmodeler/moddle/olc.json'
-import OlcModeler from "../olcmodeler/OlcModeler";
-
-
+import olc from '../olcmodeler/moddle/olc.json';
 
 export default function BpmnSpaceModeler(options) {
-//modeler for bpmn
-
-
-
-const customModules = [
-   // globalPositionProviderModule,
-    spacePropertiesProviderModule,
-    //executionTimeProvider,
-
+    const customModules = [
+        spacePropertiesProviderModule,
         {
             'olcElementFactory': ['type', OlcElementFactory],
             spaceModeler: ['value', this],
         }
-
     ];
+
     options.additionalModules = [
         ...customModules,
         ...(options.additionalModules || [])
@@ -39,20 +27,19 @@ const customModules = [
         space: spaceModdleDescriptor,
         time: executionTimeDescriptor,
         JP: bpmnExtension,
-        SA:olc
+        SA: olc
     };
 
     BpmnModeler.call(this, options);
-    //Explicitely allow the copying of references (to objects outside the fragment modeler)
-    // See https://github.com/bpmn-io/bpmn-js/blob/212af3bb51840465e5809345ea3bb3da86656be3/lib/features/copy-paste/ModdleCopy.js#L218
+
     this.get('eventBus').on('moddleCopy.canCopyProperty', function(context) {
-        if (context.propertyName === 'JP:places' || context.propertyName === 'JP:shapes' ||context.propertyName === 'JP:canvaspace') {
+        if (context.propertyName === 'JP:places' || context.propertyName === 'JP:shapes' || context.propertyName === 'JP:canvaspace') {
             console.log(context.property);
             return context.property;
         }
     });
-
 }
+
 inherits(BpmnSpaceModeler, BpmnModeler);
 
 // Metodi della classe BpmnSpaceModeler
@@ -76,7 +63,6 @@ BpmnSpaceModeler.prototype.getDataObjectReferencesInState = function (olcState) 
     );
 }
 
-
 BpmnSpaceModeler.prototype.handleStateDeleted = function (olcPlaces) {
     this.getDataObjectReferencesInState(olcPlaces).forEach((element, gfx) => {
         element.businessObject.places = without(element.businessObject.places, olcPlaces);
@@ -86,24 +72,55 @@ BpmnSpaceModeler.prototype.handleStateDeleted = function (olcPlaces) {
     });
 }
 
-// In BpmnSpaceModeler.js
+// Funzione per creare un place e una transizione tra due places
+BpmnSpaceModeler.prototype.createPlaceAndTransition = function(sourcePlaceData, targetPlaceData, transitionData) {
+    const olcElementFactory = this.get('olcElementFactory');
+    const olcUpdater = this.get('olcUpdater');
+    const canvas = this.get('canvas');
 
-BpmnSpaceModeler.prototype.createTransition = function(sourcePlaceId, targetPlaceId) {
-  // Get the olcElementFactory from your OlcModeler
-  const olcElementFactory = this.get('olcElementFactory');
-  console.log("In bpmn olcElementFactory", olcElementFactory)
+    console.log('Creating places and transition... in ceh canvas:', canvas);
 
-  // Get the source and target places from your list of places
-  const sourcePlace = this.getStateById(sourcePlaceId);
-  const targetPlace = this.getStateById(targetPlaceId);
+    function createPlace(placeData) {
+        const placeBusinessObject = olcElementFactory.createBusinessObject('space:Place', {
+            name: placeData.name,
+            x: placeData.x,
+            y: placeData.y
+        });
 
-  // Create a new space:Transition object
-  const transition = olcElementFactory.createTransition(sourcePlace, targetPlace, this.get('olcUpdater').connectionWaypoints(sourcePlace, targetPlace));
+        return olcElementFactory.createShape({
+            type: 'space:Place',
+            businessObject: placeBusinessObject,
+            id: placeBusinessObject.id,
+            width: placeData.width || 100,
+            height: placeData.height || 100
+        });
+    }
 
-  // Add the transition to the canvas
-  this.get('canvas').addConnection(transition);
+    function createTransition(sourcePlace, targetPlace, transitionData) {
+        const waypoints = olcUpdater.connectionWaypoints(sourcePlace, targetPlace);
 
-  return transition;
-};
+        const transitionBusinessObject = olcElementFactory.createBusinessObject('space:Transition', {
+            sourceRef: sourcePlace.businessObject,
+            targetRef: targetPlace.businessObject,
+            waypoints: waypoints,
+            name: transitionData.name
+        });
 
+        return olcElementFactory.createTransition(sourcePlace, targetPlace, waypoints);
+    }
 
+    const sourcePlace = createPlace(sourcePlaceData);
+    const targetPlace = createPlace(targetPlaceData);
+
+    canvas.addShape(sourcePlace);
+    canvas.addShape(targetPlace);
+
+    const transition = createTransition(sourcePlace, targetPlace, transitionData);
+
+    canvas.addConnection(transition);
+
+    console.log('Created places and transition:');
+    console.log('Source Place:', sourcePlace);
+    console.log('Target Place:', targetPlace);
+    console.log('Transition:', transition);
+}
