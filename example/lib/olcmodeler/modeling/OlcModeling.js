@@ -78,5 +78,17 @@ OlcModeling.prototype.updateProperties = function(element, newProperties) {
     });
 };
 
+OlcModeling.prototype.createConnection = function(source, target, attrs, parent) {
+    const businessObject = this._elementFactory.createBusinessObject('space:Transition', attrs);
+    return this.createShape({
+        type: 'space:Transition',
+        source: source,
+        target: target,
+        businessObject: businessObject
+    }, parent);
+};
+
+
+
 
 

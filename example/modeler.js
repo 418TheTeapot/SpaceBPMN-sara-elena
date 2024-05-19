@@ -81,7 +81,8 @@ var olcModeler = new OlcModeler({
     },
 
         OlcPropertiesProviderModule,
-        OlcPropertiesPanelModule
+        OlcPropertiesPanelModule,
+        // TokenSimulationModule,
 
     ],
     propertiesPanel: {
@@ -119,6 +120,10 @@ var modeler = new BpmnSpaceModeler({
         parent: '#properties-panel'
     }
 });
+
+
+console.log("modeler ",modeler)
+console.log("olcModeler ",olcModeler)
 
 //all'inizio il time-execution non deve comparire, compare solo con il toggle
 //document.querySelector("#time-execution").style.display = "none";

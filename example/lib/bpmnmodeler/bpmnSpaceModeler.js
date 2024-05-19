@@ -6,8 +6,18 @@ import spacePropertiesProviderModule from '../bpmnmodeler/spacePropertiesPanel/s
 import spaceModdleDescriptor from '../bpmnmodeler/spacePropertiesPanel/descriptors/space.json'
 import { is } from 'bpmn-js/lib/util/ModelUtil';
 import executionTimeDescriptor from '../bpmnmodeler/exectionTime/descriptors/time.json'
+import OlcElementFactory from "../olcmodeler/modeling/OlcElementFactory";
+import OlcModdle from "../olcmodeler/moddle";
+
+import olc from '../olcmodeler/moddle/olc.json'
+import OlcModeler from "../olcmodeler/OlcModeler";
+
+
+
 export default function BpmnSpaceModeler(options) {
 //modeler for bpmn
+
+
 
 const customModules = [
    // globalPositionProviderModule,
@@ -15,7 +25,8 @@ const customModules = [
     //executionTimeProvider,
 
         {
-            spaceModeler: ['value', this]
+            'olcElementFactory': ['type', OlcElementFactory],
+            spaceModeler: ['value', this],
         }
 
     ];
@@ -27,7 +38,8 @@ const customModules = [
     options.moddleExtensions = {
         space: spaceModdleDescriptor,
         time: executionTimeDescriptor,
-        JP: bpmnExtension
+        JP: bpmnExtension,
+        SA:olc
     };
 
     BpmnModeler.call(this, options);
@@ -73,5 +85,25 @@ BpmnSpaceModeler.prototype.handleStateDeleted = function (olcPlaces) {
         });
     });
 }
+
+// In BpmnSpaceModeler.js
+
+BpmnSpaceModeler.prototype.createTransition = function(sourcePlaceId, targetPlaceId) {
+  // Get the olcElementFactory from your OlcModeler
+  const olcElementFactory = this.get('olcElementFactory');
+  console.log("In bpmn olcElementFactory", olcElementFactory)
+
+  // Get the source and target places from your list of places
+  const sourcePlace = this.getStateById(sourcePlaceId);
+  const targetPlace = this.getStateById(targetPlaceId);
+
+  // Create a new space:Transition object
+  const transition = olcElementFactory.createTransition(sourcePlace, targetPlace, this.get('olcUpdater').connectionWaypoints(sourcePlace, targetPlace));
+
+  // Add the transition to the canvas
+  this.get('canvas').addConnection(transition);
+
+  return transition;
+};
 
 
