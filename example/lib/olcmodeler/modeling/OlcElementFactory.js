@@ -34,11 +34,14 @@ OlcElementFactory.prototype.baseCreate = BaseElementFactory.prototype.create;
 OlcElementFactory.prototype.baseCreateShape = BaseElementFactory.prototype.createShape;
 
 OlcElementFactory.prototype.createShape = function(attrs) {
+    console.log('Creating shape with attributes:', attrs); // Aggiungi questo console log
     attrs = assign(this.defaultSizeForType(attrs.type), attrs);
     return this.baseCreateShape(attrs);
 }
 
+
 OlcElementFactory.prototype.create = function (elementType, attrs) {
+    console.log('Creating element of type:', elementType, 'with attributes:', attrs); // Aggiungi questo console log
 
     attrs = attrs || {};
     attrs = assign(this.defaultSizeForType(attrs.type), attrs);
