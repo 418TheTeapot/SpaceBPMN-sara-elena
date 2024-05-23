@@ -4,6 +4,7 @@ import BaseModeling from 'diagram-js/lib/features/modeling/Modeling';
 import OlcUpdatePropertiesHandler from "./cmd/OlcUpdatePropertiesHandler";
 import OlcUpdateModdlePropertiesHandler from "./cmd/OlcUpdateModdlePropertiesHandler";
 import OlcUpdateLabelHandler from "./cmd/OlcUpdateLabelHandler";
+import OlcUpdateCanvasRootHandler from "./cmd/OlcUpdateCanvasRootHandler";
 
 export default function OlcModeling(eventBus, elementFactory, commandStack) {
     BaseModeling.call(this, eventBus, elementFactory, commandStack);
@@ -36,7 +37,7 @@ OlcModeling.prototype.getHandlers=function (){
     handlers['element.updateLabel'] = OlcUpdateLabelHandler;
     handlers['element.updateProperties'] = OlcUpdatePropertiesHandler;
     handlers['element.updateModdleProperties'] = OlcUpdateModdlePropertiesHandler;
-
+    handlers['canvas.updateRoot'] = OlcUpdateCanvasRootHandler;
     return handlers;
 
 }
@@ -59,7 +60,6 @@ OlcModeling.prototype.updateModdleProperties = function(element, moddleElement, 
     });
 
 }
-
 
 
 

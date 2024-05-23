@@ -9,6 +9,7 @@ import executionTimeDescriptor from '../bpmnmodeler/exectionTime/descriptors/tim
 import OlcElementFactory from "../olcmodeler/modeling/OlcElementFactory";
 import olc from '../olcmodeler/moddle/olc.json';
 import OlcUpdater from "../olcmodeler/modeling/OlcUpdater";
+import OlcModeling from "../olcmodeler/modeling/OlcModeling";
 
 export default function BpmnSpaceModeler(options) {
     const customModules = [
@@ -16,6 +17,7 @@ export default function BpmnSpaceModeler(options) {
         {
             'olcElementFactory': ['type', OlcElementFactory],
             'olcUpdater': ['type', OlcUpdater],
+            'olcModeling': ['type', OlcModeling],
             spaceModeler: ['value', this],
         }
     ];
@@ -49,6 +51,8 @@ BpmnSpaceModeler.prototype.handleOlcListChanged = function (places, dryRun=false
     this._places = places;
 }
 
+
+
 BpmnSpaceModeler.prototype.handleShapeChanged = function (shapes1, dryRun=false) {
     this._shapes = shapes1;
 }
@@ -74,63 +78,3 @@ BpmnSpaceModeler.prototype.handleStateDeleted = function (olcPlaces) {
     });
 }
 
-// Funzione per creare un place e una transizione tra due places
-/**
- * NON SERVE AD UN CAZZO!
- * @param sourcePlaceData
- * @param targetPlaceData
- * @param transitionData
- */
-BpmnSpaceModeler.prototype.createPlaceAndTransition = function(sourcePlaceData, targetPlaceData, transitionData) {
-    const olcElementFactory = this.get('olcElementFactory');
-    const olcUpdater = this.get('olcUpdater');
-    // const canvas = this.get('canvas');
-    const canvas = this._spaceModeler._canvaspace.canvas.get(canvas); // Ottieni correttamente il canvas
-
-    console.log('Creating places and transition... in canvas:', canvas);
-
-    function createPlace(placeData) {
-        const placeBusinessObject = olcElementFactory.createBusinessObject('space:Place', {
-            name: placeData.name,
-            x: placeData.x,
-            y: placeData.y
-        });
-
-        return olcElementFactory.createShape({
-            type: 'space:Place',
-            businessObject: placeBusinessObject,
-            id: placeBusinessObject.id,
-            width: placeData.width || 100,
-            height: placeData.height || 100,
-            parent: canvas.getRootElement() // Specifica l'elemento genitore
-        });
-    }
-
-    function createTransition(sourcePlace, targetPlace, transitionData) {
-        const waypoints = olcUpdater.connectionWaypoints(sourcePlace, targetPlace);
-
-        const transitionBusinessObject = olcElementFactory.createBusinessObject('space:Transition', {
-            sourceRef: sourcePlace.businessObject,
-            targetRef: targetPlace.businessObject,
-            waypoints: waypoints,
-            name: transitionData.name
-        });
-
-        return olcElementFactory.createTransition(sourcePlace, targetPlace, waypoints);
-    }
-
-    const sourcePlace = createPlace(sourcePlaceData);
-    const targetPlace = createPlace(targetPlaceData);
-
-    canvas.addShape(sourcePlace);
-    canvas.addShape(targetPlace);
-
-    const transition = createTransition(sourcePlace, targetPlace, transitionData);
-
-    canvas.addConnection(transition);
-
-    console.log('Created places and transition:');
-    console.log('Source Place:', sourcePlace);
-    console.log('Target Place:', targetPlace);
-    console.log('Transition:', transition);
-}

@@ -149,10 +149,11 @@ OlcUpdater.prototype.connectionWaypoints = function(source, target) {
     return connection.waypoints;
 }
 
-OlcUpdater.prototype.updateElementName = function(element, newName) {
-    var businessObject = getBusinessObject(element);
-    if (businessObject) {
-        businessObject.name = newName;
-    }
+OlcUpdater.prototype.linkToBusinessObjectParent = function(element) {
+    var businessObject = element.businessObject,
+        parentBusinessObject = element.parent.businessObject;
+    console.log(businessObject);
+    parentBusinessObject.get('Elements').push(businessObject);
+    businessObject.$parent = parentBusinessObject;
 }
 

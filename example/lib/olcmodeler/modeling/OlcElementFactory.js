@@ -19,16 +19,17 @@ OlcElementFactory.$inject = [
     'elementRegistry'
 ];
 
-OlcElementFactory.prototype.createBusinessObject = function (type, attrs) {
+OlcElementFactory.prototype.createBusinessObject = function(type, attrs) {
     const element = this._moddle.create(type, attrs || {});
-    if(!element.id) {
+    if (!element.id) {
         const prefix = (element.$type || '').replace(/^[^:]*:/g, '') + '_';
         element.id = this._ids.nextPrefixed(prefix, element);
-    } else if(this._ids.assigned(element.id)) {
+    } else if (this._ids.assigned(element.id)) {
         throw new Error('Cannot create element, id "' + element.id + '" already exists');
     }
     return element;
 };
+
 
 OlcElementFactory.prototype.baseCreate = BaseElementFactory.prototype.create;
 OlcElementFactory.prototype.baseCreateShape = BaseElementFactory.prototype.createShape;
