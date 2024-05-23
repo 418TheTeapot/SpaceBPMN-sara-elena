@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="da generalizzare ma fa anche transition">
+    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="FUNZIONAAAAAAAAAAAAAAAAAAAAA&#10;&#10;AGGIUNGERE REGOLA PESOOOO">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/bpmnmodeler/bpmnSpaceModeler.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/bpmnmodeler/bpmnSpaceModeler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcElementFactory.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcElementFactory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcModeling.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcModeling.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcUpdater.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcUpdater.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/cmd/OlcUpdateModdlePropertiesHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/cmd/OlcUpdateModdlePropertiesHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/modeler.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/modeler.bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/simulator/behaviors/ActivityBehavior.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/simulator/behaviors/ActivityBehavior.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -140,7 +137,8 @@
       <workItem from="1716354346089" duration="1177000" />
       <workItem from="1716438902818" duration="321000" />
       <workItem from="1716439389756" duration="13998000" />
-      <workItem from="1716462462121" duration="790000" />
+      <workItem from="1716462462121" duration="9614000" />
+      <workItem from="1716472137538" duration="700000" />
     </task>
     <task id="LOCAL-00001" summary="olc-js-pp">
       <option name="closed" value="true" />
@@ -326,7 +324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716149194249</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="fix but ...">
+      <option name="closed" value="true" />
+      <created>1716463522716</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1716463522716</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,15 +384,17 @@
     <MESSAGE value="apapre TESTPlaceeeeee" />
     <MESSAGE value="DA &quot;GENERALIZZARE&quot;" />
     <MESSAGE value="da generalizzare ma fa anche transition" />
-    <option name="LAST_COMMIT_MESSAGE" value="da generalizzare ma fa anche transition" />
+    <MESSAGE value="fix but ..." />
+    <MESSAGE value="FUNZIONAAAAAAAAAAAAAAAAAAAAA&#10;&#10;AGGIUNGERE REGOLA PESOOOO" />
+    <option name="LAST_COMMIT_MESSAGE" value="FUNZIONAAAAAAAAAAAAAAAAAAAAA&#10;&#10;AGGIUNGERE REGOLA PESOOOO" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/lib/simulator/behaviors/ActivityBehavior.js</url>
-          <line>76</line>
-          <option name="timeStamp" value="46" />
+          <line>74</line>
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
