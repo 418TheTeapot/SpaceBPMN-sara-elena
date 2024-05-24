@@ -23,7 +23,7 @@ function GeneralGroup(element, injector) {
     };
 }
 
-function PlaceGroup(element, injector) {
+function CustomGroup(element, injector) {
     const translate = injector.get('translate');
 
     const entries = [
@@ -31,12 +31,23 @@ function PlaceGroup(element, injector) {
         ...AssignmentOlcProps({ element })
     ];
 
-    return {
-        id: 'place',
-        label: translate('Place'),
-        entries,
-        component: Group
-    };
+    if(is(element, 'space:Place')) {
+        return {
+            id: 'place',
+            label: translate('Place'),
+            entries,
+            component: Group
+        };
+    } else if(is(element, 'space:Transition')){
+        return {
+            id: 'place',
+            label: translate('Transition'),
+            entries,
+            component: Group
+        };
+    }
+
+
 }
 
 function getGroups(element, injector) {
@@ -45,8 +56,8 @@ function getGroups(element, injector) {
         GeneralGroup(element, injector),
     ];
 
-    if(is(element, 'space:Place')) {
-        groups.push(PlaceGroup(element, injector))
+    if(is(element, 'space:Place') || is(element, 'space:Transition')) {
+        groups.push(CustomGroup(element, injector))
     }
 
     // contract: if a group returns null, it should not be displayed at all

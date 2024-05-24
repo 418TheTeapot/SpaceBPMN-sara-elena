@@ -10,7 +10,7 @@ import {
 
 
 import PlaceEventIcon from '../icons/bpmn-icon-start-event-none.svg';
-import TransitionEventIcon from '../icons/got.svg';
+import TransitionEventIcon from '../icons/connection.svg';
 
 
 

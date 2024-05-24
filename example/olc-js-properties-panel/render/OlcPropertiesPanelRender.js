@@ -1,4 +1,3 @@
-
 import {
     isUndo,
     isRedo
