@@ -38,10 +38,45 @@ var DEFAULT_FILL_OPACITY = .95;
 var DEFAULT_TEXT_SIZE = 16;
 var LINE_HEIGHT_RATIO = 1.2;
 var ELEMENT_LABEL_DISTANCE = 10;
+var DEFAULT_RENDER_PRIORITY = 1000;
 
 export default function OlcRenderer(eventBus, styles, canvas, priority) {
-
   BaseRenderer.call(this, eventBus, priority);
+
+  priority = priority || DEFAULT_RENDER_PRIORITY;
+
+  var self = this;
+
+  eventBus.on([ 'render.shape', 'render.connection' ], priority, function(evt, context) {
+    var type = evt.type,
+        element = context.element,
+        visuals = context.gfx,
+        attrs = context.attrs;
+
+    console.log('Rendering:', type, element);
+
+    if (self.canRender(element)) {
+      if (type === 'render.shape') {
+        return self.drawShape(visuals, element, attrs);
+      } else {
+        return self.drawConnection(visuals, element, attrs);
+      }
+    }
+  });
+
+  eventBus.on([ 'render.getShapePath', 'render.getConnectionPath' ], priority, function(evt, element) {
+    console.log('Getting path for:', evt.type, element);
+
+    if (self.canRender(element)) {
+      if (evt.type === 'render.getShapePath') {
+        return self.getShapePath(element);
+      } else {
+        return self.getConnectionPath(element);
+      }
+    }
+  });
+
+
   var markers = {};
   var rendererId = RENDERER_IDS.next();
 
@@ -89,6 +124,8 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
 
     svgAppend(parentGfx, circle);
 
+    console.log('Circle drawn with attributes:', attrs);
+
     return circle;
   }
 
@@ -105,14 +142,14 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
 
     svgAppend(parentGfx, path);
 
+    console.log('Path drawn with attributes:', attrs);
+
     return path;
   }
 
-
   function renderLabel(parentGfx, label, options) {
 
-    options = assign({
-    }, options);
+    options = assign({}, options);
 
     var text = textUtil.createText(label || '', options);
 
@@ -120,39 +157,42 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
 
     svgAppend(parentGfx, text);
 
+    console.log('Label rendered with options:', options);
+
     return text;
   }
- 
+
   function createPathFromConnection(connection) {
     var waypoints = connection.waypoints;
-  
+
     var pathData = 'm  ' + waypoints[0].x + ',' + waypoints[0].y;
     for (var i = 1; i < waypoints.length; i++) {
       pathData += 'L' + waypoints[i].x + ',' + waypoints[i].y + ' ';
     }
+
+    console.log('Path data created from connection:', pathData);
+
     return pathData;
   }
-  
+
   function marker(fill, stroke) {
     var id = '-' + colorEscape(fill) + '-' + colorEscape(stroke) + '-' + rendererId;
-  
+
     if (!markers[id]) {
       createMarker(id, fill, stroke);
     }
-  
+
     return 'url(#' + id + ')';
   }
-  
+
   function colorEscape(str) {
-  
-    // only allow characters and numbers
-    return str.replace(/[^0-9a-zA-z]+/g, '_');
+    return str.replace(/[^0-9a-zA-Z]+/g, '_');
   }
-  
-  function createMarker(id, type, fill, stroke) {
+
+  function createMarker(id, fill, stroke) {
     var linkEnd = svgCreate('path');
     svgAttr(linkEnd, { d: 'M 1 5 L 11 10 L 1 15 Z' });
-  
+
     addMarker(id, {
       element: linkEnd,
       ref: { x: 11, y: 10 },
@@ -162,8 +202,10 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
         stroke: stroke
       }
     });
+
+    console.log('Marker created with ID:', id);
   }
-  
+
   function addMarker(id, options) {
     var attrs = assign({
       fill: 'black',
@@ -171,23 +213,20 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
       strokeLinecap: 'round',
       strokeDasharray: 'none'
     }, options.attrs);
-  
+
     var ref = options.ref || { x: 0, y: 0 };
-  
     var scale = options.scale || 1;
-  
-    // fix for safari / chrome / firefox bug not correctly
-    // resetting stroke dash array
+
     if (attrs.strokeDasharray === 'none') {
       attrs.strokeDasharray = [ 10000, 1 ];
     }
-  
+
     var marker = svgCreate('marker');
-  
+
     svgAttr(options.element, attrs);
-  
+
     svgAppend(marker, options.element);
-  
+
     svgAttr(marker, {
       id: id,
       viewBox: '0 0 20 20',
@@ -197,18 +236,19 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
       markerHeight: 20 * scale,
       orient: 'auto'
     });
-  
+
     var defs = domQuery('defs', canvas._svg);
-  
+
     if (!defs) {
       defs = svgCreate('defs');
-  
       svgAppend(canvas._svg, defs);
     }
-  
+
     svgAppend(defs, marker);
-  
+
     markers[id] = marker;
+
+    console.log('Marker added with ID:', id);
   }
 
   this.handlers = {
@@ -222,7 +262,7 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
 
       var circle = drawCircle(parentGfx, element.width, element.height, attrs);
 
-      var semantic = element.businessObject || {name: '< unknown >'};
+      var semantic = element.businessObject || { name: '< unknown >' };
 
       renderLabel(parentGfx, semantic.name, {
         box: element,
@@ -237,7 +277,7 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
       return circle;
     },
 
-    'space:Transition' : function(parentGfx, element) {
+    'space:Transition': function (parentGfx, element) {
 
       var pathData = createPathFromConnection(element);
 
@@ -249,42 +289,32 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
         stroke: color
       };
 
-      var transition= drawPath(parentGfx, pathData, attrs);
+      var transition = drawPath(parentGfx, pathData, attrs);
 
-      var semantic = element.businessObject || {name: '< unknown >'};
-      
-      // console.log(element)
-      // console.log(parentGfx)
+      var semantic = element.businessObject || { name: '< unknown >' };
 
       var label = renderLabel(parentGfx, semantic.name, {
-        fitBox:true,
+        fitBox: true,
         align: 'center-middle',
         style: {
           fill: 'black',
           fontSize: DEFAULT_TEXT_SIZE
         },
       });
-      
-      
+
       var midPoint = transition.getPointAtLength(transition.getTotalLength() / 2);
       var labelBounds = label.getBBox();
-      // console.log(labelBounds)
-      
-      var translateX, translateY;
 
-        translateX = midPoint.x;// - labelBounds.width / 2,
-        translateY = midPoint.y;
-      
-      // console.log(labelBounds.height/2)
-      
+      var translateX = midPoint.x;
+      var translateY = midPoint.y;
 
       transform(label, translateX, translateY, 0);
 
+      console.log('Transition drawn with attributes:', attrs);
+
       return transition;
     },
-
   };
-
 }
 
 
@@ -298,7 +328,7 @@ OlcRenderer.$inject = [
 
 
 OlcRenderer.prototype.canRender = function (element) {
-  return is(element, 'space:Place') || is(element, 'space:Transition'); 
+  return is(element, 'space:Place') || is(element, 'space:Transition');
 };
 
 OlcRenderer.prototype.drawShape = function (parentGfx, element) {
@@ -315,7 +345,6 @@ OlcRenderer.prototype.getShapePath = function (element) {
 
 // Utility
 function getCirclePath(shape) {
-
   var cx = shape.x + shape.width / 2,
       cy = shape.y + shape.height / 2,
       radius = shape.width / 2;
@@ -328,5 +357,9 @@ function getCirclePath(shape) {
     ['z']
   ];
 
-  return componentsToPath(circlePath);
+  var path = componentsToPath(circlePath);
+
+  console.log('Circle path calculated:', path);
+
+  return path;
 }
