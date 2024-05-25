@@ -5,6 +5,7 @@ import OlcUpdatePropertiesHandler from "./cmd/OlcUpdatePropertiesHandler";
 import OlcUpdateModdlePropertiesHandler from "./cmd/OlcUpdateModdlePropertiesHandler";
 import OlcUpdateLabelHandler from "./cmd/OlcUpdateLabelHandler";
 import OlcUpdateCanvasRootHandler from "./cmd/OlcUpdateCanvasRootHandler";
+import {assign} from "min-dash";
 
 export default function OlcModeling(eventBus, elementFactory, commandStack) {
     BaseModeling.call(this, eventBus, elementFactory, commandStack);
@@ -77,6 +78,26 @@ OlcModeling.prototype.updateProperties = function(element, newProperties) {
         newProperties: newProperties
     });
 };
+
+OlcModeling.prototype.updateCanvasRoot = function(newRoot) {
+    this._commandStack.execute('canvas.updateRoot', {
+        newRoot: newRoot
+    });
+};
+
+OlcModeling.prototype.addPlace = function(attrs) {
+    var place = this._elementFactory.createPlace(attrs);
+    this._commandStack.execute('shape.create', { shape: place });
+    return place;
+};
+
+
+OlcModeling.prototype.addTransition = function(source, target, attrs) {
+    var transition = this._elementFactory.createTransition(assign({ source: source, target: target }, attrs));
+    this._commandStack.execute('connection.create', { connection: transition });
+    return transition;
+};
+
 
 
 

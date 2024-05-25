@@ -70,3 +70,16 @@ OlcElementFactory.prototype.create = function (elementType, attrs) {
 OlcElementFactory.prototype.defaultSizeForType = function (type) {
     return { width: 100, height: 100 };
 }
+OlcElementFactory.prototype.createPlace = function(attrs) {
+    attrs = assign(this.defaultSizeForType('space:Place'), attrs);
+    var businessObject = this.createBusinessObject('space:Place', attrs);
+    attrs = assign({ businessObject: businessObject, id: businessObject.id }, attrs);
+    return this.baseCreate('shape', attrs);
+};
+
+OlcElementFactory.prototype.createTransition = function(attrs) {
+    attrs = assign(this.defaultSizeForType('space:Transition'), attrs);
+    var businessObject = this.createBusinessObject('space:Transition', attrs);
+    attrs = assign({ businessObject: businessObject, id: businessObject.id }, attrs);
+    return this.baseCreate('connection', attrs);
+};

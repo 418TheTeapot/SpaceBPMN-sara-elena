@@ -10,6 +10,7 @@ import OlcElementFactory from "../olcmodeler/modeling/OlcElementFactory";
 import olc from '../olcmodeler/moddle/olc.json';
 import OlcUpdater from "../olcmodeler/modeling/OlcUpdater";
 import OlcModeling from "../olcmodeler/modeling/OlcModeling";
+import OlcRenderer from "../olcmodeler/draw/OlcRenderer";
 
 export default function BpmnSpaceModeler(options) {
     const customModules = [
@@ -18,9 +19,11 @@ export default function BpmnSpaceModeler(options) {
             'olcElementFactory': ['type', OlcElementFactory],
             'olcUpdater': ['type', OlcUpdater],
             'olcModeling': ['type', OlcModeling],
+            'olcRenderer': ['type', OlcRenderer], // Corrected here
             spaceModeler: ['value', this],
         }
     ];
+
 
     options.additionalModules = [
         ...customModules,
