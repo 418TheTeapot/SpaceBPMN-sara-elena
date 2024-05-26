@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="disegna MA MALE">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_05_2024_14_01__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_05_2024_14_01__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_15_2024_9_15_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_15_2024_9_15_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/bpmnmodeler/bpmnSpaceModeler.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/bpmnmodeler/bpmnSpaceModeler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/OlcModeler.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/OlcModeler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/draw/OlcRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/draw/OlcRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcElementFactory.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcElementFactory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcUpdater.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcUpdater.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/disable-modeling/DisableModeling.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/disable-modeling/DisableModeling.js" afterDir="false" />
+    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="DISEGNA ! FUNZIONA">
       <change beforePath="$PROJECT_DIR$/lib/simulator/behaviors/ActivityBehavior.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/simulator/behaviors/ActivityBehavior.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/simulator/util/AssignmentUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/simulator/util/AssignmentUtil.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +139,7 @@
       <workItem from="1716472137538" duration="1016000" />
       <workItem from="1716646486085" duration="1297000" />
       <workItem from="1716648165738" duration="32250000" />
-      <workItem from="1716682722253" duration="12609000" />
+      <workItem from="1716682722253" duration="13422000" />
     </task>
     <task id="LOCAL-00001" summary="olc-js-pp">
       <option name="closed" value="true" />
@@ -375,7 +365,23 @@
       <option name="project" value="LOCAL" />
       <updated>1716673993185</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="DISEGNA ! FUNZIONA">
+      <option name="closed" value="true" />
+      <created>1716711873207</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1716711873207</updated>
+    </task>
+    <task id="LOCAL-00030" summary="DISEGNA ! FUNZIONA">
+      <option name="closed" value="true" />
+      <created>1716711924430</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1716711924430</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -405,7 +411,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Global !!! da vedere bene gli hook e altro" />
     <MESSAGE value="Si attaaccaaaaaaaaaaaaaaaaaaaaaaa" />
     <MESSAGE value="prova Assi" />
     <MESSAGE value="caprie come estendere il json" />
@@ -430,6 +435,7 @@
     <MESSAGE value="FUNZIONAAAAAAAAAAAAAAAAAAAAA&#10;&#10;AGGIUNGERE REGOLA PESOOOO" />
     <MESSAGE value="lo salva ma non lo disegna" />
     <MESSAGE value="disegna MA MALE" />
-    <option name="LAST_COMMIT_MESSAGE" value="disegna MA MALE" />
+    <MESSAGE value="DISEGNA ! FUNZIONA" />
+    <option name="LAST_COMMIT_MESSAGE" value="DISEGNA ! FUNZIONA" />
   </component>
 </project>
