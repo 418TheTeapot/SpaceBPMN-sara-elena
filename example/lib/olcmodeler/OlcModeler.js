@@ -205,47 +205,7 @@ OlcModeler.prototype.on = function(event, priority, callback, target) {
   return this.get('eventBus').on(event, priority, callback, target);
 };
 
-OlcModeler.prototype.showOlcById = function (id) {
-  if (id && this._definitions && id !== (this._space && this._space.get('id'))) {
-    var place = this._definitions.get('places').filter(space => space.get('id') === id)[0];
-    if (place) {
-      this.showOlc(place);
-    } else {
-      throw 'Unknown olc with class id \"'+id+'\"';
-    }
-  }
-};
 
-OlcModeler.prototype.getIdSelectedElement = function() {
-  var element = this.get('selection').get();
-  if (element.length > 0) {
-    return element[0].id;
-  } else {
-    return null;
-  }
-};
-
-OlcModeler.prototype.getCurrentOlc = function () {
-  return this._space;
-};
-
-OlcModeler.prototype.getOlcById = function(id) {
-  return this.getOlcs().filter(space => space.id === id)[0];
-};
-
-OlcModeler.prototype.getStateById = function(id) {
-  return this.getOlcs().flatMap(space => space.get('Elements')).filter(element => is(element, 'space:Place')).filter(state => state.id === id)[0];
-};
-
-OlcModeler.prototype.getStatesByName = function() {
-  var states = this.getOlcs().get('Elements').filter(element => is(element, 'space:Place'));
-  var nameStates = [];
-  for (let i = 0; i < states.length; i++){
-    var nomestato = states.filter(state => state.name)[i];
-    nameStates.push(nomestato.get('name'));
-  }
-  return nameStates;
-};
 
 OlcModeler.prototype.getOlcs = function() {
   return this._definitions.get('places');
