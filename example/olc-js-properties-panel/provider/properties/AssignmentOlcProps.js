@@ -1,15 +1,24 @@
-import { TextFieldEntry, isTextFieldEntryEdited } from '@bpmn-io/properties-panel';
-import { useService } from 'bpmn-js-properties-panel';
+import { useService } from "../../hooks";
+import { isTextFieldEntryEdited, TextFieldEntry } from "@bpmn-io/properties-panel";
 
+export function AssignmentOlcProps(props) {
+    const { element } = props;
+    return [{
+        id: 'assignment',
+        element,
+        component: Assignment,
+        isEdited: isTextFieldEntryEdited
+    }];
+}
 
-export function Assignment(props) {
+function Assignment(props) {
     const { element, id } = props;
     const modeling = useService('modeling');
     const translate = useService('translate');
     const debounce = useService('debounceInput');
 
     const getValues = () => {
-        const assignmentString = element.businessObject.assignment|| '';
+        const assignmentString = element.businessObject.assignmentOlc|| '';
         return assignmentString.split(',').map(pair => {
             const [key, value] = pair.split('=').map(part => part.trim()); // Split key and value and trim whitespace
             return { key, value }; // Return as an object
@@ -18,7 +27,7 @@ export function Assignment(props) {
 
     const setValues = (updatedItems) => {
         const assignmentString = updatedItems.map(item => `${item.key}=${item.value}`).join(', ');
-        modeling.updateProperties(element, { assignment: assignmentString });
+        modeling.updateProperties(element, { assignmentOlc: assignmentString });
     };
 
     const addAttribute = () => {
@@ -34,7 +43,7 @@ export function Assignment(props) {
     return (
         <div>
             <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
-                <span style={{ marginRight: '8px' }}>{translate('Add Assignment')}</span>
+                <span style={{ marginRight: '8px' }}>{translate('Add Activity')}</span>
                 <button
                     onClick={addAttribute}
                     style={{ background: 'white', color: 'black', border: '1px solid black', borderRadius: '3px', cursor: 'pointer', fontSize: '16px' }}>
@@ -79,4 +88,3 @@ export function Assignment(props) {
         </div>
     );
 }
-

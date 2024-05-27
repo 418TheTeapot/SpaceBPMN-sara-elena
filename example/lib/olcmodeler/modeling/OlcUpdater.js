@@ -1,13 +1,9 @@
 import inherits from 'inherits';
-
 import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
-import {
-    remove as collectionRemove
-  } from 'diagram-js/lib/util/Collections';
-import {getBusinessObject} from "../../util/Util";
+import { remove as collectionRemove } from 'diagram-js/lib/util/Collections';
+import { getBusinessObject } from "../../util/Util";
 
 export default function OlcUpdater(eventBus, connectionDocking) {
-
     CommandInterceptor.call(this, eventBus);
     this._connectionDocking = connectionDocking;
     self = this;
@@ -15,7 +11,6 @@ export default function OlcUpdater(eventBus, connectionDocking) {
     // connection cropping //////////////////////
     // crop connection ends during create/update
     function cropConnection(e) {
-
         var context = e.context,
             hints = context.hints || {},
             connection = context.connection;
@@ -42,18 +37,17 @@ export default function OlcUpdater(eventBus, connectionDocking) {
         var context = event.context,
             element = context.shape || context.connection;
 
-           linkToBusinessObjectParent(element)
+        self.linkToBusinessObjectParent(element);  // Usa il metodo del prototipo
     });
 
-
-   this.executed([
+    this.executed([
         'shape.delete',
         'connection.delete'
     ], (event) => {
         var context = event.context,
             element = context.shape || context.connection;
 
-        removeFromBusinessObjectParent(element);
+        self.removeFromBusinessObjectParent(element);  // Usa il metodo del prototipo
     });
 
     this.executed([
@@ -71,12 +65,76 @@ export default function OlcUpdater(eventBus, connectionDocking) {
         'shape.move'
     ], event => {
         var element = event.context.shape;
-        var {x, y} = element;
+        var { x, y } = element;
         var businessObject = element.businessObject;
         businessObject.set('x', x);
         businessObject.set('y', y);
     });
 }
+
+inherits(OlcUpdater, CommandInterceptor);
+
+OlcUpdater.$inject = [
+    'eventBus',
+    'connectionDocking'
+];
+
+OlcUpdater.prototype.linkToBusinessObjectParent = function(element) {
+    var businessObject = element.businessObject,
+        parentBusinessObject = element.parent.businessObject;
+    parentBusinessObject.get('Elements').push(businessObject);
+    businessObject.$parent = parentBusinessObject;
+};
+
+OlcUpdater.prototype.removeFromBusinessObjectParent = function(element) {
+    var businessObject = element.businessObject,
+        parentBusinessObject = businessObject.$parent;
+
+    collectionRemove(parentBusinessObject.get('Elements'), businessObject);
+    businessObject.$parent = undefined;
+};
+
+//TODO move to common utils
+function center(shape) {
+    console.log('Calculating center for shape:', shape);
+    // Handle NaN values
+    var x = isNaN(shape.x) ? 0 : shape.x;
+    var y = isNaN(shape.y) ? 0 : shape.y;
+    return {
+        x: x + shape.width / 2,
+        y: y + shape.height / 2
+    };
+}
+
+OlcUpdater.prototype.connectionWaypoints = function(source, target) {
+
+
+    // Check if source and target have valid coordinates
+    if (isNaN(source.x) || isNaN(source.y) || isNaN(target.x) || isNaN(target.y)) {
+        return [];  // Return an empty array if coordinates are invalid
+    }
+
+    // Handle NaN values
+    source.x = isNaN(source.x) ? 0 : source.x;
+    source.y = isNaN(source.y) ? 0 : source.y;
+    target.x = isNaN(target.x) ? 0 : target.x;
+    target.y = isNaN(target.y) ? 0 : target.y;
+
+    var connection = {source, target};
+    if (connection.source === connection.target) {
+        connection.waypoints = reflectiveEdge(connection.source);
+    } else {
+        connection.waypoints = [center(connection.source), center(connection.target)];
+    }
+
+    console.log('Raw waypoints:', connection.waypoints);
+
+    connection.waypoints = this._connectionDocking.getCroppedWaypoints(connection);
+
+
+    return connection.waypoints;
+};
+
 
 function reflectiveEdge(element) {
     var { x, y, width, height } = element;
@@ -91,61 +149,17 @@ function reflectiveEdge(element) {
     ];
 }
 
-function linkToBusinessObjectParent(element) {
-
+export function linkToBusinessObjectParent(element) {
     var businessObject = element.businessObject,
         parentBusinessObject = element.parent.businessObject;
-        console.log(businessObject);
     parentBusinessObject.get('Elements').push(businessObject);
     businessObject.$parent = parentBusinessObject;
 }
 
-function removeFromBusinessObjectParent(element) {
+export function removeFromBusinessObjectParent(element) {
     var businessObject = element.businessObject,
         parentBusinessObject = businessObject.$parent;
 
     collectionRemove(parentBusinessObject.get('Elements'), businessObject);
     businessObject.$parent = undefined;
 }
-
-inherits(OlcUpdater, CommandInterceptor);
-
-OlcUpdater.$inject = [
-    'eventBus',
-    'connectionDocking'
-];
-
-//TODO move to common utils
-function center(shape) {
-    return {
-      x: shape.x + shape.width / 2,
-      y: shape.y + shape.height / 2
-    };
-}
-
-OlcUpdater.prototype.connectionWaypoints = function(source, target) {
-    var connection = {source, target};
-    if (connection.source === connection.target) {
-        connection.waypoints = reflectiveEdge(connection.source);
-    } else {
-        //TODO: Handle bidirectional edges
-        connection.waypoints = [center(connection.source), center(connection.target)];
-    }
-    connection.waypoints = this._connectionDocking.getCroppedWaypoints(connection);
-    return connection.waypoints;
-}
-
-OlcUpdater.prototype.updateElementName = function(element, newName) {
-    var businessObject = getBusinessObject(element);
-    if (businessObject) {
-        businessObject.name = newName;
-    }
-}
-
-OlcUpdater.prototype.updatePlaceProps = function(element, props) {
-    var businessObject = getBusinessObject(element);
-    if (businessObject) {
-        businessObject.placeProperties = props;
-    }
-}
-

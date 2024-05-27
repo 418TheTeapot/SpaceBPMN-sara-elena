@@ -1,13 +1,12 @@
-// In OlcPropertiesPanelContext.js
-import { createContext } from 'preact';
 
-
+import {
+    createContext
+} from '@bpmn-io/properties-panel/preact';
 
 
 const OlcPropertiesPanelContext = createContext({
     selectedElement: null,
-    olcModeler: null,
-    eventBus: null, //mi prende quello giusto?
+    injector: null,
     getService() { return null; }
 });
 

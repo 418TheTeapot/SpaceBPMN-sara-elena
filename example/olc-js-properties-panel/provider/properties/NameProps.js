@@ -1,8 +1,7 @@
 import { TextAreaEntry, isTextAreaEntryEdited } from '@bpmn-io/properties-panel';
-import OlcModeling from "../../../lib/olcmodeler/modeling/OlcModeling";
-import { useTranslation } from 'react-i18next';
-import { debounce } from 'lodash';
+
 import {is} from "../../../lib/util/Util";
+import {useService} from "../../hooks";
 
 export function NameProps(props) {
     const {
@@ -18,32 +17,29 @@ export function NameProps(props) {
     ];
 }
 
+
 function Name(props) {
     const { element } = props;
 
-    const { t: translate } = useTranslation();
+    const modeling = useService('modeling');
+    const translate = useService('translate')
+    const debounce = useService('debounceInput');
 
-    if (typeof debounce !== 'function') {
-        console.error('debounce is not a function');
-        return;
-    }
 
-    if (typeof translate !== 'function') {
-        console.error('Translate service is not a function');
-        return;
-    }
-
-    // Define the options for the custom name entry
     let options = {
         element,
         id: 'name',
-        label: translate('Name'),
+        label: is(element,'space:Transition') ? translate('Weight') : translate('Name'),
         debounce,
         setValue: (value) => {
-            OlcModeling.updateElementName(element, value);
+            // modeling.element.businessObject.name = value;
+            modeling.updateProperties(element, { name: value });
+            modeling.updateLabel(element, value);
         },
+
         getValue: (element) => {
-            return element.businessObject.name;
+            // Added safety check to avoid TypeError
+            return element && element.businessObject ? element.businessObject.name : '';
         },
         autoResize: true
     };

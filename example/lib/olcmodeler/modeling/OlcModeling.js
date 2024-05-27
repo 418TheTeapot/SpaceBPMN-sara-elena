@@ -1,6 +1,10 @@
 import inherits from 'inherits';
 
 import BaseModeling from 'diagram-js/lib/features/modeling/Modeling';
+import OlcUpdatePropertiesHandler from "./cmd/OlcUpdatePropertiesHandler";
+import OlcUpdateModdlePropertiesHandler from "./cmd/OlcUpdateModdlePropertiesHandler";
+import OlcUpdateLabelHandler from "./cmd/OlcUpdateLabelHandler";
+import OlcUpdateCanvasRootHandler from "./cmd/OlcUpdateCanvasRootHandler";
 
 export default function OlcModeling(eventBus, elementFactory, commandStack) {
     BaseModeling.call(this, eventBus, elementFactory, commandStack);
@@ -27,6 +31,18 @@ OlcModeling.$inject = [
     'commandStack',
 ];
 
+
+OlcModeling.prototype.getHandlers=function (){
+    var handlers = BaseModeling.prototype.getHandlers.call(this);
+    handlers['element.updateLabel'] = OlcUpdateLabelHandler;
+    handlers['element.updateProperties'] = OlcUpdatePropertiesHandler;
+    handlers['element.updateModdleProperties'] = OlcUpdateModdlePropertiesHandler;
+    handlers['canvas.updateRoot'] = OlcUpdateCanvasRootHandler;
+    return handlers;
+
+}
+
+
 OlcModeling.prototype.updateLabel = function (element, newLabel, newBounds, hints) {
     this._commandStack.execute('element.updateLabel', {
         element: element,
@@ -36,46 +52,42 @@ OlcModeling.prototype.updateLabel = function (element, newLabel, newBounds, hint
     });
 };
 
-OlcModeling.prototype.updateProperties = function(element, newProperties, newBounds, hints) {
+OlcModeling.prototype.updateModdleProperties = function(element, moddleElement, properties) {
+    this._commandStack.execute('element.updateModdleProperties', {
+        element: element,
+        moddleElement: moddleElement,
+        properties: properties
+    });
+
+}
+
+
+
+OlcModeling.prototype.updateProperties = function(element, newProperties) {
+    // Here, extend the logic to handle previously undefined properties
+    Object.keys(newProperties).forEach(prop => {
+        if (typeof element.businessObject[prop] === 'undefined') {
+            // If the property does not exist, initialize it
+            element.businessObject[prop] = newProperties[prop];
+        }
+    });
+
     this._commandStack.execute('element.updateProperties', {
         element: element,
-        newProperties: newProperties,
-        newBounds: newBounds,
-        hints: hints || {}
+        newProperties: newProperties
     });
 };
 
-OlcModeling.prototype.getHandlers = function () {
-    var handlers = BaseModeling.prototype.getHandlers.call(this);
-    handlers['element.updateLabel'] = UpdateLabelHandler;
-
-    return handlers;
+OlcModeling.prototype.updateCanvasRoot = function(newRoot) {
+    this._commandStack.execute('canvas.updateRoot', {
+        newRoot: newRoot
+    });
 };
 
-function UpdateLabelHandler() {
 
-}
 
-UpdateLabelHandler.prototype.execute = function (context) {
-    var { element, newLabel } = context;
-    element.businessObject.name = newLabel;
-    return element;
-}
 
-UpdateLabelHandler.prototype.revert = function (context) {
-    //TODO implement at some point
-}
 
-function UpdatePropertyHandler() {
 
-}
 
-UpdatePropertyHandler.prototype.execute = function (context) {
-    var { element, newProperties } = context;
-    element.businessObject.name = newProperties;
-    return element;
-}
 
-UpdatePropertyHandler.prototype.revert = function (context) {
-    //TODO implement at some point
-}

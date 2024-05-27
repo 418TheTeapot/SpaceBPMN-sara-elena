@@ -10,7 +10,7 @@ import {
 
 
 import PlaceEventIcon from '../icons/bpmn-icon-start-event-none.svg';
-import TransitionEventIcon from '../icons/got.svg';
+import TransitionEventIcon from '../icons/connection.svg';
 
 
 
@@ -34,19 +34,30 @@ export function getConcreteType(element) {
     return type;
 }
 
-export const PanelHeaderProvider = {
+export const OlcPanelHeaderProvider = {
 
     getDocumentationRef: (element) => {
         return null;
     },
 
     getElementLabel: (element) => {
+        let elementType = '';
+        let elementName = '';
+
         if (is(element, 'space:Place')) {
-            return getBusinessObject(element).name;
+            elementType = 'Place';
+            elementName = getBusinessObject(element).name || 'Unnamed';
+        } else if (is(element, 'space:Transition')) {
+            elementType = 'Transition';
+            elementName = getBusinessObject(element).name || 'Unnamed';
+        } else {
+            elementType = 'Space_Diagram';
+            elementName = getLabel(element) || 'Unnamed';
         }
 
-        return getLabel(element);
+        return `${elementType}: ${elementName}`;
     },
+
 
 
     getElementIcon: (element) => {
@@ -73,32 +84,13 @@ export const PanelHeaderProvider = {
         return null;
     },
 
-    //     const elementTemplates = getTemplatesService();
-    //
-    //     if (elementTemplates) {
-    //         const template = getTemplate(element, elementTemplates);
-    //
-    //         if (template && template.name) {
-    //             return template.name;
-    //         }
-    //     }
-    //
-    //     const concreteType = getConcreteType(element);
-    //
-    //     return concreteType
-    //         .replace(/(\B[A-Z])/g, ' $1')
-    //         .replace(/(\bNon Interrupting)/g, '($1)');
-    // }
+
 
 };
 
 // helpers ///////////////////////
 
-function isCancelActivity(element) {
-    const businessObject = getBusinessObject(element);
 
-    return businessObject && businessObject.cancelActivity !== false;
-}
 
 function getEventDefinition(element) {
     const businessObject = getBusinessObject(element),
