@@ -16,11 +16,6 @@
           "type": "String"
         },
         {
-          "name": "description",
-          "isAttr": true,
-          "type": "String"
-        },
-        {
           "name": "assignmentOlc",
           "isAttr": true,
           "type": "Array[String]",

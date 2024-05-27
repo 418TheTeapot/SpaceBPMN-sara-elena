@@ -16,8 +16,8 @@ export function IdProps(props) {
     return [
         {
             id: 'id',
-            component: Id,
-            isEdited: isTextFieldEntryEdited
+           component: Id,
+           isEdited: isTextFieldEntryEdited
 
         }
     ];
@@ -30,10 +30,6 @@ function Id(props) {
     const translate = useService('translate');
     const debounce = useService('debounceInput');
 
-    // console.log("Name function idelement: ", element);  // Log the element object
-    // console.log("Name function idmodeling: ", modeling);  // Log the modeling object
-    // console.log("Name function iddebounce: ", debounce);  // Log the debounce object
-    // console.log("Name function idtranslate: ", translate);  // Log the translate object
 
 
     const setValue = (value, error) => {
