@@ -16,6 +16,17 @@
           "type": "String"
         },
         {
+          "name": "description",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "assignmentOlc",
+          "isAttr": true,
+          "type": "Array[String]",
+          "isMany": true
+        },
+        {
           "name": "id",
           "isAttr": true,
           "type": "String",
@@ -28,13 +39,7 @@
       "superClass": [
         "SpaceElement"
       ],
-      "properties": [
-        {
-          "name": "placeProperties",
-          "isAttr": true,
-          "type": "Array[String]"
-        }
-      ]
+      "properties": []
     },
     {
       "name": "Transition",

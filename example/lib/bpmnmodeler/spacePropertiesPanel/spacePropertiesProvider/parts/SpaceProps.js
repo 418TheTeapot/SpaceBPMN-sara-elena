@@ -31,23 +31,12 @@ export default function SpaceProps(element, modeler) {
           component: Destination,
           isEdited: isSelectEntryEdited
         },
-        // {
-        //   id: 'velocity',
-        //   element,
-        //   component: Velocity,
-        //   isEdited: isNumberFieldEntryEdited
-        // },
-        // {
-        //   id: 'duration',
-        //   element,
-        //   component: Duration,
-        //   isEdited: isNumberFieldEntryEdited
-        // },
+
         {
-            id: 'assignment',
-            element,
-            component: Assignment,
-            isEdited: isTextFieldEntryEdited
+          id: 'assignment',
+          element,
+          component: Assignment,
+          isEdited: isTextFieldEntryEdited
         },
 
     );
@@ -138,7 +127,7 @@ function Root(props) {
   }
 
 
-  console.log(element.businessObject)
+  // console.log(element.businessObject)
 
   return <SelectEntry
       id={ id }
@@ -199,7 +188,7 @@ function Destination(props) {
     })
   }
 
-  console.log(element.businessObject)
+  // console.log(element.businessObject)
 
   return (
       <div>
@@ -214,59 +203,4 @@ function Destination(props) {
         />
       </div>
   );
-}
-
-function Velocity(props) {
-  const {element, id} = props;
-
-  const modeling = useService('modeling');
-  const translate = useService('translate');
-  const debounce = useService('debounceInput');
-
-  const getValue = () => {
-    return element.businessObject.velocity || '';
-  }
-
-  const setValue = value => {
-    return modeling.updateProperties(element, {
-      velocity: value
-    });
-  }
-  return <NumberFieldEntry
-      id={id}
-      element={element}
-      description={translate('Define robot velocity')}
-      label={translate('Velocity')}
-      getValue={getValue}
-      setValue={setValue}
-      debounce={debounce}
-  />
-}
-
-function Duration(props) {
-  const {element, id} = props;
-
-  const modeling = useService('modeling');
-  const translate = useService('translate');
-  const debounce = useService('debounceInput');
-
-  const getValue = () => {
-    return element.businessObject.duration || '';
-  }
-
-  const setValue = value => {
-    return modeling.updateProperties(element, {
-      duration: value
-    });
-  }
-
-  return <NumberFieldEntry
-      id={id}
-      element={element}
-      description={translate('Must be integer number')}
-      label={translate('Duration')}
-      getValue={getValue}
-      setValue={setValue}
-      debounce={debounce}
-  />
 }

@@ -32,7 +32,7 @@ export default function BpmnSpaceModeler(options) {
         space: spaceModdleDescriptor,
         time: executionTimeDescriptor,
         JP: bpmnExtension,
-        // SA:olc
+        SA:olc
     };
 
     BpmnModeler.call(this, options);

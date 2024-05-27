@@ -1,6 +1,6 @@
 {
   "name": "Space",
-  "prefix": "space",
+  "prefix": "spacem",
   "uri": "http://space",
   "xml": {
     "tagAlias": "lowerCase"
@@ -42,7 +42,7 @@
         {
           "name": "assignment",
           "isAttr": true,
-          "type": "String"
+          "type": "Array[String]"
         }
       ]
     }
