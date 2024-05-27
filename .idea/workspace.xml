@@ -4,50 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="DISEGNA ! FUNZIONA">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_05_2024_14_01_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_05_2024_14_01_[Changes]1/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_05_2024_14_01__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_15_2024_9_15_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_15_2024_9_15_PM_[Changes]1/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_15_2024_9_15_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Arrow.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Create.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Delete.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Drag.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ExternalLink.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Feel.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Popup.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/help.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/lib/util/UtilLink.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/CustomProps.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/toDelete/ColorProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/got.svg" beforeDir="false" afterPath="$PROJECT_DIR$/example/got.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/bpmnmodeler/bpmnSpaceModeler.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/bpmnmodeler/bpmnSpaceModeler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/bpmnmodeler/exectionTime/executionTimeProvider/parts/TimeProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/bpmnmodeler/exectionTime/executionTimeProvider/parts/TimeProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/parts/AssignmentProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/parts/AssignmentProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/mediator/Mediator.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/mediator/Mediator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/OlcModeler.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/OlcModeler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/draw/OlcRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/draw/OlcRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcLabelEditing.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcLabelEditing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcModeling.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcModeling.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcUpdater.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/OlcUpdater.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/cmd/OlcUpdateModdlePropertiesHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/cmd/OlcUpdateModdlePropertiesHandler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/modeling/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/palette/PaletteProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/palette/PaletteProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/modeler.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/modeler.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/OlcPropertiesProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/OlcPropertiesProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/AssignmentOlcProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/AssignmentOlcProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/NameProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/NameProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/provider/properties/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/olc-js-properties-panel/render/OlcPanelPlaceholderProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/olc-js-properties-panel/render/OlcPanelPlaceholderProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/animation/Animation.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/animation/Animation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/disable-modeling/DisableModeling.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/disable-modeling/DisableModeling.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/simulator/behaviors/ActivityBehavior.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/simulator/behaviors/ActivityBehavior.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="DISEGNA ! FUNZIONA" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,7 +44,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging master",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/sarav/OneDrive/Documenti/GitHub/SpaceBPMN-sara-elena/example/olc-js-properties-panel/provider",
     "node.js.detected.package.eslint": "true",
@@ -97,7 +54,7 @@
     "nodejs_package_manager_path": "npm",
     "npm.dev.executor": "Run",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.3.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.3.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
