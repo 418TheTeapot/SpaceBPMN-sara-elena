@@ -1,8 +1,7 @@
 import inherits from 'inherits';
-import { groupBy, without } from 'min-dash';
+import { groupBy, without } from 'min-dash'
 
 import Diagram from 'diagram-js';
-
 
 import ConnectModule from 'diagram-js/lib/features/connect';
 import ConnectionPreviewModule from 'diagram-js/lib/features/connection-preview';
@@ -21,6 +20,7 @@ import EditorActionsModule from '../common/editor-actions';
 import CopyPasteModule from 'diagram-js/lib/features/copy-paste';
 import KeyboardModule from '../common/keyboard';
 
+// import {OlcPropertiesPanelModule} from '../example/olc-js-properties-panel';
 import OlcPaletteModule from './palette';
 import OlcDrawModule from './draw';
 import OlcRulesModule from './rules';
@@ -31,14 +31,23 @@ import OlcModdle from './moddle';
 import OlcEvents from './OlcEvents';
 import { nextPosition, root, is } from '../util/Util';
 
-// XML vuoto
-var emptyDiagram = `<?xml version="1.0" encoding="UTF-8"?>
-<space:definitions xmlns:space="http://bptlab/schema/spaceModeler">
-  <space:space name="SpaceDiagram" id="Space_Diagram">
-  </space:space>
+
+var emptyDiagram =
+  `<?xml version="1.0" encoding="UTF-8"?>
+<space:definitions xmlns:space="http://bptlab/schema/spaceModeler" >
+<space:space name="SpaceDiagram" id="Space_Diagram">
+</space:space>
 </space:definitions>`;
 
+/**
+ * Our editor constructor
+ *
+ * @param { { container: Element, additionalModules?: Array<any> } } options
+ *
+ * @return {Diagram}
+ */
 export default function OlcModeler(options) {
+
   const {
     container,
     additionalModules = [],
@@ -46,6 +55,7 @@ export default function OlcModeler(options) {
     propertiesPanel
   } = options;
 
+  // default modules provided by the toolbox
   const builtinModules = [
     ConnectModule,
     ConnectionPreviewModule,
@@ -65,19 +75,20 @@ export default function OlcModeler(options) {
     CopyPasteModule
   ];
 
+  // our own modules, contributing controls, customizations, and more
   const customModules = [
-    // OlcElementFactory, // Aggiungi OlcElementFactory qui
     OlcPaletteModule,
     OlcDrawModule,
     OlcRulesModule,
     OlcModelingModule,
     OlcAutoPlaceModule,
-
     {
       moddle: ['value', new OlcModdle({})],
       olcModeler: ['value', this],
-    },
+    }
   ];
+
+
 
   const diagramOptions = {
     canvas: {
@@ -94,21 +105,31 @@ export default function OlcModeler(options) {
 
   Diagram.call(this, diagramOptions);
 
-  this.get('eventBus').fire('attach'); // Necessario per far funzionare i listener di tasti
+  this.get('eventBus').fire('attach'); // Needed for key listeners to work
+
 }
 inherits(OlcModeler, Diagram);
 
+
+
 OlcModeler.prototype.createNew = function () {
   return this.importXML(emptyDiagram);
-};
+}
+
 
 OlcModeler.prototype.importXML = function (xml) {
+
   var self = this;
 
   return new Promise(function (resolve, reject) {
+
+    // hook in pre-parse listeners +
+    // allow xml manipulation
     xml = self._emit('import.parse.start', { xml: xml }) || xml;
 
+
     self.get('moddle').fromXML(xml).then(function (result) {
+
       var definitions = result.rootElement;
       var references = result.references;
       var parseWarnings = result.warnings;
@@ -124,6 +145,8 @@ OlcModeler.prototype.importXML = function (xml) {
         self.get('elementFactory')._ids.claim(id, elementsById[id]);
       }
 
+      // hook in post parse listeners +
+      // allow definitions manipulation
       definitions = self._emit('import.parse.complete', {
         definitions: definitions,
         context: context
@@ -133,6 +156,7 @@ OlcModeler.prototype.importXML = function (xml) {
       self._emit('import.done', { error: null, warnings: null });
       resolve();
     }).catch(function (err) {
+
       self._emit('import.parse.failed', {
         error: err
       });
@@ -141,9 +165,11 @@ OlcModeler.prototype.importXML = function (xml) {
 
       return reject(err);
     });
+
   });
 };
 
+//TODO handle errors during import
 OlcModeler.prototype.importDefinitions = function (definitions) {
   var self = this;
   self.get('elementFactory')._ids.clear();
@@ -154,9 +180,16 @@ OlcModeler.prototype.importDefinitions = function (definitions) {
 
   self.showOlc(definitions.places);
   self._emit('import.render.complete', {});
-};
+}
+
+//crea campo sul bpmnspace modeler con shapes dove ci metto le shapes
+
 
 OlcModeler.prototype.showOlc = function (space) {
+ // this.get('eventBus').on('prova', function() {
+   // alert(1)
+  //});
+console.log(this.get('eventBus'));
   this.clear();
   this._space = space;
   if (space) {
@@ -193,7 +226,7 @@ OlcModeler.prototype.showOlc = function (space) {
     });
   }
   this._emit(OlcEvents.SELECTED_OLC_CHANGED, { space: space });
-};
+}
 
 OlcModeler.prototype.getDefinitions = function() {
   return this._definitions;
@@ -203,33 +236,86 @@ OlcModeler.prototype.on = function(event, priority, callback, target) {
   return this.get('eventBus').on(event, priority, callback, target);
 };
 
+OlcModeler.prototype.showOlcById = function (id) {
+  if (id && this._definitions && id !== (this._space && this._space.get('id'))) {
+    var place = this._definitions.get('places').filter(space => space.get('id') === id)[0];
+    if (place) {
+      this.showOlc(place);
+    } else {
+      throw 'Unknown olc with class id \"'+id+'\"';
+    }
+  }
+}
 
+
+//function to obtain the id of selected element
+OlcModeler.prototype.getIdSelectedElement = function() {
+    var element = this.get('selection').get();
+    if (element.length > 0) {
+        return element[0].id;
+
+    } else {
+        return null;
+    }
+
+}
+
+OlcModeler.prototype.getCurrentOlc = function () {
+  return this._space;
+}
+
+OlcModeler.prototype.getOlcById = function(id) {
+  return this.getOlcs().filter(space => space.id === id)[0];
+}
+
+OlcModeler.prototype.getStateById = function(id) {
+  return this.getOlcs().flatMap(space => space.get('Elements')).filter(element => is(element, 'space:Place')).filter(state => state.id === id)[0];
+}
+
+OlcModeler.prototype.getStatesByName = function() {
+  var states=this.getOlcs().get('Elements').filter(element => is(element, 'space:Place'));
+  var nameStates = [];
+  for (let i=0; i<states.length; i++){
+  var nomestato = states.filter(state => state.name)[i];
+  nameStates.push(nomestato.get('name'))
+}
+  return nameStates;
+}
 
 OlcModeler.prototype.getOlcs = function() {
   return this._definitions.get('places');
-};
+}
 
 OlcModeler.prototype.handleShapeChanges = function (space) {
-  console.log(this.get('elementRegistry'));
-};
+ console.log(this.get('elementRegistry'))
+}
+
+
 
 OlcModeler.prototype.saveXML = function (options) {
+
   options = options || {};
 
   var self = this;
+
   var definitions = this._definitions;
 
+
   return new Promise(function (resolve, reject) {
+
     if (!definitions) {
       var err = new Error('no xml loaded');
+
       return reject(err + definitions);
     }
 
+    // allow to fiddle around with definitions
     definitions = self._emit('saveXML.start', {
       definitions: definitions
     }) || definitions;
 
     self.get('moddle').toXML(definitions, options).then(function (result) {
+
       var xml = result.xml;
 
       try {
@@ -248,6 +334,7 @@ OlcModeler.prototype.saveXML = function (options) {
 
       return resolve({ xml: xml });
     }).catch(function (err) {
+
       return reject(err);
     });
   });
@@ -266,4 +353,4 @@ OlcModeler.prototype.ensureElementIsOnCanvas = function (element) {
       throw 'Cannot display element. Is not part of a known olc';
     }
   }
-};
+}

@@ -1,3 +1,4 @@
+
 import inherits from 'inherits';
 
 import {
@@ -122,37 +123,37 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
 
     return text;
   }
- 
+
   function createPathFromConnection(connection) {
     var waypoints = connection.waypoints;
-  
+
     var pathData = 'm  ' + waypoints[0].x + ',' + waypoints[0].y;
     for (var i = 1; i < waypoints.length; i++) {
       pathData += 'L' + waypoints[i].x + ',' + waypoints[i].y + ' ';
     }
     return pathData;
   }
-  
+
   function marker(fill, stroke) {
     var id = '-' + colorEscape(fill) + '-' + colorEscape(stroke) + '-' + rendererId;
-  
+
     if (!markers[id]) {
       createMarker(id, fill, stroke);
     }
-  
+
     return 'url(#' + id + ')';
   }
-  
+
   function colorEscape(str) {
-  
+
     // only allow characters and numbers
     return str.replace(/[^0-9a-zA-z]+/g, '_');
   }
-  
+
   function createMarker(id, type, fill, stroke) {
     var linkEnd = svgCreate('path');
     svgAttr(linkEnd, { d: 'M 1 5 L 11 10 L 1 15 Z' });
-  
+
     addMarker(id, {
       element: linkEnd,
       ref: { x: 11, y: 10 },
@@ -163,7 +164,7 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
       }
     });
   }
-  
+
   function addMarker(id, options) {
     var attrs = assign({
       fill: 'black',
@@ -171,23 +172,23 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
       strokeLinecap: 'round',
       strokeDasharray: 'none'
     }, options.attrs);
-  
+
     var ref = options.ref || { x: 0, y: 0 };
-  
+
     var scale = options.scale || 1;
-  
+
     // fix for safari / chrome / firefox bug not correctly
     // resetting stroke dash array
     if (attrs.strokeDasharray === 'none') {
       attrs.strokeDasharray = [ 10000, 1 ];
     }
-  
+
     var marker = svgCreate('marker');
-  
+
     svgAttr(options.element, attrs);
-  
+
     svgAppend(marker, options.element);
-  
+
     svgAttr(marker, {
       id: id,
       viewBox: '0 0 20 20',
@@ -197,17 +198,17 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
       markerHeight: 20 * scale,
       orient: 'auto'
     });
-  
+
     var defs = domQuery('defs', canvas._svg);
-  
+
     if (!defs) {
       defs = svgCreate('defs');
-  
+
       svgAppend(canvas._svg, defs);
     }
-  
+
     svgAppend(defs, marker);
-  
+
     markers[id] = marker;
   }
 
@@ -252,7 +253,7 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
       var transition= drawPath(parentGfx, pathData, attrs);
 
       var semantic = element.businessObject || {name: '< unknown >'};
-      
+
       console.log(element)
       console.log(parentGfx)
 
@@ -264,19 +265,19 @@ export default function OlcRenderer(eventBus, styles, canvas, priority) {
           fontSize: DEFAULT_TEXT_SIZE
         },
       });
-      
-      
+
+
       var midPoint = transition.getPointAtLength(transition.getTotalLength() / 2);
       var labelBounds = label.getBBox();
       console.log(labelBounds)
-      
+
       var translateX, translateY;
 
-        translateX = midPoint.x;// - labelBounds.width / 2,
-        translateY = midPoint.y;
-      
+      translateX = midPoint.x;// - labelBounds.width / 2,
+      translateY = midPoint.y;
+
       console.log(labelBounds.height/2)
-      
+
 
       transform(label, translateX, translateY, 0);
 
@@ -298,7 +299,7 @@ OlcRenderer.$inject = [
 
 
 OlcRenderer.prototype.canRender = function (element) {
-  return is(element, 'space:Place') || is(element, 'space:Transition'); 
+  return is(element, 'space:Place') || is(element, 'space:Transition');
 };
 
 OlcRenderer.prototype.drawShape = function (parentGfx, element) {

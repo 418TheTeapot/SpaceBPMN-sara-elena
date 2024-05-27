@@ -180,27 +180,7 @@ Mediator.prototype.OlcModelerHook = function (eventBus, olcModeler) {
         });
     });
 
-   /* this.executed([
-        'element.updateLabel'
-    ], event => {
-        if (is(event.context.element, 'olc:State')) {
-            this.mediator.renamedState(event.context.element.businessObject);
-        }
-       // if (is(event.context.element, 'olc:Transition')) {
-        //    this.mediator.renamedState(event.context.element.businessObject);
-        //}
-    });*/
 
-   /* this.reverted([
-        'element.updateLabel'
-    ], event => {
-        if (is(event.context.element, 'olc:State')) {
-            this.mediator.renamedState(event.context.element.businessObject);
-        }
-       // if (is(event.context.element, 'olc:Transition')) {
-         //   this.mediator.renamedState(event.context.element.businessObject);
-        //}
-    });*/
 
     //importante mi permette di avere .places property come ref del bpm space modeler
     eventBus.on(OlcEvents.DEFINITIONS_CHANGED, event => {
@@ -210,14 +190,6 @@ Mediator.prototype.OlcModelerHook = function (eventBus, olcModeler) {
     });
 
 
-   /* eventBus.on('shapes', event => {
-        this.mediator.olcListChanged(event.definitions.places);
-    });
-*/
-
-   /* eventBus.on(OlcEvents.OLC_RENAME, event => {
-        this.mediator.olcRenamed(event.olc, event.name);
-    });*/
 
     this.locationOfElement = function(element) {
         return 'Space ' + root(element).name;
@@ -241,15 +213,6 @@ Mediator.prototype.SpaceModelerHook = function (eventBus, spaceModeler) {
     this.eventBus = eventBus;
 
 
-    /*eventBus.on('import.parse.complete', ({warnings}) => {
-        warnings.filter(({message}) => message.startsWith('unresolved reference')).forEach(({property, value, element}) => {
-            if (property === 'bpmn:Task#destination') {
-                const dest = this.mediator.olcModelerHook.modeler.getStateById(value)
-                if (!dest) { throw new Error('Could not resolve olc state with id '+value); }
-                element.get('destination').push(dest);
-            }
-        });
-    });*/
 }
 inherits(Mediator.prototype.SpaceModelerHook, CommandInterceptor);
 

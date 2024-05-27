@@ -1,6 +1,3 @@
-
-
-
 export const OlcPanelPlaceholderProvider = (translate) => {
     if (!translate) translate = (text) => text;
     return {

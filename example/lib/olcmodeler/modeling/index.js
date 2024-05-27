@@ -12,7 +12,7 @@ export default {
   __init__: [
     'modeling',
     'olcUpdater',
-    'olcLabelEditing'
+    'olcLabelEditing',
   ],
   __depends__: [
     CommandModule,
