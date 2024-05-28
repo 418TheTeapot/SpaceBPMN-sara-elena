@@ -1,5 +1,5 @@
 import BpmnModeler from 'bpmn-js/lib/Modeler';
-import { without } from 'min-dash';
+import {assign, without} from 'min-dash';
 import bpmnExtension from './moddle/bpmnextension.json';
 import spacePropertiesProviderModule from '../bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/index.js';
 import spaceModdleDescriptor from '../bpmnmodeler/spacePropertiesPanel/descriptors/space.json';
@@ -7,19 +7,30 @@ import { is } from 'bpmn-js/lib/util/ModelUtil';
 import executionTimeDescriptor from '../bpmnmodeler/exectionTime/descriptors/time.json';
 import OlcElementFactory from "../olcmodeler/modeling/OlcElementFactory";
 import OlcUpdater from "../olcmodeler/modeling/OlcUpdater";
-import olc from '../olcmodeler/moddle/olc.json';
+import olcModdleDescriptor from '../olcmodeler/moddle/olc.json';
 
 import OlcRenderer from "../olcmodeler/draw/OlcRenderer";
 import inherits from 'inherits';
+import OlcModdle from "../olcmodeler/moddle/OlcModdle";
+
+
+
+import OlcDescriptors from '../olcmodeler/moddle/olc.json';
+
+console.log('Inizializzazione OlcModdle', { olc: olcModdleDescriptor });
+const olcModdle = new OlcModdle({ olc: olcModdleDescriptor });
+const olcElementFactory = new OlcElementFactory(olcModdle);
+console.log('OlcElementFactory inizializzato:', olcElementFactory);
+console.log('OlcModdle inizializzato:', olcModdle);
 
 export default function BpmnSpaceModeler(options) {
     const customModules = [
         spacePropertiesProviderModule,
         {
-            'olcElementFactory': ['type', OlcElementFactory],
+            'olcElementFactory': ['value', olcElementFactory],
             'olcUpdater': ['type', OlcUpdater],
             'olcRenderer': ['type', OlcRenderer],
-
+            'olcModdle': ['value', olcModdle],
             spaceModeler: ['value', this]
         }
     ];
@@ -31,8 +42,7 @@ export default function BpmnSpaceModeler(options) {
     options.moddleExtensions = {
         space: spaceModdleDescriptor,
         time: executionTimeDescriptor,
-        JP: bpmnExtension,
-        SA:olc
+        JP: bpmnExtension
     };
 
     BpmnModeler.call(this, options);

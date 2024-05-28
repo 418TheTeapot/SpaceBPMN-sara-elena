@@ -1,0 +1,150 @@
+{
+  "name": "Space",
+  "prefix": "space",
+  "uri": "http://space",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "types": [
+    {
+      "name": "SpaceTask",
+      "extends": [
+        "bpmn:Task",
+        "bpmn:Participant"
+      ],
+      "properties": [
+        {
+          "name": "guard",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "root",
+          "isAttr": true,
+          "type": "space:Place"
+        },
+        {
+          "name": "destination",
+          "isAttr": true,
+          "type": "space:Place"
+        },
+        {
+          "name": "velocity",
+          "isAttr": true,
+          "type": "Integer"
+        },
+        {
+          "name": "duration",
+          "isAttr": true,
+          "type": "Integer"
+        },
+        {
+          "name": "assignment",
+          "isAttr": true,
+          "type": "Array[String]"
+        }
+      ]
+    },
+    {
+      "name": "SpaceElement",
+      "isAbstract": true,
+      "properties": [
+        {
+          "name": "name",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "assignmentOlc",
+          "isAttr": true,
+          "type": "Array[String]",
+          "isMany": true
+        },
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String",
+          "isId": true
+        }
+      ]
+    },
+    {
+      "name": "Place",
+      "superClass": [
+        "SpaceElement"
+      ],
+      "properties": []
+    },
+    {
+      "name": "Transition",
+      "superClass": [
+        "SpaceElement"
+      ],
+      "properties": [
+        {
+          "name": "sourcePlace",
+          "isAttr": true,
+          "isReference": true,
+          "type": "Place"
+        },
+        {
+          "name": "targetPlace",
+          "isAttr": true,
+          "type": "Place"
+        }
+      ]
+    },
+    {
+      "name": "Space",
+      "superClass": [
+        "SpaceElement"
+      ],
+      "properties": [
+        {
+          "name": "Elements",
+          "isMany": true,
+          "type": "SpaceElement"
+        }
+      ]
+    },
+    {
+      "name": "Definitions",
+      "superClass": [
+        "SpaceElement"
+      ],
+      "properties": [
+        {
+          "name": "targetNamespace",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "expressionLanguage",
+          "default": "http://www.w3.org/1999/XPath",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "typeLanguage",
+          "default": "http://www.w3.org/2001/XMLSchema",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "places",
+          "type": "Space"
+        },
+        {
+          "name": "exporter",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "exporterVersion",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    }
+  ]
+}

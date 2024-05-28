@@ -1,6 +1,6 @@
 {
   "name": "Space",
-  "prefix": "spacem",
+  "prefix": "space",
   "uri": "http://space",
   "xml": {
     "tagAlias": "lowerCase"

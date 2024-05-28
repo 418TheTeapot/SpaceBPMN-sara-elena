@@ -64,40 +64,33 @@ if (persistent) {
     hideMessage();
 }
 
-//mediator for communication between the two modelers
+
+// Mediator for communication between the two modelers
 var mediator = new Mediator();
 window.mediator = mediator;
 
-// Integrazione nel tuo OlcModeler
-//modeler for space
+// Modeler for space
 var olcModeler = new OlcModeler({
     container: document.querySelector('#olc-canvas'),
     keyboard: {
         bindTo: document.querySelector('#olc-canvas')
     },
-    additionalModules: [{
-        __init__ : ['mediator'],
-        mediator : ['type', mediator.OlcModelerHook]
-    },
-
+    additionalModules: [
+        {
+            __init__: ['mediator'],
+            mediator: ['type', mediator.OlcModelerHook]
+        },
         OlcPropertiesProviderModule,
         OlcPropertiesPanelModule,
-        // TokenSimulationModule,
-
     ],
     propertiesPanel: {
         parent: '#properties-panel-olc',
     }
 });
 
-
-// console.log("BpmnPropertiesProviderModule ",BpmnPropertiesProviderModule)
-// console.log("BpmnPropertiesPanelModule ",BpmnPropertiesPanelModule)
-
-
-//create a bpmn modeler
+// Create a BPMN modeler
 var modeler = new BpmnSpaceModeler({
-    container:'#canvas',
+    container: '#canvas',
     keyboard: {
         bindTo: document
     },
@@ -105,49 +98,35 @@ var modeler = new BpmnSpaceModeler({
         name: 'bpmn-js-token-simulation',
         version: process.env.TOKEN_SIMULATION_VERSION
     },
-    additionalModules: [{
-        __init__ : ['mediator'],
-        mediator : ['type', mediator.SpaceModelerHook]
-    },
+    additionalModules: [
+        {
+            __init__: ['mediator'],
+            mediator: ['type', mediator.SpaceModelerHook]
+        },
         BpmnPropertiesPanelModule,
         BpmnPropertiesProviderModule,
         TokenSimulationModule,
-        //BpmnColorPickerModule,
         AddExporter,
-        // ExampleModule
     ],
     propertiesPanel: {
         parent: '#properties-panel'
     }
 });
 
-
-console.log("modeler ",modeler)
-console.log("olcModeler ",olcModeler)
-
-//all'inizio il time-execution non deve comparire, compare solo con il toggle
-//document.querySelector("#time-execution").style.display = "none";
-
-//Serve per creare gli XML dei due modeler
 async function createNewDiagram() {
     await modeler.importXML(exampleXML);
-    await olcModeler.createNew(); //inizializza XML dell'olc modeler
+    await olcModeler.createNew(); // Initialize XML of the OLC modeler
 }
 
 $(function() {
     createNewDiagram();
 });
 
-
 function openDiagram(diagram) {
     return modeler.importXML(diagram)
         .then(({ warnings }) => {
             if (warnings.length) {
                 console.warn(warnings);
-            }
-
-            if (persistent) {
-                localStorage['diagram-xml'] = diagram;
             }
 
             modeler.get('canvas').zoom('fit-viewport');
@@ -157,48 +136,36 @@ function openDiagram(diagram) {
         });
 }
 
-if (presentationMode) {
-    document.body.classList.add('presentation-mode');
-}
-
 function openFile(files) {
-
-    // files = [ { name, contents }, ... ]
-
     if (!files.length) {
         return;
     }
 
     hideMessage();
 
-    fileName = files[0].name;
+    const fileName = files[0].name;
 
     openDiagram(files[0].contents);
 }
 
 document.body.addEventListener('dragover', fileDrop('Open BPMN diagram', openFile), false);
 
-//open diagram
 function loadDiagram(xml) {
-    var fileInput = document.createElement("input");
+    const fileInput = document.createElement("input");
     document.body.appendChild(fileInput);
 
     $(fileInput).attr({ 'type': 'file' }).on('change', function (e) {
-        var file = e.target.files[0];
-        var reader = new FileReader();
+        const file = e.target.files[0];
+        const reader = new FileReader();
         if (file) {
             reader.readAsText(file, "UTF-8");
             reader.onload = function (evt) {
-
-                var bpmnXML = evt.target.result;
+                const bpmnXML = evt.target.result;
                 modeler.importXML(bpmnXML, function(err) {
                     if (err) {
                         return console.error('could not import BPMN 2.0 diagram', err);
                     }
-                    // access modeler components
-                    var canvas = modeler.get('canvas');
-                    var overlays = modeler.get('overlays');
-                    // zoom to fit full viewport
+                    const canvas = modeler.get('canvas');
                     canvas.zoom('fit-viewport');
                 });
             }
@@ -210,15 +177,15 @@ function loadDiagram(xml) {
     document.body.removeChild(fileInput);
 }
 
-async function importFromZip (zipData) {
-    const zip = await Zip.loadAsync(zipData, {base64 : true});
+async function importFromZip(zipData) {
+    const zip = await Zip.loadAsync(zipData, { base64: true });
     const files = {
         space: zip.file('behaviour.bpmn'),
         olcs: zip.file('space.xml'),
     };
     Object.keys(files).forEach(key => {
         if (!files[key]) {
-            throw new Error('Missing file: '+key)
+            throw new Error('Missing file: ' + key);
         }
     });
     await olcModeler.importXML(await files.olcs.async("string"));
@@ -232,55 +199,45 @@ document.querySelector("#open-diagram").addEventListener('click', () => uploadZI
     importFromZip(data);
 }, 'base64'));
 
-//document.querySelector("#open-diagram").addEventListener('click', (e) =>loadDiagram(e.currentTarget.file));
-
-//download diagram
 function downloadDiagram() {
-    modeler.saveXML({ format: true }, function(err, xml) {
+    modeler.saveXML({ format: true }, function (err, xml) {
         if (!err) {
             download(xml, fileName, 'application/xml');
         }
     });
 }
 
-document.body.addEventListener('keydown', function(event) {
+document.body.addEventListener('keydown', function (event) {
     if (event.code === 'KeyS' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
-
         downloadDiagram();
     }
 
     if (event.code === 'KeyO' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
-
         fileOpen().then(openFile);
     }
 });
 
-async function exportToZip () {
+async function exportToZip() {
     const zip = new Zip();
-    const space = (await modeler.saveXML({format:true})).xml;
+    const space = (await modeler.saveXML({ format: true })).xml;
     zip.file('behaviour.bpmn', space);
     const olcs = (await olcModeler.saveXML({ format: true })).xml;
     zip.file('space.xml', olcs);
-    return zip.generateAsync({type : 'base64'});
+    return zip.generateAsync({ type: 'base64' });
 }
 
-document.querySelector('#download-button').addEventListener('click',  () => exportToZip().then(zip => {
+document.querySelector('#download-button').addEventListener('click', () => exportToZip().then(zip => {
     downloadZIP('SpaceBPMN.zip', zip, 'base64');
-    //importFromZip(zip);
 }));
-
 
 // Toggle properties panel for OLC modeler
 const olcPropertiesPanel = document.querySelector('#properties-panel-olc');
-
 const olcPropertiesPanelResizer = document.querySelector('#properties-panel-resizer-olc');
-
 let olcStartX, olcStartWidth;
 
 function toggleOlcProperties(open) {
-
     if (open) {
         url.searchParams.set('olcpp', '1');
     } else {
@@ -288,15 +245,14 @@ function toggleOlcProperties(open) {
     }
 
     history.replaceState({}, document.title, url.toString());
-
     olcPropertiesPanel.classList.toggle('open', open);
 }
 
-olcPropertiesPanelResizer.addEventListener('click', function(event) {
+olcPropertiesPanelResizer.addEventListener('click', function (event) {
     toggleOlcProperties(!olcPropertiesPanel.classList.contains('open'));
 });
 
-olcPropertiesPanelResizer.addEventListener('dragstart', function(event) {
+olcPropertiesPanelResizer.addEventListener('dragstart', function (event) {
     const img = new Image();
     img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
     event.dataTransfer.setDragImage(img, 1, 1);
@@ -305,32 +261,23 @@ olcPropertiesPanelResizer.addEventListener('dragstart', function(event) {
     olcStartWidth = olcPropertiesPanel.getBoundingClientRect().width;
 });
 
-olcPropertiesPanelResizer.addEventListener('drag', function(event) {
-
+olcPropertiesPanelResizer.addEventListener('drag', function (event) {
     if (!event.screenX) {
         return;
     }
 
     const delta = event.screenX - olcStartX;
-
     const width = olcStartWidth - delta;
-
     const open = width > 200;
-
     olcPropertiesPanel.style.width = open ? `${width}px` : null;
-
     toggleOlcProperties(open);
 });
 
-
 const propertiesPanel = document.querySelector('#properties-panel');
-
 const propertiesPanelResizer = document.querySelector('#properties-panel-resizer');
-
 let startX, startWidth;
 
 function toggleProperties(open) {
-
     if (open) {
         url.searchParams.set('pp', '1');
     } else {
@@ -338,15 +285,14 @@ function toggleProperties(open) {
     }
 
     history.replaceState({}, document.title, url.toString());
-
     propertiesPanel.classList.toggle('open', open);
 }
 
-propertiesPanelResizer.addEventListener('click', function(event) {
+propertiesPanelResizer.addEventListener('click', function (event) {
     toggleProperties(!propertiesPanel.classList.contains('open'));
 });
 
-propertiesPanelResizer.addEventListener('dragstart', function(event) {
+propertiesPanelResizer.addEventListener('dragstart', function (event) {
     const img = new Image();
     img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
     event.dataTransfer.setDragImage(img, 1, 1);
@@ -355,26 +301,20 @@ propertiesPanelResizer.addEventListener('dragstart', function(event) {
     startWidth = propertiesPanel.getBoundingClientRect().width;
 });
 
-propertiesPanelResizer.addEventListener('drag', function(event) {
-
+propertiesPanelResizer.addEventListener('drag', function (event) {
     if (!event.screenX) {
         return;
     }
 
     const delta = event.screenX - startX;
-
     const width = startWidth - delta;
-
     const open = width > 200;
-
     propertiesPanel.style.width = open ? `${width}px` : null;
-
     toggleProperties(open);
 });
 
 const remoteDiagram = url.searchParams.get('diagram');
 
-//Apre il diagramma iniziale
 if (remoteDiagram) {
     fetch(remoteDiagram).then(
         r => {
@@ -389,7 +329,6 @@ if (remoteDiagram) {
     ).catch(
         err => {
             showMessage('error', `Failed to open remote diagram: ${err.message}`);
-
             openDiagram(initialDiagram);
         }
     );
@@ -399,10 +338,7 @@ if (remoteDiagram) {
 
 toggleProperties(url.searchParams.has('pp'));
 
-
-
-// part for dynamism of the  vertical divider
-var dragTarget = undefined;
+var dragTarget;
 
 window.addEventListener('mousemove', function (e) { dragmove(e); });
 window.addEventListener('touchmove', function (e) { dragmove(e); });
@@ -420,30 +356,30 @@ function dragstart(e) {
 
 function dragmove(e) {
     if (dragTarget) {
-        dragTarget.classList.add('dragged')
-        var parent = $(dragTarget).parent()[0];
-        var parentStyle = window.getComputedStyle(parent);
-        var prev = $(dragTarget).prev('div')[0];
-        var next = $(dragTarget).next('div')[0];
+        dragTarget.classList.add('dragged');
+        const parent = $(dragTarget).parent()[0];
+        const parentStyle = window.getComputedStyle(parent);
+        const prev = $(dragTarget).prev('div')[0];
+        const next = $(dragTarget).next('div')[0];
         if (dragTarget.classList.contains('vertical')) {
-            var parentInnerWidth = parseInt(parentStyle.width, 10) - parseInt(parentStyle.paddingLeft, 10) - parseInt(parentStyle.paddingRight, 10);
-            var percentage = ((e.pageX - (parent.getBoundingClientRect().left + parseInt(parentStyle.paddingLeft, 10))) / parentInnerWidth) * 100;
+            const parentInnerWidth = parseInt(parentStyle.width, 10) - parseInt(parentStyle.paddingLeft, 10) - parseInt(parentStyle.paddingRight, 10);
+            const percentage = ((e.pageX - (parent.getBoundingClientRect().left + parseInt(parentStyle.paddingLeft, 10))) / parentInnerWidth) * 100;
             if (percentage > 5 && percentage < 95) {
-                var mainPercentage = 100 - percentage;
+                const mainPercentage = 100 - percentage;
                 prev.style.width = percentage + '%';
                 next.style.width = mainPercentage + '%';
-                dragTarget.style.left = 'calc('+ percentage * (parentInnerWidth / parseInt(parentStyle.width, 10)) + '% - 10px - '+ parentStyle.paddingLeft +')';
-                next.style.left = 0 + '%';
+                dragTarget.style.left = `calc(${percentage * (parentInnerWidth / parseInt(parentStyle.width, 10))}% - 10px - ${parentStyle.paddingLeft})`;
+                next.style.left = '0%';
             }
         } else {
-            var parentInnerHeight = parseInt(parentStyle.height, 10) - parseInt(parentStyle.paddingTop, 10) - parseInt(parentStyle.paddingBottom, 10);
-            var percentage = ((e.pageY - (parent.getBoundingClientRect().top + parseInt(parentStyle.paddingTop, 10))) / parentInnerHeight) * 100;
+            const parentInnerHeight = parseInt(parentStyle.height, 10) - parseInt(parentStyle.paddingTop, 10) - parseInt(parentStyle.paddingBottom, 10);
+            const percentage = ((e.pageY - (parent.getBoundingClientRect().top + parseInt(parentStyle.paddingTop, 10))) / parentInnerHeight) * 100;
             if (percentage > 5 && percentage < 95) {
-                var mainPercentage = 100 - percentage;
+                const mainPercentage = 100 - percentage;
                 prev.style.height = percentage + '%';
                 next.style.height = mainPercentage + '%';
-                dragTarget.style.top = 'calc('+percentage * (parentInnerHeight / parseInt(parentStyle.height, 10)) + '% - 10px + ' + parentStyle.paddingTop +')';
-                next.style.top = 0 + '%';
+                dragTarget.style.top = `calc(${percentage * (parentInnerHeight / parseInt(parentStyle.height, 10))}% - 10px + ${parentStyle.paddingTop})`;
+                next.style.top = '0%';
             }
         }
     }
@@ -451,8 +387,7 @@ function dragmove(e) {
 
 function dragend() {
     $('.divider').each((index, divider) => {
-        divider.classList.remove('dragged')
+        divider.classList.remove('dragged');
     });
     dragTarget = undefined;
 }
-
