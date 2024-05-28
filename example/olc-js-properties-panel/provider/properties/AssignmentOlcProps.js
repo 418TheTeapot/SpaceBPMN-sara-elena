@@ -18,7 +18,7 @@ function Assignment(props) {
     const debounce = useService('debounceInput');
 
     const getValues = () => {
-        const assignmentString = element.businessObject.assignmentOlc|| '';
+        const assignmentString = element.businessObject.assignmentOlc || '';
         return assignmentString.split(',').map(pair => {
             const [key, value] = pair.split('=').map(part => part.trim()); // Split key and value and trim whitespace
             return { key, value }; // Return as an object
@@ -43,7 +43,7 @@ function Assignment(props) {
     return (
         <div>
             <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
-                <span style={{ marginRight: '8px' }}>{translate('Add Activity')}</span>
+                <span style={{ marginRight: '8px' }}>{translate('Add Assignment')}</span>
                 <button
                     onClick={addAttribute}
                     style={{ background: 'white', color: 'black', border: '1px solid black', borderRadius: '3px', cursor: 'pointer', fontSize: '16px' }}>
@@ -51,12 +51,12 @@ function Assignment(props) {
                 </button>
             </div>
             {getValues().map((item, index) => (
-                <div key={index} style={{ display: 'flex', marginBottom: '5px' }}>
+                <div key={index} style={{ display: 'flex', marginBottom: '5px', alignItems: 'center' }}>
                     <TextFieldEntry
                         id={`${id}-key-${index}`}
                         element={element}
-                        description={translate('Edit the key')}
-                        label={`Key ${index + 1}`}
+                        description={translate('ex.LUX')}
+                        label={`Attributo ${index + 1}`}
                         getValue={() => item.key}
                         setValue={(newKey) => {
                             const updatedItems = getValues();
@@ -64,12 +64,13 @@ function Assignment(props) {
                             setValues(updatedItems);
                         }}
                         debounce={debounce}
+                        style={{ flex: 1, marginRight: '1px' }} // Making the text field more extensive
                     />
                     <TextFieldEntry
                         id={`${id}-value-${index}`}
                         element={element}
-                        description={translate('Edit the value')}
-                        label={`Value ${index + 1}`}
+                        description={translate('ON')}
+                        label={`Valore ${index + 1}`}
                         getValue={() => item.value}
                         setValue={(newValue) => {
                             const updatedItems = getValues();
@@ -77,10 +78,17 @@ function Assignment(props) {
                             setValues(updatedItems);
                         }}
                         debounce={debounce}
+                        style={{ flex: 1, marginRight: '10px' }}
                     />
                     <button
                         onClick={() => removeAttribute(index)}
-                        style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '16px', marginLeft: '10px' }}>
+                        style={{
+                            background: 'transparent',
+                            border: 'none',
+                            cursor: 'pointer',
+                            fontSize: '12px',
+                            marginLeft: '1px'
+                        }}>
                         Remove
                     </button>
                 </div>
