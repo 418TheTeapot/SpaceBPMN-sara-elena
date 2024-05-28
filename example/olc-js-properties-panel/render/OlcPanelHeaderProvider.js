@@ -7,27 +7,16 @@ import {
     getBusinessObject
 } from 'bpmn-js/lib/util/ModelUtil';
 
-
-
 import PlaceEventIcon from '../icons/bpmn-icon-start-event-none.svg';
 import TransitionEventIcon from '../icons/connection.svg';
 
-
-
 export function getConcreteType(element) {
-    const {
-        type: elementType
-    } = element;
-
+    const { type: elementType } = element;
     let type = getRawType(elementType);
-
-    // (1) event definition types
     const eventDefinition = getEventDefinition(element);
 
     if (eventDefinition) {
         type = `${getEventDefinitionPrefix(eventDefinition)}${type}`;
-
-
         return type;
     }
 
@@ -45,52 +34,34 @@ export const OlcPanelHeaderProvider = {
         let elementName = '';
 
         if (is(element, 'space:Place')) {
-            elementType = 'Place';
-            elementName = getBusinessObject(element).name || 'Unnamed';
+            elementType = '';
+            elementName = getBusinessObject(element).name || '';
         } else if (is(element, 'space:Transition')) {
-            elementType = 'Transition';
-            elementName = getBusinessObject(element).name || 'Unnamed';
+            elementType = '';
+            elementName = getBusinessObject(element).name || '';
         } else {
-            elementType = 'Space_Diagram';
-            elementName = getLabel(element) || 'Unnamed';
+            elementType = '';
+            elementName = getLabel(element) || '';
         }
 
-        return `${elementType}: ${elementName}`;
+        return elementName ? `${elementName}` : elementType;
     },
 
-
-
     getElementIcon: (element) => {
-
-        const config = {
-            elementTemplateIconRenderer: (element) => {
-                if (element.type === 'space:Place') {
-                    return PlaceEventIcon;
-                } else if (element.type === 'Space:Transition') {
-                    return TransitionEventIcon;
-                }
-            }
-        };
-
         if (is(element, 'space:Transition')) {
-            return () => <img class="bio-properties-panel-header-template-icon" width="32" height="32" src={ TransitionEventIcon } />;
+            return () => <img class="bio-properties-panel-header-template-icon" width="32" height="32" src={TransitionEventIcon} />;
         } else if (is(element, 'space:Place')) {
-            return () => <img class="bio-properties-panel-header-template-icon" width="32" height="32" src={ PlaceEventIcon } />;
+            return () => <img class="bio-properties-panel-header-template-icon" width="32" height="32" src={PlaceEventIcon} />;
         }
     },
 
     getTypeLabel: (element) => {
-
-        return null;
-    },
-
-
-
+        const label = getConcreteType(element);
+        return label;
+    }
 };
 
 // helpers ///////////////////////
-
-
 
 function getEventDefinition(element) {
     const businessObject = getBusinessObject(element),
@@ -105,10 +76,5 @@ function getRawType(type) {
 
 function getEventDefinitionPrefix(eventDefinition) {
     const rawType = getRawType(eventDefinition.$type);
-
     return rawType.replace('EventDefinition', '');
 }
-
-
-
-
