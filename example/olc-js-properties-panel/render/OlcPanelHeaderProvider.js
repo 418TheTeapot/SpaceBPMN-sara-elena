@@ -9,6 +9,8 @@ import {
 
 import PlaceEventIcon from '../icons/bpmn-icon-start-event-none.svg';
 import TransitionEventIcon from '../icons/connection.svg';
+import SpaceDiagramIcon from '../icons/space-icon.svg';
+import SpaceIcon from '../icons/space-icon.svg';  // Assicurati che il percorso sia corretto
 
 export function getConcreteType(element) {
     const { type: elementType } = element;
@@ -48,10 +50,17 @@ export const OlcPanelHeaderProvider = {
     },
 
     getElementIcon: (element) => {
+        if (is(element, 'space:SpaceDiagram')) {
+            return () => <img class="bio-properties-panel-header-template-icon" width="32" height="32" src={SpaceDiagramIcon} />;
+        }
         if (is(element, 'space:Transition')) {
             return () => <img class="bio-properties-panel-header-template-icon" width="32" height="32" src={TransitionEventIcon} />;
-        } else if (is(element, 'space:Place')) {
+        }
+        if (is(element, 'space:Place')) {
             return () => <img class="bio-properties-panel-header-template-icon" width="32" height="32" src={PlaceEventIcon} />;
+        }
+        if (is(element, 'space:Space')) {
+            return () => <img class="bio-properties-panel-header-template-icon" width="32" height="32" src={SpaceIcon} />;
         }
     },
 
@@ -60,6 +69,7 @@ export const OlcPanelHeaderProvider = {
         return label;
     }
 };
+
 
 // helpers ///////////////////////
 

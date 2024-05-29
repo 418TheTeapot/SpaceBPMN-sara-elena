@@ -13,7 +13,7 @@ export default function OlcUpdateModdlePropertiesHandler(elementRegistry, comman
     this._commandStack = commandStack;
     this._olcModdle = olcModdle;  // Store the OlcModdle instance
 
-    console.log('OlcMoodle Attuale:',olcModdle);
+    //console.log('OlcMoodle Attuale:',olcModdle);
 
 }
 

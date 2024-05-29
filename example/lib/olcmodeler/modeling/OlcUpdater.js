@@ -82,7 +82,6 @@ OlcUpdater.$inject = [
 OlcUpdater.prototype.linkToBusinessObjectParent = function(element) {
     var businessObject = element.businessObject,
         parentBusinessObject = element.parent.businessObject;
-    console.log(businessObject);
     parentBusinessObject.get('Elements').push(businessObject);
     businessObject.$parent = parentBusinessObject;
 };
@@ -97,7 +96,6 @@ OlcUpdater.prototype.removeFromBusinessObjectParent = function(element) {
 
 //TODO move to common utils
 function center(shape) {
-    console.log('Calculating center for shape:', shape);
     // Handle NaN values
     var x = isNaN(shape.x) ? 0 : shape.x;
     var y = isNaN(shape.y) ? 0 : shape.y;
@@ -108,7 +106,7 @@ function center(shape) {
 }
 
 OlcUpdater.prototype.connectionWaypoints = function(source, target) {
-    console.log('Calculating waypoints for source:', source, 'and target:', target);
+   // console.log('Calculating waypoints for source:', source, 'and target:', target);
 
     // Check if source and target have valid coordinates
     if (isNaN(source.x) || isNaN(source.y) || isNaN(target.x) || isNaN(target.y)) {
@@ -124,19 +122,19 @@ OlcUpdater.prototype.connectionWaypoints = function(source, target) {
 
     var connection = {source, target};
     if (connection.source === connection.target) {
-        console.log('Creating reflective edge');
+       // console.log('Creating reflective edge');
         connection.waypoints = reflectiveEdge(connection.source);
     } else {
-        console.log('Creating direct waypoints');
-        console.log('Source coordinates:', source.x, source.y);
-        console.log('Target coordinates:', target.x, target.y);
+        // console.log('Creating direct waypoints');
+        // console.log('Source coordinates:', source.x, source.y);
+        // console.log('Target coordinates:', target.x, target.y);
         connection.waypoints = [center(connection.source), center(connection.target)];
     }
 
-    console.log('Raw waypoints:', connection.waypoints);
+    // console.log('Raw waypoints:', connection.waypoints);
 
     connection.waypoints = this._connectionDocking.getCroppedWaypoints(connection);
-    console.log('Cropped waypoints:', connection.waypoints);
+    // console.log('Cropped waypoints:', connection.waypoints);
 
     return connection.waypoints;
 };
@@ -158,7 +156,7 @@ function reflectiveEdge(element) {
 export function linkToBusinessObjectParent(element) {
     var businessObject = element.businessObject,
         parentBusinessObject = element.parent.businessObject;
-    console.log(businessObject);
+    //console.log(businessObject);
     parentBusinessObject.get('Elements').push(businessObject);
     businessObject.$parent = parentBusinessObject;
 }
