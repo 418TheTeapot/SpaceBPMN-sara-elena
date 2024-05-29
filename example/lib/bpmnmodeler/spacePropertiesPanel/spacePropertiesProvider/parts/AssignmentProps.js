@@ -42,7 +42,7 @@ export function Assignment(props) {
             </div>
             {getValues().map((item, index) => (
                 <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
-                    <div style={{ flex: 1, marginRight: '10px' }}>
+                    <div style={{ flex: 0.2, marginRight: '0px'}}>
                         <TextFieldEntry
                             id={`${id}-key-${index}`}
                             element={element}
@@ -57,7 +57,7 @@ export function Assignment(props) {
                             debounce={debounce}
                         />
                     </div>
-                    <div style={{ flex: 1, marginRight: '10px' }}>
+                    <div style={{ flex: 0.2, marginRight: '0px'}}>
                         <TextFieldEntry
                             id={`${id}-value-${index}`}
                             element={element}
@@ -79,7 +79,7 @@ export function Assignment(props) {
                             border: 'none',
                             cursor: 'pointer',
                             fontSize: '12px',
-                            marginLeft: '1px'
+                            //marginLeft: '1px'
                         }}>
                         Remove
                     </button>
