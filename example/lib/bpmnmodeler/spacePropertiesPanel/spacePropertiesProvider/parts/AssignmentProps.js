@@ -46,7 +46,7 @@ export function Assignment(props) {
                         id={`${id}-key-${index}`}
                         element={element}
                         description={translate('ex."add"')}
-                        label={`Assignment ${index + 1}`}
+                        label={`Attribute ${index + 1}`}
                         getValue={() => item.key}
                         setValue={(newKey) => {
                             const updatedItems = getValues();
@@ -54,7 +54,7 @@ export function Assignment(props) {
                             setValues(updatedItems);
                         }}
                         debounce={debounce}
-                        style={{ flex: 2, marginRight: '1px' }}
+                        style={{ flex: 1, marginRight: '1px' }}
                     />
                     <TextFieldEntry
                         id={`${id}-value-${index}`}
