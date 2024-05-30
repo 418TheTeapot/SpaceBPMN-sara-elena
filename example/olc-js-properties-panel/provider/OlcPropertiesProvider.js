@@ -30,22 +30,12 @@ function CustomGroup(element, injector) {
         ...AssignmentOlcProps({ element })
     ];
 
-    if(is(element, 'space:Place')) {
-        return {
+    return {
             id: 'place',
-            label: translate('Place'),
+            label: translate('SpaceBPMN properties'),
             entries,
             component: Group
         };
-    } else if(is(element, 'space:Transition')){
-        return {
-            id: 'place',
-            label: translate('Transition'),
-            entries,
-            component: Group
-        };
-    }
-
 
 }
 

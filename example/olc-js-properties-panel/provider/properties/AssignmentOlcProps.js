@@ -43,7 +43,7 @@ function Assignment(props) {
     return (
         <div>
             <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
-                <span style={{ marginRight: '8px' }}>{translate('Add Assignment')}</span>
+                <span style={{ marginRight: '8px' }}>{translate('Add Attribute')}</span>
                 <button
                     onClick={addAttribute}
                     style={{ background: 'white', color: 'black', border: '1px solid black', borderRadius: '3px', cursor: 'pointer', fontSize: '16px' }}>
@@ -55,8 +55,8 @@ function Assignment(props) {
                     <TextFieldEntry
                         id={`${id}-key-${index}`}
                         element={element}
-                        description={translate('ex.LUX')}
-                        label={`Attributo ${index + 1}`}
+                        description={translate('ex."lux"')}
+                        label={`Attribute ${index + 1}`}
                         getValue={() => item.key}
                         setValue={(newKey) => {
                             const updatedItems = getValues();
@@ -69,8 +69,8 @@ function Assignment(props) {
                     <TextFieldEntry
                         id={`${id}-value-${index}`}
                         element={element}
-                        description={translate('ON')}
-                        label={`Valore ${index + 1}`}
+                        description={translate('ex."on"')}
+                        label={`Value ${index + 1}`}
                         getValue={() => item.value}
                         setValue={(newValue) => {
                             const updatedItems = getValues();

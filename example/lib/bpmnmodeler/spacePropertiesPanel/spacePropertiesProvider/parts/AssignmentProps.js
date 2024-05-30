@@ -41,37 +41,35 @@ export function Assignment(props) {
                 </button>
             </div>
             {getValues().map((item, index) => (
-                <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
-                    <div style={{ flex: 0.2, marginRight: '0px'}}>
-                        <TextFieldEntry
-                            id={`${id}-key-${index}`}
-                            element={element}
-                            description={translate('Place.attribute')}
-                            label={`Attributo ${index + 1}`}
-                            getValue={() => item.key}
-                            setValue={(newKey) => {
-                                const updatedItems = getValues();
-                                updatedItems[index].key = newKey;
-                                setValues(updatedItems);
-                            }}
-                            debounce={debounce}
-                        />
-                    </div>
-                    <div style={{ flex: 0.2, marginRight: '0px'}}>
-                        <TextFieldEntry
-                            id={`${id}-value-${index}`}
-                            element={element}
-                            description={translate('Attribute.value')}
-                            label={`Valore ${index + 1}`}
-                            getValue={() => item.value}
-                            setValue={(newValue) => {
-                                const updatedItems = getValues();
-                                updatedItems[index].value = newValue;
-                                setValues(updatedItems);
-                            }}
-                            debounce={debounce}
-                        />
-                    </div>
+                < div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
+                    <TextFieldEntry
+                        id={`${id}-key-${index}`}
+                        element={element}
+                        description={translate('ex."add"')}
+                        label={`Assignment ${index + 1}`}
+                        getValue={() => item.key}
+                        setValue={(newKey) => {
+                            const updatedItems = getValues();
+                            updatedItems[index].key = newKey;
+                            setValues(updatedItems);
+                        }}
+                        debounce={debounce}
+                        style={{ flex: 2, marginRight: '1px' }}
+                    />
+                    <TextFieldEntry
+                        id={`${id}-value-${index}`}
+                        element={element}
+                        description={translate('ex."p1 p2"')}
+                        label={`Value ${index + 1}`}
+                        getValue={() => item.value}
+                        setValue={(newValue) => {
+                            const updatedItems = getValues();
+                            updatedItems[index].value = newValue;
+                            setValues(updatedItems);
+                        }}
+                        debounce={debounce}
+                        style={{ flex: 1, marginRight: '1px' }}
+                    />
                     <button
                         onClick={() => removeAttribute(index)}
                         style={{
@@ -79,7 +77,7 @@ export function Assignment(props) {
                             border: 'none',
                             cursor: 'pointer',
                             fontSize: '12px',
-                            //marginLeft: '1px'
+                            marginLeft: '1px'
                         }}>
                         Remove
                     </button>

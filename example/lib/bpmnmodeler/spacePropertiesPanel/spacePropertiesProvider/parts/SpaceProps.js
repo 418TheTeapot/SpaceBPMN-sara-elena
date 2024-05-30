@@ -115,7 +115,7 @@ function Root(props) {
             ...options
         );
       }
-      console.log(newOptions);
+      //console.log(newOptions);
       return newOptions;
     }
   }
