@@ -33,7 +33,9 @@ export function Assignment(props) {
     return (
         <div>
             <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
-                <span style={{ marginRight: '8px' }}>{translate('Add Assignment')}</span>
+                <span style={{ marginRight: '8px' }}>
+                    {translate('Add Assignment')}
+                </span>
                 <button
                     onClick={addAttribute}
                     style={{ background: 'white', color: 'black', border: '1px solid black', borderRadius: '3px', cursor: 'pointer', fontSize: '16px' }}>
