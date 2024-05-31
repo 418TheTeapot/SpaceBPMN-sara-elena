@@ -1,5 +1,6 @@
 import { useService } from "../../hooks";
 import { isTextFieldEntryEdited, TextFieldEntry } from "@bpmn-io/properties-panel";
+import {is} from "bpmn-js/lib/util/ModelUtil";
 
 export function AssignmentOlcProps(props) {
     const { element } = props;
@@ -40,10 +41,16 @@ function Assignment(props) {
         setValues(updatedItems);
     };
 
+
+    const assignmentLabel = translate('Add Transition Assignment');
+    const shouldTranslate = is(element, 'space:Transition');
+
     return (
         <div>
             <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
-                <span style={{ marginRight: '8px' }}>{translate('Add Attribute')}</span>
+                <span style={{ marginRight: '8px' }}>
+                    {shouldTranslate ? assignmentLabel : 'Add Place Assignment'}
+                </span>
                 <button
                     onClick={addAttribute}
                     style={{ background: 'white', color: 'black', border: '1px solid black', borderRadius: '3px', cursor: 'pointer', fontSize: '16px' }}>

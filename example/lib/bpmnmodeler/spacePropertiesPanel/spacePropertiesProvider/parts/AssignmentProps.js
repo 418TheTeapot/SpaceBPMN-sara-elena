@@ -33,7 +33,9 @@ export function Assignment(props) {
     return (
         <div>
             <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
-                <span style={{ marginRight: '8px' }}>{translate('Add Assignment')}</span>
+                <span style={{ marginRight: '8px' }}>
+                    {translate('Add Assignment')}
+                </span>
                 <button
                     onClick={addAttribute}
                     style={{ background: 'white', color: 'black', border: '1px solid black', borderRadius: '3px', cursor: 'pointer', fontSize: '16px' }}>
@@ -46,7 +48,7 @@ export function Assignment(props) {
                         id={`${id}-key-${index}`}
                         element={element}
                         description={translate('ex."add"')}
-                        label={`Assignment ${index + 1}`}
+                        label={`Attribute ${index + 1}`}
                         getValue={() => item.key}
                         setValue={(newKey) => {
                             const updatedItems = getValues();
@@ -54,7 +56,7 @@ export function Assignment(props) {
                             setValues(updatedItems);
                         }}
                         debounce={debounce}
-                        style={{ flex: 2, marginRight: '1px' }}
+                        style={{ flex: 1, marginRight: '1px' }}
                     />
                     <TextFieldEntry
                         id={`${id}-value-${index}`}
