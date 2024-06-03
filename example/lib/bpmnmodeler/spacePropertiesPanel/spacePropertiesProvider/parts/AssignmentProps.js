@@ -61,7 +61,7 @@ export function Assignment(props) {
                     <TextFieldEntry
                         id={`${id}-value-${index}`}
                         element={element}
-                        description={translate('ex."p1 p2"')}
+                        description={translate('ex."p1.p2"')}
                         label={`Value ${index + 1}`}
                         getValue={() => item.value}
                         setValue={(newValue) => {
