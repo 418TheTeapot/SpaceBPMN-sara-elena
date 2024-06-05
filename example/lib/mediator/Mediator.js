@@ -1,3 +1,5 @@
+// Mediator.js
+
 import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 import inherits from 'inherits';
 import { isFunction, without } from 'min-dash';
@@ -37,7 +39,7 @@ export default function Mediator() {
     this._executed = [];
     this._on = [];
 
-    //Propagate mouse events in order to defocus elements and close menus
+    // Propagate mouse events in order to defocus elements and close menus
     this.on(['element.mousedown', 'element.mouseup', 'element.click'], DEFAULT_EVENT_PRIORITY - 1, (event, data, hook) => {
         if (!event.handledByMediator) {
             const { originalEvent, element } = event;
@@ -49,7 +51,6 @@ export default function Mediator() {
             event.cancelBubble = true;
         }
     });
-
 }
 
 Mediator.prototype.getHooks = function () {
@@ -100,7 +101,7 @@ function wrapCallback(callback, hook) {
 
 Mediator.prototype.addState = function (olcState) {
     var canva1 = new CanvaUtil(this.olcModelerHook.modeler.get('canvas'));
-    console.log(canva1)
+    // console.log(canva1)
 }
 
 Mediator.prototype.confirmStateDeletion = function (olcState) {
@@ -122,10 +123,22 @@ Mediator.prototype.olcShapeChanged = function (shapes1) {
 
 Mediator.prototype.olcCanvaChanged = function (canva1) {
     var canva1 = new CanvaUtil(this.olcModelerHook.modeler.get('canvas'));
-    console.log("olc canvas ", canva1)
+    // console.log("olc canvas ", canva1)
     this.spaceModelerHook.modeler.handleCanvaChanged(canva1)
 }
 
+Mediator.prototype.switchPropertyPanel = function(element) {
+    const hook = this.getHookForElement(element);
+    const bpmnPanel = document.getElementById('properties-panel');
+    const olcPanel = document.getElementById('properties-panel-olc');
+    if (hook.title === 'BPMN') {
+        bpmnPanel.classList.add('open');
+        olcPanel.classList.remove('open');
+    } else if (hook.title === 'Space') {
+        olcPanel.classList.add('open');
+        bpmnPanel.classList.remove('open');
+    }
+};
 
 Mediator.prototype.focusElement = function(element) {
     const hook = this.getHookForElement(element);
@@ -140,7 +153,7 @@ Mediator.prototype.getHookForElement = function(element) {
     const elementNamespace = namespace(element);
     const modelers = this.getHooks().filter(hook => hook.getNamespace() === elementNamespace);
     if (modelers.length !== 1) {
-        throw new Error('Modeler for element '+element+' was not unique or present: '+modelers);
+        throw new Error('Modeler for element ' + element + ' was not unique or present: ' + modelers);
     }
     return modelers[0];
 }
@@ -180,16 +193,12 @@ Mediator.prototype.OlcModelerHook = function (eventBus, olcModeler) {
         });
     });
 
-
-
-    //importante mi permette di avere .places property come ref del bpm space modeler
+    // important: allows .places property as ref of bpm space modeler
     eventBus.on(OlcEvents.DEFINITIONS_CHANGED, event => {
         this.mediator.olcListChanged(event.definitions.places);
         this.mediator.olcShapeChanged(event.definitions.shapes);
         this.mediator.olcCanvaChanged(event.definitions.canvaspace);
     });
-
-
 
     this.locationOfElement = function(element) {
         return 'Space ' + root(element).name;
@@ -204,21 +213,18 @@ Mediator.prototype.OlcModelerHook.$inject = [
 
 Mediator.prototype.OlcModelerHook.isHook = true;
 
-
 // === Space Modeler Hook
 Mediator.prototype.SpaceModelerHook = function (eventBus, spaceModeler) {
     CommandInterceptor.call(this, eventBus);
-    AbstractHook.call(this, spaceModeler, 'Space');
+    AbstractHook.call(this, spaceModeler, 'BPMN');
     this.mediator.spaceModelerHook = this;
     this.eventBus = eventBus;
-
-
 }
 inherits(Mediator.prototype.SpaceModelerHook, CommandInterceptor);
 
 Mediator.prototype.SpaceModelerHook.$inject = [
     'eventBus',
-    'spaceModeler',
+    'spaceModeler'
     //'olcModeler'
 ];
 

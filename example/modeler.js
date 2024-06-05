@@ -3,37 +3,27 @@
 'use strict';
 import $ from 'jquery';
 import TokenSimulationModule from '..';
-
-
 import AddExporter from '@bpmn-io/add-exporter';
 import {
     BpmnPropertiesPanelModule,
     BpmnPropertiesProviderModule
 } from 'bpmn-js-properties-panel';
 
-
 import fileDrop from 'file-drops';
-
 import fileOpen from 'file-open';
-
 import download from 'downloadjs';
 import Zip from 'jszip';
-
 import exampleXML from '../example/resources/prova.bpmn';
-
 import OlcModeler from './lib/olcmodeler/OlcModeler';
 import Mediator from './lib/mediator/Mediator';
 import BpmnSpaceModeler from './lib/bpmnmodeler/bpmnSpaceModeler';
 import { downloadZIP, uploadZIP } from './lib/util/FileUtil';
 import {OlcPropertiesPanelModule, OlcPropertiesProviderModule} from "./olc-js-properties-panel";
 
-
-
 const url = new URL(window.location.href);
 const persistent = url.searchParams.has('p');
 const active = url.searchParams.has('e');
 const presentationMode = url.searchParams.has('pm');
-
 
 let fileName = 'diagram.bpmn';
 
@@ -47,23 +37,19 @@ const initialDiagram = (() => {
 
 function showMessage(cls, message) {
     const messageEl = document.querySelector('.drop-message');
-
     messageEl.textContent = message;
     messageEl.className = `drop-message ${cls || ''}`;
-
     messageEl.style.display = 'block';
 }
 
 function hideMessage() {
     const messageEl = document.querySelector('.drop-message');
-
     messageEl.style.display = 'none';
 }
 
 if (persistent) {
     hideMessage();
 }
-
 
 // Mediator for communication between the two modelers
 var mediator = new Mediator();
@@ -128,7 +114,6 @@ function openDiagram(diagram) {
             if (warnings.length) {
                 console.warn(warnings);
             }
-
             modeler.get('canvas').zoom('fit-viewport');
         })
         .catch(err => {
@@ -140,11 +125,8 @@ function openFile(files) {
     if (!files.length) {
         return;
     }
-
     hideMessage();
-
     const fileName = files[0].name;
-
     openDiagram(files[0].contents);
 }
 
@@ -153,7 +135,6 @@ document.body.addEventListener('dragover', fileDrop('Open BPMN diagram', openFil
 function loadDiagram(xml) {
     const fileInput = document.createElement("input");
     document.body.appendChild(fileInput);
-
     $(fileInput).attr({ 'type': 'file' }).on('change', function (e) {
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -212,7 +193,6 @@ document.body.addEventListener('keydown', function (event) {
         event.preventDefault();
         downloadDiagram();
     }
-
     if (event.code === 'KeyO' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         fileOpen().then(openFile);
@@ -243,7 +223,6 @@ function toggleOlcProperties(open) {
     } else {
         url.searchParams.delete('olcpp');
     }
-
     history.replaceState({}, document.title, url.toString());
     olcPropertiesPanel.classList.toggle('open', open);
 }
@@ -256,7 +235,6 @@ olcPropertiesPanelResizer.addEventListener('dragstart', function (event) {
     const img = new Image();
     img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
     event.dataTransfer.setDragImage(img, 1, 1);
-
     olcStartX = event.screenX;
     olcStartWidth = olcPropertiesPanel.getBoundingClientRect().width;
 });
@@ -265,7 +243,6 @@ olcPropertiesPanelResizer.addEventListener('drag', function (event) {
     if (!event.screenX) {
         return;
     }
-
     const delta = event.screenX - olcStartX;
     const width = olcStartWidth - delta;
     const open = width > 200;
@@ -283,7 +260,6 @@ function toggleProperties(open) {
     } else {
         url.searchParams.delete('pp');
     }
-
     history.replaceState({}, document.title, url.toString());
     propertiesPanel.classList.toggle('open', open);
 }
@@ -296,7 +272,6 @@ propertiesPanelResizer.addEventListener('dragstart', function (event) {
     const img = new Image();
     img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
     event.dataTransfer.setDragImage(img, 1, 1);
-
     startX = event.screenX;
     startWidth = propertiesPanel.getBoundingClientRect().width;
 });
@@ -305,7 +280,6 @@ propertiesPanelResizer.addEventListener('drag', function (event) {
     if (!event.screenX) {
         return;
     }
-
     const delta = event.screenX - startX;
     const width = startWidth - delta;
     const open = width > 200;
@@ -321,7 +295,6 @@ if (remoteDiagram) {
             if (r.ok) {
                 return r.text();
             }
-
             throw new Error(`Status ${r.status}`);
         }
     ).then(
@@ -391,3 +364,12 @@ function dragend() {
     });
     dragTarget = undefined;
 }
+
+// Add event listeners for element selection
+modeler.get('eventBus').on('element.click', function(event) {
+    mediator.switchPropertyPanel(event.element);
+});
+
+olcModeler.get('eventBus').on('element.click', function(event) {
+    mediator.switchPropertyPanel(event.element);
+});
