@@ -35,7 +35,7 @@ export default function BpmnSpaceModeler(options) {
     options.moddleExtensions = {
         space: spaceModdleDescriptor,
         time: executionTimeDescriptor,
-        JP: bpmnExtension // Assicurati che sia presente
+        JP: bpmnExtension
     };
 
     BpmnModeler.call(this, options);
