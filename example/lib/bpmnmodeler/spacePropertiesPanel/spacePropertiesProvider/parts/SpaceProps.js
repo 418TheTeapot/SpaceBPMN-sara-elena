@@ -1,7 +1,6 @@
 import { TextFieldEntry, NumberFieldEntry, isTextFieldEntryEdited, isNumberFieldEntryEdited, SelectEntry, isSelectEntryEdited } from '@bpmn-io/properties-panel';
 import { useService } from 'bpmn-js-properties-panel';
 import { is } from "../../../../util/Util";
-import {  useState } from "@bpmn-io/properties-panel/preact/hooks";
 import { Assignment } from "./AssignmentProps";
 
 

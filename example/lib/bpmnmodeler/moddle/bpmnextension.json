@@ -24,8 +24,7 @@
                     "isReference": true,
                     "type": "space:Place",
                     "isMany": true
-                },
-                {
+                },                {
                     "name": "canvaspace",
                     "isAttr": true,
                     "isReference": true,

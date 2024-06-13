@@ -1,27 +1,20 @@
 import BpmnModeler from 'bpmn-js/lib/Modeler';
-import {assign, without} from 'min-dash';
+import { assign, without } from 'min-dash';
 import bpmnExtension from './moddle/bpmnextension.json';
-import spacePropertiesProviderModule from '../bpmnmodeler/spacePropertiesPanel/spacePropertiesProvider/index.js';
+import spacePropertiesProviderModule from './spacePropertiesPanel/spacePropertiesProvider/provider';
+
 import spaceModdleDescriptor from '../bpmnmodeler/spacePropertiesPanel/descriptors/space.json';
 import { is } from 'bpmn-js/lib/util/ModelUtil';
 import executionTimeDescriptor from '../bpmnmodeler/exectionTime/descriptors/time.json';
 import OlcElementFactory from "../olcmodeler/modeling/OlcElementFactory";
 import OlcUpdater from "../olcmodeler/modeling/OlcUpdater";
 import olcModdleDescriptor from '../olcmodeler/moddle/olc.json';
-
 import OlcRenderer from "../olcmodeler/draw/OlcRenderer";
 import inherits from 'inherits';
 import OlcModdle from "../olcmodeler/moddle/OlcModdle";
 
-
-
-import OlcDescriptors from '../olcmodeler/moddle/olc.json';
-
-console.log('Inizializzazione OlcModdle', { olc: olcModdleDescriptor });
 const olcModdle = new OlcModdle({ olc: olcModdleDescriptor });
 const olcElementFactory = new OlcElementFactory(olcModdle);
-console.log('OlcElementFactory inizializzato:', olcElementFactory);
-console.log('OlcModdle inizializzato:', olcModdle);
 
 export default function BpmnSpaceModeler(options) {
     const customModules = [
@@ -31,8 +24,8 @@ export default function BpmnSpaceModeler(options) {
             'olcUpdater': ['type', OlcUpdater],
             'olcRenderer': ['type', OlcRenderer],
             'olcModdle': ['value', olcModdle],
-            spaceModeler: ['value', this]
-        }
+            spaceModeler: ['value', this],
+        },
     ];
     options.additionalModules = [
         ...customModules,
@@ -42,16 +35,13 @@ export default function BpmnSpaceModeler(options) {
     options.moddleExtensions = {
         space: spaceModdleDescriptor,
         time: executionTimeDescriptor,
-        JP: bpmnExtension
+        JP: bpmnExtension // Assicurati che sia presente
     };
 
     BpmnModeler.call(this, options);
 
-
-
     this.get('eventBus').on('moddleCopy.canCopyProperty', function(context) {
-        if (context.propertyName === 'JP:places' || context.propertyName === 'JP:shapes' || context.propertyName === 'JP:canvaspace') {
-            console.log(context.property);
+        if (context.propertyName === 'JP:condition') {
             return context.property;
         }
     });
@@ -87,6 +77,3 @@ BpmnSpaceModeler.prototype.handleStateDeleted = function (olcPlaces) {
         });
     });
 }
-
-
-
