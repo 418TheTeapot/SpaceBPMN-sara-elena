@@ -37,14 +37,18 @@ const initialDiagram = (() => {
 
 function showMessage(cls, message) {
     const messageEl = document.querySelector('.drop-message');
-    messageEl.textContent = message;
-    messageEl.className = `drop-message ${cls || ''}`;
-    messageEl.style.display = 'block';
+    if (messageEl) {
+        messageEl.textContent = message;
+        messageEl.className = `drop-message ${cls || ''}`;
+        messageEl.style.display = 'block';
+    }
 }
 
 function hideMessage() {
     const messageEl = document.querySelector('.drop-message');
-    messageEl.style.display = 'none';
+    if (messageEl) {
+        messageEl.style.display = 'none';
+    }
 }
 
 if (persistent) {
@@ -98,6 +102,150 @@ var modeler = new BpmnSpaceModeler({
         parent: '#properties-panel'
     }
 });
+
+const olcPropertiesPanel = document.querySelector('#properties-panel-olc');
+const propertiesPanel = document.querySelector('#properties-panel');
+
+const propertiesPanelToggle = document.querySelector('#properties-panel-toggle');
+const olcPropertiesPanelResizer = document.querySelector('#properties-panel-resizer-olc');
+const propertiesPanelResizer = document.querySelector('#properties-panel-resizer');
+
+let startX, startWidth;
+
+function togglePropertiesPanel() {
+    const olcPanelOpen = olcPropertiesPanel && olcPropertiesPanel.classList.contains('open');
+    const bpmnPanelOpen = propertiesPanel && propertiesPanel.classList.contains('open');
+
+    if (olcPanelOpen || bpmnPanelOpen) {
+        // Close both panels if either is open
+        toggleOlcProperties(false);
+        toggleProperties(false);
+    } else {
+        // Otherwise, open the OLC panel by default
+        toggleOlcProperties(true);
+    }
+}
+
+function toggleOlcProperties(open) {
+    if (olcPropertiesPanel) {
+        if (open) {
+            url.searchParams.set('olcpp', '1');
+        } else {
+            url.searchParams.delete('olcpp');
+        }
+        history.replaceState({}, document.title, url.toString());
+        olcPropertiesPanel.classList.toggle('open', open);
+    }
+}
+
+function toggleProperties(open) {
+    if (propertiesPanel) {
+        if (open) {
+            url.searchParams.set('pp', '1');
+        } else {
+            url.searchParams.delete('pp');
+        }
+        history.replaceState({}, document.title, url.toString());
+        propertiesPanel.classList.toggle('open', open);
+    }
+}
+
+if (propertiesPanelToggle) {
+    propertiesPanelToggle.addEventListener('click', function (event) {
+        togglePropertiesPanel();
+    });
+}
+
+if (olcPropertiesPanelResizer) {
+    olcPropertiesPanelResizer.addEventListener('click', function (event) {
+        toggleOlcProperties(!olcPropertiesPanel.classList.contains('open'));
+    });
+
+    olcPropertiesPanelResizer.addEventListener('dragstart', function (event) {
+        const img = new Image();
+        img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+        event.dataTransfer.setDragImage(img, 1, 1);
+        startX = event.screenX;
+        startWidth = olcPropertiesPanel.getBoundingClientRect().width;
+    });
+
+    olcPropertiesPanelResizer.addEventListener('drag', function (event) {
+        if (!event.screenX) {
+            return;
+        }
+        const delta = event.screenX - startX;
+        const width = startWidth - delta;
+        const open = width > 200;
+        olcPropertiesPanel.style.width = open ? `${width}px` : null;
+        toggleOlcProperties(open);
+    });
+}
+
+if (propertiesPanelResizer) {
+    propertiesPanelResizer.addEventListener('click', function (event) {
+        toggleProperties(!propertiesPanel.classList.contains('open'));
+    });
+
+    propertiesPanelResizer.addEventListener('dragstart', function (event) {
+        const img = new Image();
+        img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+        event.dataTransfer.setDragImage(img, 1, 1);
+        startX = event.screenX;
+        startWidth = propertiesPanel.getBoundingClientRect().width;
+    });
+
+    propertiesPanelResizer.addEventListener('drag', function (event) {
+        if (!event.screenX) {
+            return;
+        }
+        const delta = event.screenX - startX;
+        const width = startWidth - delta;
+        const open = width > 200;
+        propertiesPanel.style.width = open ? `${width}px` : null;
+        toggleProperties(open);
+    });
+}
+
+const remoteDiagram = url.searchParams.get('diagram');
+
+if (remoteDiagram) {
+    fetch(remoteDiagram).then(
+        r => {
+            if (r.ok) {
+                return r.text();
+            }
+            throw new Error(`Status ${r.status}`);
+        }
+    ).then(
+        text => openDiagram(text)
+    ).catch(
+        err => {
+            showMessage('error', `Failed to open remote diagram: ${err.message}`);
+            openDiagram(initialDiagram);
+        }
+    );
+} else {
+    openDiagram(initialDiagram);
+}
+
+toggleProperties(url.searchParams.has('pp'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 async function createNewDiagram() {
     await modeler.importXML(exampleXML);
@@ -212,104 +360,10 @@ document.querySelector('#download-button').addEventListener('click', () => expor
     downloadZIP('SpaceBPMN.zip', zip, 'base64');
 }));
 
-// Toggle properties panel for OLC modeler
-const olcPropertiesPanel = document.querySelector('#properties-panel-olc');
-const olcPropertiesPanelResizer = document.querySelector('#properties-panel-resizer-olc');
-let olcStartX, olcStartWidth;
 
-function toggleOlcProperties(open) {
-    if (open) {
-        url.searchParams.set('olcpp', '1');
-    } else {
-        url.searchParams.delete('olcpp');
-    }
-    history.replaceState({}, document.title, url.toString());
-    olcPropertiesPanel.classList.toggle('open', open);
-}
 
-olcPropertiesPanelResizer.addEventListener('click', function (event) {
-    toggleOlcProperties(!olcPropertiesPanel.classList.contains('open'));
-});
 
-olcPropertiesPanelResizer.addEventListener('dragstart', function (event) {
-    const img = new Image();
-    img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-    event.dataTransfer.setDragImage(img, 1, 1);
-    olcStartX = event.screenX;
-    olcStartWidth = olcPropertiesPanel.getBoundingClientRect().width;
-});
 
-olcPropertiesPanelResizer.addEventListener('drag', function (event) {
-    if (!event.screenX) {
-        return;
-    }
-    const delta = event.screenX - olcStartX;
-    const width = olcStartWidth - delta;
-    const open = width > 200;
-    olcPropertiesPanel.style.width = open ? `${width}px` : null;
-    toggleOlcProperties(open);
-});
-
-const propertiesPanel = document.querySelector('#properties-panel');
-const propertiesPanelResizer = document.querySelector('#properties-panel-resizer');
-let startX, startWidth;
-
-function toggleProperties(open) {
-    if (open) {
-        url.searchParams.set('pp', '1');
-    } else {
-        url.searchParams.delete('pp');
-    }
-    history.replaceState({}, document.title, url.toString());
-    propertiesPanel.classList.toggle('open', open);
-}
-
-propertiesPanelResizer.addEventListener('click', function (event) {
-    toggleProperties(!propertiesPanel.classList.contains('open'));
-});
-
-propertiesPanelResizer.addEventListener('dragstart', function (event) {
-    const img = new Image();
-    img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-    event.dataTransfer.setDragImage(img, 1, 1);
-    startX = event.screenX;
-    startWidth = propertiesPanel.getBoundingClientRect().width;
-});
-
-propertiesPanelResizer.addEventListener('drag', function (event) {
-    if (!event.screenX) {
-        return;
-    }
-    const delta = event.screenX - startX;
-    const width = startWidth - delta;
-    const open = width > 200;
-    propertiesPanel.style.width = open ? `${width}px` : null;
-    toggleProperties(open);
-});
-
-const remoteDiagram = url.searchParams.get('diagram');
-
-if (remoteDiagram) {
-    fetch(remoteDiagram).then(
-        r => {
-            if (r.ok) {
-                return r.text();
-            }
-            throw new Error(`Status ${r.status}`);
-        }
-    ).then(
-        text => openDiagram(text)
-    ).catch(
-        err => {
-            showMessage('error', `Failed to open remote diagram: ${err.message}`);
-            openDiagram(initialDiagram);
-        }
-    );
-} else {
-    openDiagram(initialDiagram);
-}
-
-toggleProperties(url.searchParams.has('pp'));
 
 var dragTarget;
 

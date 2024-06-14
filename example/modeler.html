@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-
     <title>Modeler | SpaceBPMN Demo</title>
-
     <link rel="stylesheet" href="./dist/vendor/bpmn-js/assets/diagram-js.css" />
     <link rel="stylesheet" href="./dist/vendor/bpmn-js/assets/bpmn-js.css" />
     <link rel="stylesheet" href="./dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn-embedded.css" />
@@ -23,11 +21,10 @@
 <body>
 <div id="nav-bar" class="topnav" id="myTopnav">
     <a href="index.html" class="active" style="padding: 4px 4px 4px 4px;"><img src="./icons/home.png" alt="Mida Web Client" style="height:42px"></img></a>
-    <a style="float:right" href="#" class="properties-panel-resize" id="properties-panel-resizer-olc" draggable="true"><i class="fa fa-circle-o"></i> SPACE Property Panel</a>
-    <a style="float:right" href="#" class="properties-panel-resize" id="properties-panel-resizer" draggable="true"><i class="fa fa-columns"></i> BPMN Property Panel</a>
+    <a style="float:right" href="#" class="properties-panel-resize" id="properties-panel-toggle" draggable="true"><i class="fa fa-columns"></i> Properties Panel</a>
     <a href="https://github.com/jessicapicc/SpaceBPMN" class="links" target="_blank" rel="noopener">View on GitHub</a>
     <a style="float:right" href="#" class="download-button" id="download-button"><i class="fa fa-download"></i>Save</a>
-    <a style="float:right" href="#"  class="open-diagram" id="open-diagram"><i class="fa fa-upload"></i>Open</a>
+    <a style="float:right" href="#" class="open-diagram" id="open-diagram"><i class="fa fa-upload"></i>Open</a>
 </div>
 
 <div id="main" class="mainContent">
@@ -36,18 +33,13 @@
             <div class="canvas" id="canvas"></div>
             <div class="properties-panel" id="properties-panel"></div>
             <div class="properties-panel" id="properties-panel-olc"></div>
-
         </div>
     </div>
-
     <div class="divider vertical"></div>
-
     <div class="contentRight">
         <div class="canvas" id="olc-canvas"></div>
     </div>
 </div>
-
-
 <script src="./modeler.bundle.js"></script>
 </body>
 </html>
