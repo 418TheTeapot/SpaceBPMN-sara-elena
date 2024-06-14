@@ -66,7 +66,7 @@ function Guard(props) {
       id={id}
       element={element}
       description={translate('')}
-      label={translate('Enable Places')}
+      label={translate('Guard')}
       getValue={getValue}
       setValue={setValue}
       debounce={debounce}

@@ -42,14 +42,14 @@ function Assignment(props) {
     };
 
 
-    const assignmentLabel = translate('Add Transition Assignment');
+    const assignmentLabel = translate('Add environmental Attribute');
     const shouldTranslate = is(element, 'space:Transition');
 
     return (
         <div>
             <div style={{ marginLeft: '12px', display: 'flex', justifyContent: 'left', alignItems: 'center', marginBottom: '1px' }}>
                 <span style={{ marginRight: '8px' }}>
-                    {shouldTranslate ? assignmentLabel : 'Add Place Assignment'}
+                    {shouldTranslate ? assignmentLabel : 'Add environmental Attribute'}
                 </span>
                 <button
                     onClick={addAttribute}
