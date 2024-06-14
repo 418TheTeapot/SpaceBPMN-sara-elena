@@ -20,6 +20,9 @@ import BpmnSpaceModeler from './lib/bpmnmodeler/bpmnSpaceModeler';
 import { downloadZIP, uploadZIP } from './lib/util/FileUtil';
 import {OlcPropertiesPanelModule, OlcPropertiesProviderModule} from "./olc-js-properties-panel";
 
+import BpmnColorPickerModule from 'bpmn-js-color-picker';
+
+
 const url = new URL(window.location.href);
 const persistent = url.searchParams.has('p');
 const active = url.searchParams.has('e');
@@ -97,6 +100,8 @@ var modeler = new BpmnSpaceModeler({
         BpmnPropertiesProviderModule,
         TokenSimulationModule,
         AddExporter,
+        BpmnColorPickerModule,
+
     ],
     propertiesPanel: {
         parent: '#properties-panel'
@@ -117,11 +122,9 @@ function togglePropertiesPanel() {
     const bpmnPanelOpen = propertiesPanel && propertiesPanel.classList.contains('open');
 
     if (olcPanelOpen || bpmnPanelOpen) {
-        // Close both panels if either is open
         toggleOlcProperties(false);
         toggleProperties(false);
     } else {
-        // Otherwise, open the OLC panel by default
         toggleOlcProperties(true);
     }
 }
