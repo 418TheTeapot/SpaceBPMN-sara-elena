@@ -20,6 +20,7 @@ import EditorActionsModule from '../common/editor-actions';
 import CopyPasteModule from 'diagram-js/lib/features/copy-paste';
 import KeyboardModule from '../common/keyboard';
 
+
 // import {OlcPropertiesPanelModule} from '../example/olc-js-properties-panel';
 import OlcPaletteModule from './palette';
 import OlcDrawModule from './draw';
@@ -72,7 +73,8 @@ export default function OlcModeler(options) {
     ZoomScrollModule,
     EditorActionsModule,
     KeyboardModule,
-    CopyPasteModule
+    CopyPasteModule,
+    //PopupMenu
   ];
 
   // our own modules, contributing controls, customizations, and more

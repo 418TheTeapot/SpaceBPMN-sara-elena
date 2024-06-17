@@ -75,6 +75,7 @@ var olcModeler = new OlcModeler({
         },
         OlcPropertiesProviderModule,
         OlcPropertiesPanelModule,
+        // BpmnColorPickerModule,
     ],
     propertiesPanel: {
         parent: '#properties-panel-olc',
@@ -100,7 +101,7 @@ var modeler = new BpmnSpaceModeler({
         BpmnPropertiesProviderModule,
         TokenSimulationModule,
         AddExporter,
-        BpmnColorPickerModule,
+        //BpmnColorPickerModule,
 
     ],
     propertiesPanel: {

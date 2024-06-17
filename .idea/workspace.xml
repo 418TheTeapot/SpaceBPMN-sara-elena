@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="disegna MA MALE">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+    <list default="true" id="42eb7927-93ef-4bbe-ac12-7c5828022e74" name="Changes" comment="task rossa">
+      <change beforePath="$PROJECT_DIR$/.idea/SpaceBPMN-sara-elena.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SpaceBPMN-sara-elena.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/olcmodeler/OlcModeler.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/olcmodeler/OlcModeler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/modeler.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/modeler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/ViolationNotification.js/ViolationNotification.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/ViolationNotification.js/ViolationNotification.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/log/Log.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/log/Log.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/simulation-state/SimulationState.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/simulation-state/SimulationState.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/simulation-state/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/simulation-state/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/simulator/behaviors/ActivityBehavior.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/simulator/behaviors/ActivityBehavior.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="elena" />
+        <entry key="$PROJECT_DIR$" value="master-sara" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -61,7 +70,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sarav/OneDrive/Documenti/GitHub/SpaceBPMN-sara-elena/example/olc-js-properties-panel/provider&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sara.avaltroni/Downloads/diagram-js-develop&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -71,7 +80,7 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;npm.dev.executor&quot;: &quot;Run&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.3.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -84,10 +93,11 @@
       <recent name="C:\Users\sarav\OneDrive\Documenti\GitHub\SpaceBPMN-sara-elena\example\lib\olcmodeler" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sara.avaltroni\Documents\GitHub\SpaceBPMN-sara-elena\lib\features\ViolationNotification.js" />
+      <recent name="C:\Users\sara.avaltroni\Documents\GitHub\SpaceBPMN-sara-elena\lib\features\simulation-state" />
+      <recent name="C:\Users\sara.avaltroni\Documents\GitHub\SpaceBPMN-sara-elena\example\lib\olcmodeler" />
+      <recent name="C:\Users\sara.avaltroni\Documents\GitHub\SpaceBPMN-sara-elena\example\lib\popup-menu" />
       <recent name="C:\Users\sarav\OneDrive\Documenti\GitHub\SpaceBPMN-sara-elena\example\olc-js-properties-panel\provider\properties\toDelete" />
-      <recent name="C:\Users\sarav\OneDrive\Documenti\GitHub\SpaceBPMN-sara-elena\example\olc-js-properties-panel\provider\properties\PlaceProps" />
-      <recent name="C:\Users\sarav\OneDrive\Documenti\GitHub\SpaceBPMN-sara-elena\example\lib\spacemodeler\spaceOlcPropertiesPanel\spaceOlcProperteisProvider" />
-      <recent name="C:\Users\sarav\OneDrive\Documenti\GitHub\SpaceBPMN-sara-elena\example" />
     </key>
   </component>
   <component name="RunManager">
@@ -104,14 +114,15 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.dev" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
       </set>
     </attachedChunks>
   </component>
@@ -162,6 +173,10 @@
       <workItem from="1716648165738" duration="32250000" />
       <workItem from="1716682722253" duration="12609000" />
       <workItem from="1717775931027" duration="117000" />
+      <workItem from="1718356820058" duration="289000" />
+      <workItem from="1718357132918" duration="183000" />
+      <workItem from="1718363795786" duration="11566000" />
+      <workItem from="1718609121805" duration="710000" />
     </task>
     <task id="LOCAL-00001" summary="olc-js-pp">
       <option name="closed" value="true" />
@@ -387,7 +402,31 @@
       <option name="project" value="LOCAL" />
       <updated>1716673993185</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Attributes Panel">
+      <option name="closed" value="true" />
+      <created>1718346563974</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1718346563974</updated>
+    </task>
+    <task id="LOCAL-00030" summary="panel unico">
+      <option name="closed" value="true" />
+      <created>1718349305293</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1718349305293</updated>
+    </task>
+    <task id="LOCAL-00031" summary="task rossa">
+      <option name="closed" value="true" />
+      <created>1718366392963</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1718366392963</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -417,9 +456,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Global !!! da vedere bene gli hook e altro" />
-    <MESSAGE value="Si attaaccaaaaaaaaaaaaaaaaaaaaaaa" />
-    <MESSAGE value="prova Assi" />
     <MESSAGE value="caprie come estendere il json" />
     <MESSAGE value="Lux appare ma non salva XML" />
     <MESSAGE value="Lux salva XML, ma cosi non va bene" />
@@ -442,6 +478,9 @@
     <MESSAGE value="FUNZIONAAAAAAAAAAAAAAAAAAAAA&#10;&#10;AGGIUNGERE REGOLA PESOOOO" />
     <MESSAGE value="lo salva ma non lo disegna" />
     <MESSAGE value="disegna MA MALE" />
-    <option name="LAST_COMMIT_MESSAGE" value="disegna MA MALE" />
+    <MESSAGE value="Attributes Panel" />
+    <MESSAGE value="panel unico" />
+    <MESSAGE value="task rossa" />
+    <option name="LAST_COMMIT_MESSAGE" value="task rossa" />
   </component>
 </project>
