@@ -245,12 +245,6 @@ toggleProperties(url.searchParams.has('pp'));
 
 
 
-
-
-
-
-
-
 async function createNewDiagram() {
     await modeler.importXML(exampleXML);
     await olcModeler.createNew(); // Initialize XML of the OLC modeler
