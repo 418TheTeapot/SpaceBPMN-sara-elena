@@ -18,10 +18,10 @@ import OlcModeler from './lib/olcmodeler/OlcModeler';
 import Mediator from './lib/mediator/Mediator';
 import BpmnSpaceModeler from './lib/bpmnmodeler/bpmnSpaceModeler';
 import { downloadZIP, uploadZIP } from './lib/util/FileUtil';
-import { OlcPropertiesPanelModule, OlcPropertiesProviderModule } from "./olc-js-properties-panel";
+import {OlcPropertiesPanelModule, OlcPropertiesProviderModule} from "./olc-js-properties-panel";
 
 import BpmnColorPickerModule from 'bpmn-js-color-picker';
-import {RESET_SIMULATION_EVENT} from "../lib/util/EventHelper";
+
 
 const url = new URL(window.location.href);
 const persistent = url.searchParams.has('p');
@@ -108,52 +108,6 @@ var modeler = new BpmnSpaceModeler({
         parent: '#properties-panel'
     }
 });
-
-
-let initialSpaceXML;
-let initialOLCXML;
-let initialStateSaved = false;
-
-async function importFromZip(zipData) {
-    const zip = await Zip.loadAsync(zipData, { base64: true });
-    const files = {
-        space: zip.file('behaviour.bpmn'),
-        olcs: zip.file('space.xml')
-    };
-
-    Object.keys(files).forEach(key => {
-        if (!files[key]) {
-            throw new Error('Missing file: ' + key);
-        }
-    });
-
-    // Extract XML strings
-    const spaceXML = await files.space.async("string");
-    const olcXML = await files.olcs.async("string");
-
-    // Save initial state only once
-    if (!initialStateSaved) {
-        initialSpaceXML = spaceXML;
-        initialOLCXML = olcXML;
-        initialStateSaved = true;
-    }
-
-    // Import the diagrams into the modelers
-    await olcModeler.importXML(olcXML);
-    await modeler.importXML(spaceXML);
-}
-
-export async function restoreInitialState() {
-    if (initialSpaceXML && initialOLCXML) {
-        await olcModeler.importXML(initialOLCXML);
-        await modeler.importXML(initialSpaceXML);
-    } else {
-        console.error('Initial state not saved');
-    }
-}
-
-
-
 
 const olcPropertiesPanel = document.querySelector('#properties-panel-olc');
 const propertiesPanel = document.querySelector('#properties-panel');
@@ -280,9 +234,20 @@ if (remoteDiagram) {
 
 toggleProperties(url.searchParams.has('pp'));
 
+
+
+
+
+
+
+
+
+
+
+
 async function createNewDiagram() {
     await modeler.importXML(exampleXML);
-    await olcModeler.createNew();
+    await olcModeler.createNew(); // Initialize XML of the OLC modeler
 }
 
 $(function() {
@@ -340,7 +305,47 @@ function loadDiagram(xml) {
 }
 
 
+let initialSpaceXML;
+let initialOLCXML;
+let initialStateSaved = false;
 
+async function importFromZip(zipData) {
+    const zip = await Zip.loadAsync(zipData, { base64: true });
+    const files = {
+        space: zip.file('behaviour.bpmn'),
+        olcs: zip.file('space.xml')
+    };
+
+    Object.keys(files).forEach(key => {
+        if (!files[key]) {
+            throw new Error('Missing file: ' + key);
+        }
+    });
+
+    // Extract XML strings
+    const spaceXML = await files.space.async("string");
+    const olcXML = await files.olcs.async("string");
+
+    // Save initial state only once
+    if (!initialStateSaved) {
+        initialSpaceXML = spaceXML;
+        initialOLCXML = olcXML;
+        initialStateSaved = true;
+    }
+
+    // Import the diagrams into the modelers
+    await olcModeler.importXML(olcXML);
+    await modeler.importXML(spaceXML);
+}
+
+export async function restoreInitialState() {
+    if (initialSpaceXML && initialOLCXML) {
+        await olcModeler.importXML(initialOLCXML);
+        await modeler.importXML(initialSpaceXML);
+    } else {
+        console.error('Initial state not saved');
+    }
+}
 
 
 document.querySelector("#open-diagram").addEventListener('click', () => uploadZIP(data => {
@@ -381,6 +386,11 @@ async function exportToZip() {
 document.querySelector('#download-button').addEventListener('click', () => exportToZip().then(zip => {
     downloadZIP('SpaceBPMN.zip', zip, 'base64');
 }));
+
+
+
+
+
 
 var dragTarget;
 
