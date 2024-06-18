@@ -304,20 +304,47 @@ function loadDiagram(xml) {
     document.body.removeChild(fileInput);
 }
 
+
+let initialSpaceXML;
+let initialOLCXML;
+
 async function importFromZip(zipData) {
     const zip = await Zip.loadAsync(zipData, { base64: true });
     const files = {
-        space: zip.file('behaviour.bpmn'),
-        olcs: zip.file('space.xml'),
+        space: await zip.file('behaviour.bpmn').async('string'),
+        olcs: await zip.file('space.xml').async('string')
     };
-    Object.keys(files).forEach(key => {
-        if (!files[key]) {
-            throw new Error('Missing file: ' + key);
-        }
-    });
-    await olcModeler.importXML(await files.olcs.async("string"));
-    await modeler.importXML(await files.space.async("string"));
+
+    if (files.space && files.olcs) {
+        // Save initial state
+        initialSpaceXML = files.space;
+        initialOLCXML = files.olcs;
+
+        await olcModeler.importXML(initialOLCXML);
+        await modeler.importXML(initialSpaceXML);
+    } else {
+        throw new Error('Missing files in ZIP');
+    }
 }
+
+async function restoreInitialState() {
+    if (initialSpaceXML && initialOLCXML) {
+        await olcModeler.importXML(initialOLCXML);
+        await modeler.importXML(initialSpaceXML);
+    } else {
+        console.error('Initial state not saved');
+    }
+}
+
+document.querySelector('#restore-button').addEventListener('click', restoreInitialState);
+
+document.querySelector("#open-diagram").addEventListener('click', () => uploadZIP(data => {
+    if (data.startsWith('data:')) {
+        data = data.split(',')[1];
+    }
+    importFromZip(data);
+}, 'base64'));
+
 
 document.querySelector("#open-diagram").addEventListener('click', () => uploadZIP(data => {
     if (data.startsWith('data:')) {
