@@ -45,6 +45,21 @@
           "type": "Array[String]"
         }
       ]
+    },
+    {
+      "name": "SpaceMessage",
+      "extends": [
+        "bpmn:StartEvent",
+        "bpmn:IntermediateThrowEvent",
+        "bpmn:MessageEventDefinition"
+      ],
+      "properties": [
+        {
+          "name": "body",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
     }
   ]
 }
