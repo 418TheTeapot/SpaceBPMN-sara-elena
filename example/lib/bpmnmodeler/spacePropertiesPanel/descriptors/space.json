@@ -51,6 +51,7 @@
       "extends": [
         "bpmn:StartEvent",
         "bpmn:IntermediateThrowEvent",
+        "bpmn:IntermediateCatchEvent",
         "bpmn:MessageEventDefinition"
       ],
       "properties": [

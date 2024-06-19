@@ -29,7 +29,10 @@ export default function SpacePropertiesProvider(propertiesPanel, translate, even
             if (is(element, 'bpmn:Process')) {
                 groups.push(createTimeGroup(element, translate));
             }
-            if (is(element, 'bpmn:StartEvent') || is(element, 'bpmn:IntermediateThrowEvent') || is(element, 'bpmn:MessageEvent')) {
+            if (is(element, 'bpmn:StartEvent')
+                || is(element, 'bpmn:IntermediateThrowEvent')
+                || is(element,"bpmn:IntermediateCatchEvent")
+                || is(element, 'bpmn:MessageEvent')) {
                 groups.push(createDetailsMessage(element, translate));
             }
             // Filter out null groups
@@ -78,12 +81,16 @@ export default function SpacePropertiesProvider(propertiesPanel, translate, even
     function createDetailsMessage(element, translate) {
         let label, description;
 
-        if (is(element, 'bpmn:StartEvent') ||is(element, 'bpmn:MessageEvent'))  {
+        if (is(element, 'bpmn:StartEvent')
+            ||is(element, 'bpmn:MessageEvent')
+            || is(element,"bpmn:IntermediateCatchEvent"))
+        {
+            label = translate('Read the SMS received');
+            description = translate('Read the received message.');
+        } else if (is(element, 'bpmn:IntermediateThrowEvent')
+            || is(element, 'bpmn:MessageEvent')) {
             label = translate('Send a Message');
-            description = translate('Write of the message u want to send.');
-        } else if (is(element, 'bpmn:IntermediateThrowEvent') || is(element, 'bpmn:MessageEvent')) {
-            label = translate('Your Message');
-            description = translate('Details of the message u will receive.');
+            description = translate('Write the message if u want to send.');
         } else {
             label = translate('Details of Message');
             description = '';
