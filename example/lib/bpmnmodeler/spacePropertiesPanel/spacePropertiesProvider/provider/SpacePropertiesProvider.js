@@ -15,29 +15,30 @@ export default function SpacePropertiesProvider(propertiesPanel, translate, even
     this._spaceModeler = spaceModeler;
     const modeler = this._spaceModeler;
 
-    this.getGroups = function (element) {
-        return function (groups) {
-            if (is(element, 'bpmn:Task')) {
-                groups.push(createSpaceGroup(element, translate));
-            }
-            if (is(element, 'bpmn:Participant')) {
-                groups.push(createSpaceGroup(element, translate));
-            }
-            if (is(element, 'bpmn:StartEvent') || is(element, 'bpmn:BoundaryEvent')) {
-                groups.push(createConditionGroup(element, translate));
-            }
-            if (is(element, 'bpmn:Process')) {
-                groups.push(createTimeGroup(element, translate));
-            }
-            if (is(element, 'bpmn:StartEvent')
-                || is(element,"bpmn:IntermediateCatchEvent")
-                || is(element, 'bpmn:MessageEvent')) {
-                groups.push(createDetailsMessage(element, translate));
-            }
-            // Filter out null groups
-            return groups.filter((group) => group !== null);
-        };
+this.getGroups = function (element) {
+    return function (groups) {
+        if (is(element, 'bpmn:Task')) {
+            groups.push(createSpaceGroup(element, translate));
+        }
+        if (is(element, 'bpmn:Participant')) {
+            groups.push(createSpaceGroup(element, translate));
+        }
+        if (is(element, 'bpmn:StartEvent') || is(element, 'bpmn:BoundaryEvent')) {
+            groups.push(createConditionGroup(element, translate));
+        }
+        if (is(element, 'bpmn:Process')) {
+            groups.push(createTimeGroup(element, translate));
+        }
+        if (is(element, 'bpmn:StartEvent')
+            || is(element, 'bpmn:IntermediateThrowEvent')
+            || is(element,"bpmn:IntermediateCatchEvent")
+            || is(element, 'bpmn:MessageEvent')) {
+            groups.push(createDetailsMessage(element, translate));
+        }
+        // Filter out null groups
+        return groups.filter((group) => group !== null);
     };
+};
 
     propertiesPanel.registerProvider(LOW_PRIORITY, this);
 
@@ -78,36 +79,37 @@ export default function SpacePropertiesProvider(propertiesPanel, translate, even
     }
 
     function createDetailsMessage(element, translate) {
-        let label, description;
+    let label, description;
 
-        if (is(element, 'bpmn:StartEvent')
-            ||is(element, 'bpmn:MessageEvent')
-            || is(element,"bpmn:IntermediateCatchEvent"))
-        {
-            label = translate('Read the SMS received');
-            description = translate('Read the received message.');
-        } else if (is(element, 'bpmn:IntermediateThrowEvent')
-            || is(element, 'bpmn:MessageEvent')) {
-            label = translate('Send a Message');
-            description = translate('Write the message if u want to send.');
-        } else {
-            label = translate('Details of Message');
-            description = '';
-        }
-
-        const group = {
-            id: 'messageBody',
-            label: label,
-            component: Group,
-            entries: MessageProps({ element, label, description })
-        };
-
-        if (group.entries.length) {
-            return group;
-        }
-
-        return null;
+    if (is(element, 'bpmn:StartEvent')
+        || is(element, 'bpmn:MessageEvent')
+        || is(element,"bpmn:IntermediateCatchEvent"))
+    {
+        label = translate('Read the SMS received');
+        description = translate('Read the received message.');
+    } else if (is(element, 'bpmn:IntermediateThrowEvent')
+        || is(element, 'bpmn:MessageEvent')
+        || is(element, 'bpmn:MessageEventDefinition')){
+        label = translate('Send a Message');
+        description = translate('Write the message if u want to send.');
+    } else {
+        label = translate('Details of Message');
+        description = '';
     }
+
+    const group = {
+        id: 'messageBody',
+        label: label,
+        component: Group,
+        entries: MessageProps({ element, label, description })
+    };
+
+    if (group.entries.length) {
+        return group;
+    }
+
+    return null;
+}
 }
 
 SpacePropertiesProvider.$inject = ['propertiesPanel', 'translate', 'eventBus', 'spaceModeler'];
