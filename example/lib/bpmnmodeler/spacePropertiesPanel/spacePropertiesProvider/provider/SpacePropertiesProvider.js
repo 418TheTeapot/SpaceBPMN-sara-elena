@@ -30,7 +30,6 @@ export default function SpacePropertiesProvider(propertiesPanel, translate, even
                 groups.push(createTimeGroup(element, translate));
             }
             if (is(element, 'bpmn:StartEvent')
-                || is(element, 'bpmn:IntermediateThrowEvent')
                 || is(element,"bpmn:IntermediateCatchEvent")
                 || is(element, 'bpmn:MessageEvent')) {
                 groups.push(createDetailsMessage(element, translate));
