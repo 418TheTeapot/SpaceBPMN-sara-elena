@@ -116,10 +116,43 @@ function ConditionExpression(props) {
         debounce = useService("debounceInput");
 
     const getValue = () => {
-        return getConditionExpression(element).get("body");
+        const conditionExpression = getConditionExpression(element);
+        if (conditionExpression) {
+            const body = conditionExpression.get("body");
+            if (body === "destinationUnreachable" || body === "") {
+                return body;
+            } else {
+                return "custom"; // Indicates that a custom value is used
+            }
+        }
+        return "";
+    };
+
+    const getCustomValue = () => {
+        const conditionExpression = getConditionExpression(element);
+        if (conditionExpression) {
+            const body = conditionExpression.get("body");
+            if (body !== "destinationUnreachable" && body !== "") {
+                return body; // Return the custom value
+            }
+        }
+        return "";
     };
 
     const setValue = (value) => {
+        const finalValue = value === "custom" ? getCustomValue() : value;
+        const conditionExpression = createFormalExpression(
+            element,
+            {
+                body: finalValue
+            },
+            bpmnFactory
+        );
+
+        updateCondition(element, commandStack, conditionExpression);
+    };
+
+    const setCustomValue = (value) => {
         const conditionExpression = createFormalExpression(
             element,
             {
@@ -131,14 +164,36 @@ function ConditionExpression(props) {
         updateCondition(element, commandStack, conditionExpression);
     };
 
-    return TextFieldEntry({
-        element,
-        id: "conditionExpression",
-        label: translate("Condition Expression"),
-        getValue,
-        setValue,
-        debounce
-    });
+    const getOptions = () => {
+        return [
+            { value: "", label: translate("<none>") },
+            { value: "destinationUnreachable", label: translate("Destination Unreachable") },
+            { value: "custom", label: translate("Custom Expression") },
+        ];
+    };
+
+    return (
+        <div>
+            <SelectEntry
+                element={element}
+                id="conditionExpressionSelect"
+                label={translate("Condition Expression")}
+                getValue={getValue}
+                setValue={setValue}
+                getOptions={getOptions}
+            />
+            {getValue() === "custom" && (
+                <TextFieldEntry
+                    element={element}
+                    id="conditionExpressionCustom"
+                    label={translate("Custom Expression")}
+                    getValue={getCustomValue}
+                    setValue={setCustomValue}
+                    debounce={debounce}
+                />
+            )}
+        </div>
+    );
 }
 
 function ConditionScriptProps(props) {
